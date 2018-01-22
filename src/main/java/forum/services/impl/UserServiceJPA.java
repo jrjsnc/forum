@@ -1,4 +1,4 @@
-package forum.services;
+package forum.services.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
