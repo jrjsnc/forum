@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 <title>Movie forum</title>
 </head>
 <body>
-    <div class="container">
-	<div class="row">
-	<div class="col">
-		<table class="topics">
-		<tr th:each="topic : ${topics}">
-			<td th:text='${topic.name}'/>
-			</tr>
-		</table>
+	<div class="container">
+		<div class="row">
+			<div class="col" th:replace="fragments::header"></div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<table class="topics">
+					<tr th:each="topic : ${topics}">
+						<td th:text='${topic.name}' />
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col" th:replace="fragments::footer"></div>
+		</div>
 	</div>
-	</div>
-	</div>
-			
-    
-    
-    
-    
+
+
 </body>
 </html>

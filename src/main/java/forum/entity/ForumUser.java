@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class ForumUser {
 	
 	@Id
 	@GeneratedValue
@@ -14,15 +14,15 @@ public class User {
 	private String login;
 	private String password;
 	private String email;
-	private boolean isAdmin;
+	//private boolean isAdmin;
 	
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-	
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
+//	public boolean isAdmin() {
+//		return isAdmin;
+//	}
+//	
+//	public void setAdmin(boolean isAdmin) {
+//		this.isAdmin = isAdmin;
+//	}
 	
 	public int getIdent() {
 		return ident;
