@@ -34,13 +34,12 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public boolean nameTaken(String login) {
 		try {
-			entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login").setParameter("login", login)
+			ForumUser fu = (ForumUser)entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login").setParameter("login", login)
 					.getSingleResult();
-			return true;
-
 		} catch (NoResultException e) {
+			return false;
 		}
-		return false;
+		return true;
 
 	}
 }
