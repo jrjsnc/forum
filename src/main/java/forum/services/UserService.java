@@ -1,12 +1,12 @@
 package forum.services;
 
-import forum.entity.User;
+import forum.entity.ForumUser;
 
 public interface UserService {
 	
-	void register(User user);	
+	void register(ForumUser user);	
 	
-	User login(String login, String password);
+	ForumUser login(String login, String password);
 	
 	boolean nameTaken(String login);
 

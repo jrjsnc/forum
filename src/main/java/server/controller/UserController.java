@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
-import forum.entity.User;
+import forum.entity.ForumUser;
 import forum.services.UserService;
 
 @Controller
@@ -18,7 +18,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	private User loggedUser;
+	private ForumUser loggedUser;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -42,7 +42,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/login")
-	public String login(User user, Model model) {
+	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
 		if (isLogged()) {
 			model.addAttribute("message", "");
@@ -53,7 +53,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/register")
-	public String register(User user, Model model) {
+	public String register(ForumUser user, Model model) {
 		if (!userService.nameTaken(user.getLogin())) {
 			userService.register(user);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
@@ -72,7 +72,7 @@ public class UserController {
 		return "index";
 	}
 
-	public User getLoggedUser() {
+	public ForumUser getLoggedUser() {
 		return loggedUser;
 	}
 
