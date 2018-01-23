@@ -14,8 +14,8 @@ public class ForumUser {
 	private String login;
 	private String password;
 	private String email;
-	//private boolean isAdmin;
-	
+//	private boolean isAdmin;
+//	
 //	public boolean isAdmin() {
 //		return isAdmin;
 //	}

@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
+import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.TopicService;
 import forum.services.UserService;
@@ -48,9 +49,10 @@ public class UserController {
 		// List<Game> games = gameService.getGames();
 		// addRatingToGames(games);
 		// model.addAttribute("games", games);
+		model.addAttribute("topics", topicService.getTopics());
 		//if (isLogged()) {
 			//model.addAttribute("comments", commentService.getComments("comment"));
-			model.addAttribute("topics", topicService.getTopics());
+		
 			//model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
 		//}
 
@@ -99,8 +101,20 @@ public class UserController {
 		loggedUser = null;
 		fillModel(model);
 		return "index";
-	}
+	}	
+	
+	@RequestMapping("test")
+	public String test(Model model) {
+		Topic t = new Topic("ahoj");
+		t.addComment(new Comment("test komentar 1", new Date()));
+		t.addComment(new Comment("test komentar 2", new Date()));
+		t.addComment(new Comment("test komentar 3", new Date()));
 
+		topicService.addTopic(t);
+		
+		return "index";
+	}
+	
 	public ForumUser getLoggedUser() {
 		return loggedUser;
 	}
