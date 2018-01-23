@@ -1,5 +1,8 @@
 package server.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +10,33 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
+import forum.entity.Comment;
 import forum.entity.ForumUser;
+import forum.services.CommentService;
+import forum.services.TopicService;
 import forum.services.UserService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
+	
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	Date date = new Date();
 
 	@Autowired
-	private UserService userService;
+	private UserService userService;	
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private TopicService topicService;
+	
 	private ForumUser loggedUser;
+	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -30,9 +48,11 @@ public class UserController {
 		// List<Game> games = gameService.getGames();
 		// addRatingToGames(games);
 		// model.addAttribute("games", games);
-		if (isLogged()) {
+		//if (isLogged()) {
+			//model.addAttribute("comments", commentService.getComments("comment"));
+			model.addAttribute("topics", topicService.getTopics());
 			//model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
-		}
+		//}
 
 	}
 
@@ -64,7 +84,16 @@ public class UserController {
 		model.addAttribute("message", "Name already used. Try another name.");
 		return "login";
 	}
-
+	
+	//@RequestMapping("/comment")
+	//public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+	//	commentService.addComment(new Comment(userController.getLoggedPlayer().getLogin(), "puzzle", newComment, date));
+	//	fillModel(model);
+	//	return "index";
+	//}
+	
+	
+	
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedUser = null;
