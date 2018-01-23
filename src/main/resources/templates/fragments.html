@@ -3,7 +3,6 @@
 
 <div th:fragment="header">
 <h1> Best movie forum ever </h1>
-<!-- pridat podmienku s log in a log out  -->
 </div>
 
 
@@ -11,6 +10,16 @@
 <hr/>
 <a href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
 <br/>
+
+<span th:if='${@userController.Logged}'>
+Logged as <span th:text='${@userController.LoggedUser?.Login}'/><br/>
+<a href="/logout">Logout</a>
+</span>
+
+<span th:if='${not @userController.Logged}'>
+<a href="/user">Log in</a>
+</span>
+
 </div>
 
 
