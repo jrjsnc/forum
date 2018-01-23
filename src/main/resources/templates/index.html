@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie forum</title>
+</head>
+<body>
+    <div class="container">
+	<div class="row">
+	<div class="col">
+		<table class="topics">
+		<tr th:each="topic : ${topics}">
+			<td th:text='${topic.name}'/>
+			</tr>
+		</table>
+	</div>
+	</div>
+	</div>
+			
+    
+    
+    
+    
+</body>
+</html>
