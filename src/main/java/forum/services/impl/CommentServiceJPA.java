@@ -43,9 +43,7 @@ public class CommentServiceJPA implements CommentService {
 					.createQuery("SELECT c FROM Comment c WHERE c.content = :content AND c.username = :username")
 					.setParameter("content", comment.getContent()).setParameter("username", comment.getUsername())
 					.getSingleResult();
-
 			deleteComment(c);
-
 			addComment(comment);
 
 		} catch (NoResultException e) {

@@ -7,6 +7,10 @@ import javax.persistence.Id;
 @Entity
 public class Topic {
 	
+	public Topic(String name) {
+		super();
+		this.name = name;
+	}
 	@Id
 	@GeneratedValue
 	private int ident;

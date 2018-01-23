@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
+import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.TopicService;
 import forum.services.UserService;
@@ -28,12 +29,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;	
-	
 	@Autowired
 	private CommentService commentService;
-	
 	@Autowired
 	private TopicService topicService;
+	
 	
 	private ForumUser loggedUser;
 	
@@ -85,6 +85,13 @@ public class UserController {
 		return "login";
 	}
 	
+//	@RequestMapping("/topic")
+//	
+//	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
+//		topicService.addTopic(new Topic(getLoggedUser().getLogin()));
+//		return "index";
+//	}
+//	
 	//@RequestMapping("/comment")
 	//public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
 	//	commentService.addComment(new Comment(userController.getLoggedPlayer().getLogin(), "puzzle", newComment, date));
