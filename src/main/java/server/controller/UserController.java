@@ -103,7 +103,7 @@ public class UserController {
 		return "index";
 	}	
 	
-	@RequestMapping("test")
+	@RequestMapping("/test")
 	public String test(Model model) {
 		Topic t = new Topic("ahoj");
 		t.addComment(new Comment("test komentar 1", new Date()));
