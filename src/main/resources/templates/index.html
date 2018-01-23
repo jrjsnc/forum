@@ -17,6 +17,14 @@
 						<td th:text='${topic.name}' />
 					</tr>
 				</table>
+				
+				<span th:if='@userController.Logged'>
+					<form action="/index" method="post">
+					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
+					</label>
+					<button type="submit"> Post</button>
+					</form>
+				</span>
 			</div>
 		</div>
 
