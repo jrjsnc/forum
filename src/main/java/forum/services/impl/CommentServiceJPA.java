@@ -3,6 +3,7 @@ package forum.services.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -10,32 +11,48 @@ import forum.entity.Comment;
 import forum.services.CommentService;
 
 @Transactional
-public class CommentServiceJPA implements CommentService{
-	
+public class CommentServiceJPA implements CommentService {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public void addComment(Comment comment) {
-		// TODO Auto-generated method stub		
+		entityManager.persist(comment);
 	}
 
 	@Override
 	public List<Comment> getComments(String topic) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.topic= :topic ORDER BY c.createdOn")
+				.setParameter("topic", topic).getResultList();
 	}
 
 	@Override
 	public void deleteComment(Comment comment) {
-		// TODO Auto-generated method stub
-		
+		entityManager.createQuery("DELETE c FROM Comment c WHERE c.content= :content AND c.username = :username")
+				.setParameter("content", comment.getContent()).setParameter("username", comment.getUsername())
+				.executeUpdate();
+
 	}
 
 	@Override
 	public void updateComment(Comment comment) {
-		// TODO Auto-generated method stub
-		
+
+		try {
+			Comment c = (Comment) entityManager
+					.createQuery("SELECT c FROM Comment c WHERE c.content = :content AND c.username = :username")
+					.setParameter("content", comment.getContent()).setParameter("username", comment.getUsername())
+					.getSingleResult();
+
+			deleteComment(c);
+
+			addComment(comment);
+
+		} catch (NoResultException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
