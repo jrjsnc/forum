@@ -85,16 +85,7 @@ public class UserController {
 		}
 		model.addAttribute("message", "Name already used. Try another name.");
 		return "login";
-	}
-	
-	//@RequestMapping("/comment")
-	//public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-	//	commentService.addComment(new Comment(userController.getLoggedPlayer().getLogin(), "puzzle", newComment, date));
-	//	fillModel(model);
-	//	return "index";
-	//}
-	
-	
+	}	
 	
 	@RequestMapping("/logout")
 	public String login(Model model) {
@@ -114,6 +105,14 @@ public class UserController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/topic")
+	public String getTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {		
+		model.addAttribute("comments", topicService.getTopic(Long.parseLong(ident)).getComments());		
+		System.err.println(model.toString());		
+		return "topic";
+	}
+	
 	
 	public ForumUser getLoggedUser() {
 		return loggedUser;

@@ -13,10 +13,31 @@
 		<div class="row">
 			<div class="col">
 				<table class="topics">
-					<tr th:each="topic : ${topics}">
-						<td th:text='${topic.title}' />
+					<tr th:each="topic : ${topics}">					
+						<td> <a th:href='${"/topic?ident=" +topic.ident}'><span th:text='${topic.ident}'/><span th:text='${topic.title}'/></a> </td>
 					</tr>
 				</table>
+				
+<!-- 				<ul> -->
+<!-- 				<li th:each='game: ${games}'> -->
+
+<!-- 					<div class="card"> -->
+
+<!-- 						<a th:href='${"/" + game.ident}'> <img -->
+<!-- 							th:src='${"img/gs/" + game.ident + ".png"}' alt="" /> -->
+<!-- 						</a> -->
+<!-- 						<div class="card-content"> -->
+<!-- 							<h3> -->
+<!-- 								<a th:href='${"/" + game.ident}' th:text='${game.name}' /> <br /> -->
+
+<!-- 								<span th:text='${#numbers.formatDecimal(game.rating,1,2)}' /> / 5 <i -->
+<!-- 									class="fa fa-star fa-md"></i> -->
+<!-- 							</h3> -->
+<!-- 							<div th:text='${game.description}' /> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
 				
 				<span th:if='${@userController.Logged}'>
 					<form action="/index" method="post">

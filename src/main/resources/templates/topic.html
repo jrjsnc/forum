@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Movie forum</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" th:replace="fragments::header"></div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<table class="comments">
+					<tr th:each="comment : ${comments}">
+						<td th:text='${comment.content}' />
+					</tr>
+				</table>
+				
+				<span th:if='${@userController.Logged}'>
+					<form action="/index" method="post">
+					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
+					</label>
+					<button type="submit"> Post</button>
+					</form>
+				</span>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col" th:replace="fragments::footer"></div>
+		</div>
+	</div>
+
+
+</body>
+</html>

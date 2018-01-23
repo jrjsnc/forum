@@ -23,8 +23,12 @@ public class TopicServiceJPA implements TopicService {
 
 	@Override
 	public List<Topic> getTopics() {
-
 		return entityManager.createQuery("SELECT t from Topic t ").getResultList();
+	}
+	
+	@Override
+	public Topic getTopic(Long ident) {
+		return entityManager.find(Topic.class, ident);
 	}
 
 	@Override
