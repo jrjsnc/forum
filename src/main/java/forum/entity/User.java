@@ -6,12 +6,24 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+	
 	@Id
 	@GeneratedValue
 	private int ident;
+	
 	private String login;
 	private String password;
 	private String email;
+	private boolean isAdmin;
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 	public int getIdent() {
 		return ident;
 	}

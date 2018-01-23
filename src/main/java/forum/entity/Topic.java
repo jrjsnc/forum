@@ -10,7 +10,9 @@ public class Topic {
 	@Id
 	@GeneratedValue
 	private int ident;
+	
 	private String name;
+	
 	public int getIdent() {
 		return ident;
 	}
