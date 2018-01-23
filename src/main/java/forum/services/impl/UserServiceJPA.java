@@ -1,6 +1,7 @@
 package forum.services.impl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -8,34 +9,38 @@ import forum.entity.User;
 import forum.services.UserService;
 
 @Transactional
-public class UserServiceJPA implements UserService{
-	
+public class UserServiceJPA implements UserService {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public void register(User user) {
-		// TODO Auto-generated method stub
-		
+		entityManager.persist(user);
+
 	}
 
 	@Override
 	public User login(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return (User) entityManager
+					.createQuery("SELECT u FROM User u WHERE u.login = :login AND u.password =:password")
+					.setParameter("login", login).setParameter("password", password).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override
 	public boolean nameTaken(String login) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	
-	
-	
-	
-	
-	
+		try {
+			entityManager.createQuery("SELECT u FROM User u WHERE u.login = :login").setParameter("login", login)
+					.getSingleResult();
+			return true;
 
+		} catch (NoResultException e) {
+		}
+		return false;
+
+	}
 }
