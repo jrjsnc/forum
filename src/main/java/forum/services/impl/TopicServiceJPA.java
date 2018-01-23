@@ -10,27 +10,28 @@ import forum.entity.Topic;
 import forum.services.TopicService;
 
 @Transactional
-public class TopicServiceJPA implements TopicService{
-	
+public class TopicServiceJPA implements TopicService {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public void addTopic(Topic topic) {
-		// TODO Auto-generated method stub
-		
+		entityManager.persist(topic);
+
 	}
 
 	@Override
 	public List<Topic> getTopics() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return entityManager.createQuery("SELECT * from Topics  DESC").getResultList();
 	}
 
 	@Override
 	public void deleteTopic(Topic topic) {
-		// TODO Auto-generated method stub
-		
+		entityManager.createQuery("DELETE t FROM Topics t WHERE t.name=:name").setParameter("name", topic)
+				.getResultList();
+		return;
 	}
 
 }
