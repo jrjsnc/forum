@@ -1,6 +1,5 @@
 package forum.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,14 +18,8 @@ public class Comment {
 	private String content;
 	private Date createdOn;
 	
-	public Comment(String username, String topic, String content, Date createdOn) {
-		this.username = username;
-		this.topic = topic;
-		this.content = content;
-		this.createdOn = new Timestamp(createdOn.getTime());
-	}
-
 	public Comment() {
+
 	}	
 
 	public int getIdent() {
@@ -49,7 +42,7 @@ public class Comment {
 		return topic;
 	}
 
-	public void setGame(String topic) {
+	public void setTopic(String topic) {
 		this.topic = topic;
 	}
 
@@ -69,5 +62,9 @@ public class Comment {
 		this.createdOn = createdOn;
 	}
 
-}
+	@Override
+	public String toString() {
+		return String.format("Coment (%d %s %s %s %tc)", ident, username, topic, content, createdOn);
+	}
 
+}
