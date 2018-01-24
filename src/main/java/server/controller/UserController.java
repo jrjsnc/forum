@@ -85,19 +85,19 @@ public class UserController {
 		return "login";
 	}
 	
-//	@RequestMapping("/topic")
+//	@RequestMapping("/addTopic")
 //	
 //	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
-//		topicService.addTopic(new Topic(getLoggedUser().getLogin()));
-//		return "index";
+//		topicService.getTopics(new Topic(getLoggedUser().getLogin()));
+//		return "topic";
 //	}
 //	
-	//@RequestMapping("/comment")
-	//public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-	//	commentService.addComment(new Comment(userController.getLoggedPlayer().getLogin(), "puzzle", newComment, date));
-	//	fillModel(model);
-	//	return "index";
-	//}
+//	@RequestMapping("/comment")
+//	public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+//		commentService.addComment(new Comment(getLoggedUser().getLogin(), ));
+//		fillModel(model);
+//		return "index";
+//	}
 	
 	
 	
@@ -115,5 +115,8 @@ public class UserController {
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
+	
+	
+	
 
 }
