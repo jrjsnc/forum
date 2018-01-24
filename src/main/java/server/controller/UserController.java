@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -72,40 +74,44 @@ public class UserController {
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
-		if (isLogged()) {
-			model.addAttribute("message", "");
-			fillModel(model);
-			return "index";
-		}
-		return "login";
+		//if (isLogged()) {
+			//model.addAttribute("message", "");
+			//fillModel(model);
+			return isLogged() ? "index" : "login";
 	}
 
 	@RequestMapping("/register")
 	public String register(ForumUser user, Model model) {
-		if (!userService.nameTaken(user.getLogin())) {
-			userService.register(user);
-			loggedUser = userService.login(user.getLogin(), user.getPassword());
-			model.addAttribute("message", "");
-			fillModel(model);
-			return "index";
+		try {
+			if (!userService.nameTaken(user.getLogin())) {
+				userService.register(user);
+				loggedUser = userService.login(user.getLogin(), user.getPassword());
+				model.addAttribute("message", "");
+				fillModel(model);
+				return "index";
+			} else {
+			model.addAttribute("message", "Name already used. Try another name.");
+			}
+			
+		} catch (NoResultException e) {
+			
 		}
-		model.addAttribute("message", "Name already used. Try another name.");
-		return "login";
+		return "login" ;
 	}
 	
-//	@RequestMapping("/topic")
+//	@RequestMapping("/addTopic")
 //	
 //	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
-//		topicService.addTopic(new Topic(getLoggedUser().getLogin()));
-//		return "index";
+//		topicService.getTopics(new Topic(getLoggedUser().getLogin()));
+//		return "topic";
 //	}
 //	
-	//@RequestMapping("/comment")
-	//public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-	//	commentService.addComment(new Comment(userController.getLoggedPlayer().getLogin(), "puzzle", newComment, date));
-	//	fillModel(model);
-	//	return "index";
-	//}
+//	@RequestMapping("/comment")
+//	public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+//		commentService.addComment(new Comment(getLoggedUser().getLogin(), ));
+//		fillModel(model);
+//		return "index";
+//	}
 	
 	
 	
@@ -123,5 +129,8 @@ public class UserController {
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
+	
+	
+	
 
 }

@@ -9,7 +9,7 @@ import forum.entity.ForumUser;
 import forum.services.UserService;
 
 @Transactional
-public class UserServiceJPA implements UserService {
+public  class UserServiceJPA implements UserService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -34,7 +34,8 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public boolean nameTaken(String login) {
 		try {
-			ForumUser fu = (ForumUser)entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login").setParameter("login", login)
+			ForumUser fu = (ForumUser)entityManager
+					.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login").setParameter("login", login)
 					.getSingleResult();
 		} catch (NoResultException e) {
 			return false;
@@ -42,4 +43,8 @@ public class UserServiceJPA implements UserService {
 		return true;
 
 	}
+
+	
+	
+	
 }

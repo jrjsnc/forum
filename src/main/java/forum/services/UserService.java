@@ -10,4 +10,6 @@ public interface UserService {
 	
 	boolean nameTaken(String login);
 
+	
+
 }
