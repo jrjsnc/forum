@@ -2,6 +2,7 @@ package server.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,13 @@ public class UserController {
 		//if (isLogged()) {
 			//model.addAttribute("comments", commentService.getComments("comment"));
 			model.addAttribute("topics", topicService.getTopics());
+			List<String> tags = new ArrayList<>();
+			tags.add("1.tag");
+			tags.add("2.tag");
+			tags.add("3.tag");
+			model.addAttribute("tags", tags);
+			
+			System.err.println(model.toString());
 			//model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
 		//}
 
