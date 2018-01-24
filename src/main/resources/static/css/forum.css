@@ -1,0 +1,43 @@
+body{
+	background: url("../pictures/white_backround.jpg");
+	-moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.header{
+	text-align: center;
+	font-family: "Tw Cen MT" !important;
+	font-size: 150%;
+}
+.classlogin {
+  display: inline-block;
+  margin-bottom: .5rem;
+  border-radius: 15px;
+  font-family: "Tw Cen MT" !important;
+}
+.classregister{
+  display: inline-block;
+  margin-bottom: .5rem;
+  border-radius: 15px;
+  font-family: "Tw Cen MT" !important;
+}
+h4{
+  font-family: "Tw Cen MT" !important;
+  font-size: 125%;
+  text-align: left;
+}
+input {
+  display: inline-block;
+  margin-bottom: .5rem;
+  border-radius: 15px;  
+}
+form {
+	text-align: right;
+}
+fieldset{
+	border: none;
+}
+.footer{
+	text-align: center;
+}
