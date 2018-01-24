@@ -33,11 +33,17 @@ input {
   border-radius: 15px;  
 }
 form {
-	text-align: right;
+	text-align: left;
 }
 fieldset{
 	border: none;
 }
 .footer{
 	text-align: center;
+}
+.classlogin{
+	text-align: right;
+}
+.classregister{
+	text-align: right;
 }
