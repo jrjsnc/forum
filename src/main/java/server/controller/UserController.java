@@ -38,6 +38,8 @@ public class UserController {
 	
 	private ForumUser loggedUser;
 	
+	private Long currentTopicIdent;
+	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -100,6 +102,7 @@ public class UserController {
 		t.addComment(new Comment("test komentar 1", new Date()));
 		t.addComment(new Comment("test komentar 2", new Date()));
 		t.addComment(new Comment("test komentar 3", new Date()));
+		t.addComment(new Comment("test komentar 4", new Date()));
 
 		topicService.addTopic(t);
 		
@@ -107,12 +110,27 @@ public class UserController {
 	}
 	
 	@RequestMapping("/topic")
-	public String getTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {		
-		model.addAttribute("comments", topicService.getTopic(Long.parseLong(ident)).getComments());		
-		System.err.println(model.toString());		
+	public String getTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {
+		setCurrentTopicIdent(Long.parseLong(ident));		
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());				
 		return "topic";
 	}
 	
+	@RequestMapping("/deleteComment")
+	public String deleteComment(@RequestParam(value = "ident", required = false)String ident, Model model) {
+		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));		
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
+		return "topic";
+	}
+	
+	@RequestMapping("/deleteTopic")
+	public String deleteTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {
+		Topic t = topicService.getTopic(Long.parseLong(ident));		
+		
+		System.err.println(t.getComments().toString());
+		topicService.deleteTopic(t);
+		return "index";
+	}
 	
 	public ForumUser getLoggedUser() {
 		return loggedUser;
@@ -121,5 +139,8 @@ public class UserController {
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
-
+	
+	public void setCurrentTopicIdent(Long ident) {
+		currentTopicIdent = ident;
+	}
 }

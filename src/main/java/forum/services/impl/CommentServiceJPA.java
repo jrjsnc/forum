@@ -26,12 +26,26 @@ public class CommentServiceJPA implements CommentService {
 		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.topic= :topic ORDER BY c.createdOn")
 				.setParameter("topic", topic).getResultList();
 	}
+	
+	@Override
+	public Comment getComment(Long ident) {
+		try {
+			Comment c = (Comment) entityManager
+					.createQuery("SELECT c FROM Comment c WHERE c.ident = :ident")
+					.setParameter("ident", ident).getSingleResult();			
+			return c;
+			
+		} catch (NoResultException e) {
+				e.printStackTrace();
+			}
+
+		return null;
+	}
 
 	@Override
 	public void deleteComment(Comment comment) {
-		entityManager.createQuery("DELETE c FROM Comment c WHERE c.content= :content AND c.username = :username")
-				.setParameter("content", comment.getContent()).setParameter("username", comment.getUsername())
-				.executeUpdate();
+		entityManager.createQuery("DELETE FROM Comment c WHERE c.ident= :ident")
+				.setParameter("ident", comment.getIdent()).executeUpdate();
 
 	}
 

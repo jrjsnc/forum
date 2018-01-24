@@ -14,15 +14,18 @@
 			<div class="col">
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
-						<td th:text='${comment.content}' />
+						<td><span th:text='${comment.content}' /><span th:if='${@userController.Logged}'><a
+							th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
+								comment</a></span></td>
 					</tr>
 				</table>
-				
+
 				<span th:if='${@userController.Logged}'>
-					<form action="/index" method="post">
-					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
-					</label>
-					<button type="submit"> Post</button>
+					<form action="/addComment" method="post">
+						<label> Add Comment <input type="text" name="newComment"
+							placeholder="Add comment here" />
+						</label>
+						<button type="submit">Post</button>
 					</form>
 				</span>
 			</div>

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import forum.entity.Comment;
 import forum.entity.Topic;
 import forum.services.TopicService;
 
@@ -33,9 +34,24 @@ public class TopicServiceJPA implements TopicService {
 
 	@Override
 	public void deleteTopic(Topic topic) {
-		entityManager.createQuery("DELETE t FROM Topics t WHERE t.title=:title").setParameter("title", topic.getTitle())
-				.getResultList();
-		return;
+		
+		Topic t = (Topic)entityManager.createQuery("SELECT t FROM Topic t JOIN FETCH t.comments WHERE t.ident = :ident")
+				.setParameter("ident", topic.getIdent()).getSingleResult();
+		
+		
+		
+		//int commentCount = t.getComments().size();
+		
+		t.getComments().clear();
+		
+//		for (int i = 0; i<commentCount; i++) {
+//			t.removeComment(t.getComments().get(i));
+//		}
+		
+		//t.removeComment(t.getComments().get(0));
+		
+		entityManager.createQuery("DELETE FROM Topic t WHERE t.title=:title").setParameter("title", topic.getTitle())
+				.executeUpdate();		
 	}
-
+	
 }
