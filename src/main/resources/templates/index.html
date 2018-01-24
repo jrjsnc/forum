@@ -14,13 +14,13 @@
 			<div class="col">
 				<table class="topics">
 					<tr th:each="topic : ${topics}">
-						<td th:text='${topic.name}' />
+						<td th:text='${topic.title}' />
 					</tr>
 				</table>
 				
 				<span th:if='${@userController.Logged}'>
 					<form action="/addTopic" method="post">
-					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
+					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here" required="required"/>
 					</label>
 					<button type="submit"> Post</button>
 					</form>

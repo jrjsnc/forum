@@ -65,6 +65,7 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
+		fillModel(model);
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
 		//if (isLogged()) {
 			//model.addAttribute("message", "");
@@ -93,7 +94,9 @@ public class UserController {
 	
 	@RequestMapping("/addTopic")	
 	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
+		fillModel(model);
 		topicService.addTopic(new Topic(newTopic, getLoggedUser().getLogin()));
+		fillModel(model);
 		return "index";
 	}
 
@@ -103,6 +106,8 @@ public class UserController {
 		fillModel(model);
 		return "index";
 	}
+	
+	
 	
 	
 	
