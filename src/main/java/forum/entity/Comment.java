@@ -13,6 +13,7 @@ public class Comment {
 	@GeneratedValue
 	private int ident;
 
+	
 	private String username;
 	private String topic;
 	private String content;
@@ -20,7 +21,15 @@ public class Comment {
 	
 	public Comment() {
 
-	}	
+	}
+	
+	public Comment(String username, String topic, String content, Date createdOn) {
+		super();
+		this.username = username;
+		this.topic = topic;
+		this.content = content;
+		this.createdOn = createdOn;
+	}
 
 	public int getIdent() {
 		return ident;

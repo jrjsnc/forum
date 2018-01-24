@@ -91,19 +91,18 @@ public class UserController {
 		return "login" ;
 	}
 	
-//	@RequestMapping("/addTopic")
-//	
-//	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
-//		topicService.getTopics(new Topic(getLoggedUser().getLogin()));
-//		return "topic";
-//	}
-//	
-//	@RequestMapping("/comment")
-//	public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-//		commentService.addComment(new Comment(getLoggedUser().getLogin(), ));
-//		fillModel(model);
-//		return "index";
-//	}
+	@RequestMapping("/addTopic")	
+	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
+		topicService.addTopic(new Topic(newTopic, getLoggedUser().getLogin()));
+		return "index";
+	}
+
+	@RequestMapping("/addComment")
+	public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+		commentService.addComment(new Comment(getLoggedUser().getLogin(), "topic", newComment, new Date()));
+		fillModel(model);
+		return "index";
+	}
 	
 	
 	

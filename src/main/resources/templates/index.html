@@ -19,7 +19,7 @@
 				</table>
 				
 				<span th:if='${@userController.Logged}'>
-					<form action="/index" method="post">
+					<form action="/addTopic" method="post">
 					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
 					</label>
 					<button type="submit"> Post</button>
@@ -27,6 +27,8 @@
 				</span>
 			</div>
 		</div>
+		
+		
 
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-sm"> -->

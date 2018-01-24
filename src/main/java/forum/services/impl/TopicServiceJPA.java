@@ -18,7 +18,6 @@ public class TopicServiceJPA implements TopicService {
 	@Override
 	public void addTopic(Topic topic) {
 		entityManager.persist(topic);
-
 	}
 
 	@Override
@@ -28,7 +27,7 @@ public class TopicServiceJPA implements TopicService {
 
 	@Override
 	public void deleteTopic(Topic topic) {
-		entityManager.createQuery("DELETE t FROM Topics t WHERE t.name=:name").setParameter("name", topic)
+		entityManager.createQuery("DELETE t FROM Topics t WHERE t.title=:title").setParameter("title", topic)
 				.getResultList();
 		return;
 	}

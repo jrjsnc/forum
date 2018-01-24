@@ -6,29 +6,48 @@ import javax.persistence.Id;
 
 @Entity
 public class Topic {
-	
-//	public Topic(String name) {
-//		super();
-//		this.name = name;
-//	}
+
 	@Id
 	@GeneratedValue
 	private int ident;
+
+	private String title;
+	private String forumUser;
+	
+
+	public Topic(String title, String user) {
+		super();
+		this.title = title;
+		this.forumUser = user;
+	}
+	
+	public Topic() {
 		
-	private String name;
-	
-	
+	}
+
+	public String getForumUser() {
+		return forumUser;
+	}
+
+	public void setForumUser(String forumUser) {
+		this.forumUser = forumUser;
+	}
+
+
 	public int getIdent() {
 		return ident;
 	}
+
 	public void setIdent(int ident) {
 		this.ident = ident;
 	}
-	public String getName() {
-		return name;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }
