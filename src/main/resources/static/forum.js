@@ -18,6 +18,7 @@ confirm_password.onkeyup = validatePassword;
 
 
 
+
 function validateEmail() {
     var x = document.forms["loginForm"]["email"].value;
     var atpos = x.indexOf("@");
