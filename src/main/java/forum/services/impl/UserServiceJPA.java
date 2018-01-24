@@ -9,7 +9,7 @@ import forum.entity.ForumUser;
 import forum.services.UserService;
 
 @Transactional
-public class UserServiceJPA implements UserService {
+public  class UserServiceJPA implements UserService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -43,17 +43,8 @@ public class UserServiceJPA implements UserService {
 		return true;
 
 	}
+
 	
-	@Override
-	public boolean isLogin(String login) {
-
-		try {
-			 entityManager
-					.createQuery("SELECT f FROM ForumUser WHERE f.login = :login").setParameter("login", login).getSingleResult();
-
-		} catch (NoResultException e) {
-			return false;
-		}
-		return true;
-	}
+	
+	
 }

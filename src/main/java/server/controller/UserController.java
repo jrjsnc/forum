@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -64,25 +66,29 @@ public class UserController {
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
-		if (isLogged()) {
-			model.addAttribute("message", "");
-			fillModel(model);
-			return "index";
-		}
-		return "login";
+		//if (isLogged()) {
+			//model.addAttribute("message", "");
+			//fillModel(model);
+			return isLogged() ? "index" : "login";
 	}
 
 	@RequestMapping("/register")
 	public String register(ForumUser user, Model model) {
-		if (!userService.nameTaken(user.getLogin())) {
-			userService.register(user);
-			loggedUser = userService.login(user.getLogin(), user.getPassword());
-			model.addAttribute("message", "");
-			fillModel(model);
-			return "index";
+		try {
+			if (!userService.nameTaken(user.getLogin())) {
+				userService.register(user);
+				loggedUser = userService.login(user.getLogin(), user.getPassword());
+				model.addAttribute("message", "");
+				fillModel(model);
+				return "index";
+			} else {
+			model.addAttribute("message", "Name already used. Try another name.");
+			}
+			
+		} catch (NoResultException e) {
+			
 		}
-		model.addAttribute("message", "Name already used. Try another name.");
-		return "login";
+		return "login" ;
 	}
 	
 //	@RequestMapping("/addTopic")
