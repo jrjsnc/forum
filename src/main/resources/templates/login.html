@@ -5,7 +5,8 @@
 </head>
 
 <body>
-	<h3>Login</h3>
+<div th:replace="fragments::header"></div>	
+	<h4>Login</h4>
 	<form action="/login" method="post">
 
 		Login: <input type="text" name="login"
@@ -17,17 +18,19 @@
 	
 	<h4 class="alert"><span th:text='${message}'/></h4>
 	
-	<h3>Register</h3>
-	<form action="/register" method="post">
+	<h4>Register</h4>
+	<form action="/register" name="loginForm" method="post">
 	
 			Login: <input type="text" name="login"/> <br /> 
-			Password: <input type="password" name="password" id="password"/> <br />
-			Repeat password: <input type="password" name="password2" id="confirm_password" onblur="validatePassword()"/> <br />					
-			Email: <input type="email" name="email" id="email" onblur="validateEmail()"/><br />
+			Password: <input type="password"  id="password"/> <br />
+			Repeat password: <input type="password" id="confirm_password"/> <br />					
+			Email: <input type="email" name="email" id="email"/><br />
 			
 			<input type="submit"
 			value="Register" />
-	</form>	
+	</form>
+	
+	<div th:replace="fragments::footer"></div>	
 </body>
 
 </html>

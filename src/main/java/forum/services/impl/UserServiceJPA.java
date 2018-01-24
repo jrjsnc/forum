@@ -42,4 +42,17 @@ public class UserServiceJPA implements UserService {
 		return true;
 
 	}
+	
+	@Override
+	public boolean isLogin(String login) {
+
+		try {
+			 entityManager
+					.createQuery("SELECT f FROM ForumUser WHERE f.login = :login").setParameter("login", login).getSingleResult();
+
+		} catch (NoResultException e) {
+			return false;
+		}
+		return true;
+	}
 }
