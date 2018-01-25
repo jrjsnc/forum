@@ -9,19 +9,18 @@ public class Topic {
 
 	@Id
 	@GeneratedValue
-	private int ident;
+	private long ident;
 	private String title;
 	private String forumUser;
-	
+
+	public Topic() {
+
+	}
 
 	public Topic(String title, String user) {
 		super();
 		this.title = title;
 		this.forumUser = user;
-	}
-	
-	public Topic() {
-		
 	}
 
 	public String getForumUser() {
@@ -32,12 +31,11 @@ public class Topic {
 		this.forumUser = forumUser;
 	}
 
-
-	public int getIdent() {
+	public long getIdent() {
 		return ident;
 	}
 
-	public void setIdent(int ident) {
+	public void setIdent(long ident) {
 		this.ident = ident;
 	}
 

@@ -11,7 +11,7 @@ public class Comment {
 
 	@Id
 	@GeneratedValue
-	private int ident;
+	private long ident;
 
 	
 	private String username;
@@ -31,11 +31,11 @@ public class Comment {
 		this.createdOn = createdOn;
 	}
 
-	public int getIdent() {
+	public long getIdent() {
 		return ident;
 	}
 
-	public void setIdent(int ident) {
+	public void setIdent(long ident) {
 		this.ident = ident;
 	}
 

@@ -22,8 +22,22 @@ public class CommentServiceJPA implements CommentService {
 	}
 
 	@Override
+	public Comment getComment(long ident) {
+		try {
+			Comment c = (Comment) entityManager.createQuery("SELECT c FROM Comment c WHERE c.ident = :ident")
+					.setParameter("ident", ident).getSingleResult();
+			return c;
+
+		} catch (NoResultException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
 	public List<Comment> getComments(String topic) {
-		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.topic= :topic ORDER BY c.createdOn")
+		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.comment= :comment ORDER BY c.createdOn")
 				.setParameter("topic", topic).getResultList();
 	}
 
