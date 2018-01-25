@@ -55,7 +55,7 @@ public class UserController {
 		//if (isLogged()) {
 			//model.addAttribute("comments", commentService.getComments("comment"));
 			model.addAttribute("topics", topicService.getTopics());
-			List<String> tags = new ArrayList<>();
+			List<String> tags = new ArrayList<String>();
 			tags.add("1.tag");
 			tags.add("2.tag");
 			tags.add("3.tag");
