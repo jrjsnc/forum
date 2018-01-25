@@ -121,7 +121,7 @@ public class UserController {
 //	public String deleteComment(@RequestParam(value = "ident", required = false)String ident, Model model) {
 //		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));		
 //		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
-//		return "topic";
+//		return "topic";   
 //	}
 	
 	

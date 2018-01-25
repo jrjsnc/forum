@@ -14,9 +14,10 @@
 			<div class="col">
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
-						<td><span th:text='${comment.content}' /><span th:if='${@userController.Logged}'><a
-							th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
-								comment</a></span></td>
+						<td><span th:text='${comment.content}' /><span
+							th:if='${@userController.Logged}'><a
+								th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
+									comment</a></span></td>
 					</tr>
 				</table>
 
@@ -30,11 +31,6 @@
 				</span>
 			</div>
 		</div>
-
-
-
-
-
 
 		<div class="row">
 			<div class="col" th:replace="fragments::footer"></div>
