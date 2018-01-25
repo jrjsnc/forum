@@ -30,23 +30,23 @@
 		
 		
 
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-sm"> -->
-<!-- 				<span th:if='${@userController.logged}'> -->
-<!-- 					<form action="/comment" method="post"> -->
-<!-- 						<label>Comment <input type="text" name="newComment" -->
-<!-- 							placeholder="Insert your comment" /> -->
-<!-- 						</label> -->
-<!-- 						<button type="submit" id="SaveComment">SEND</button> -->
-<!-- 					</form> -->
-<!-- 				</span> -->
-<!-- 			</div> -->
+		<div class="row">
+			<div class="col-sm">
+				<span th:if='${@userController.logged}'>
+					<form action="/comment" method="post">
+						<label>Comment <input type="text" name="newComment" placeholder="Insert your comment" required= "required" />
+						</label>
+						<button type="submit" id="SaveComment">SEND</button>
+					</form>
+				</span>
+			</div>
+			</div>
 			
 			
 <!-- 			<div class="col-sm"> -->
 <!-- 				<table class='forum_comment_table'> -->
 <!-- 					<tr> -->
-<!-- 						<th>Topic name</th> -->
+<!-- 						<th>Topic </th> -->
 <!-- 						<th>Content</th> -->
 <!-- 						<th>Date</th> -->
 <!-- 					</tr> -->

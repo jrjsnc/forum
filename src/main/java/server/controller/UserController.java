@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
+import forum.entity.Restriction;
 import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.TopicService;
@@ -77,6 +78,7 @@ public class UserController {
 	public String register(ForumUser user, Model model) {
 		try {
 			if (!userService.nameTaken(user.getLogin())) {
+				user.setRestriction(Restriction.BASIC);
 				userService.register(user);
 				loggedUser = userService.login(user.getLogin(), user.getPassword());
 				model.addAttribute("message", "");
@@ -94,7 +96,6 @@ public class UserController {
 	
 	@RequestMapping("/addTopic")	
 	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
-		fillModel(model);
 		topicService.addTopic(new Topic(newTopic, getLoggedUser().getLogin()));
 		fillModel(model);
 		return "index";
@@ -106,6 +107,14 @@ public class UserController {
 		fillModel(model);
 		return "index";
 	}
+	
+//	@RequestMapping("/addComment2")
+//	public String comment2(Comment comment, Model model) {
+//		comment.setCreatedOn(new Date());
+//		commentService.addComment(comment);
+//		fillModel(model);
+//		return "index";
+//	}
 	
 	
 	

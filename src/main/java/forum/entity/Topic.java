@@ -10,7 +10,6 @@ public class Topic {
 	@Id
 	@GeneratedValue
 	private int ident;
-
 	private String title;
 	private String forumUser;
 	
