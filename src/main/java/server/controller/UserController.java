@@ -47,21 +47,11 @@ public class UserController {
 		return "index";
 	}
 
-	private void fillModel(Model model) {
-		// List<Game> games = gameService.getGames();
-		// addRatingToGames(games);
-		// model.addAttribute("games", games);
+	private void fillModel(Model model) {		
 		model.addAttribute("topics", topicService.getTopics());
 		model.addAttribute("users", userService.getUsers());
 		if(null != currentTopicIdent)
-		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
-		// if (isLogged()) {
-		// model.addAttribute("comments", commentService.getComments("comment"));
-
-		// model.addAttribute("favouriteGames",
-		// gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
-		// }
-
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());		
 	}
 
 	@RequestMapping("/user")
@@ -101,23 +91,20 @@ public class UserController {
 		return "index";
 	}
 
-	@RequestMapping("/test")
+	@RequestMapping("/setup")
 	public String test(Model model) {
 		Topic t = new Topic("ahoj");
 		t.addComment(new Comment("test komentar 1", new Date()));
 		t.addComment(new Comment("test komentar 2", new Date()));
 		t.addComment(new Comment("test komentar 3", new Date()));
 		t.addComment(new Comment("test komentar 4", new Date()));
-
 		topicService.addTopic(t);
-
 		return "index";
 	}
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		setCurrentTopicIdent(Long.parseLong(ident));
-		
+		setCurrentTopicIdent(Long.parseLong(ident));		
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
 	}

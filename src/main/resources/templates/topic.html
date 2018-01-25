@@ -15,7 +15,11 @@
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
 						<td><span th:text='${comment.content}' /><span
-							th:if='${@userController.Logged}'><a
+						
+						entry.description != null and entry.owner == true
+						
+						
+							th:if='${@userController.Logged and @userController.getLoggedUser().getIdent() == comment.user_ident}'><a
 								th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
 									comment</a></span></td>
 					</tr>
