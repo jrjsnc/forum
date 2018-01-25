@@ -13,28 +13,31 @@
 		<div class="row">
 			<div class="col">
 				<table class="topics">
-					<tr th:each="topic : ${topics}">					
-						<td> <a th:href='${"/topic?ident=" +topic.ident}'><span th:text='${topic.title}'/></a> <span th:if='${@userController.Logged}'><a
-							th:href='${"/deleteTopic?ident=" + topic.ident}'>Delete
-								topic</a></span></td>
+					<tr th:each="topic : ${topics}">
+						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
+								th:text='${topic.title}' /></a> <span
+							th:if='${@userController.Logged}'><a
+								th:href='${"/deleteTopic?ident=" + topic.ident}'>Delete
+									topic</a></span></td>
 					</tr>
 				</table>
 				<div>
-				<a th:href='${"/admin"}'>admin</a>
+					<a th:href='${"/admin"}'>admin</a>
 				</div>
-								
+
 				<span th:if='${@userController.Logged}'>
+
 					<form action="/addTopic" method="post">
-					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here"/>
-					</label>
-					<button type="submit">Add new topic</button>
+
+						Add Topic: <input type="text" name="title"
+							placeholder="Add topic here" /> <input type="submit" value="Post" />
 					</form>
 				</span>
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div class="row">
 			<div class="col" th:replace="fragments::footer"></div>
 		</div>

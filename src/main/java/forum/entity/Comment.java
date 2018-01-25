@@ -27,7 +27,7 @@ public class Comment {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(foreignKey = @ForeignKey(name = "topic_id", value = ConstraintMode.NO_CONSTRAINT))	
+	@JoinColumn(foreignKey = @ForeignKey(name = "topic_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private Topic topic;
 	
 	@Override

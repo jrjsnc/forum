@@ -53,6 +53,8 @@ public class UserController {
 		// model.addAttribute("games", games);
 		model.addAttribute("topics", topicService.getTopics());
 		model.addAttribute("users", userService.getUsers());
+		if(null != currentTopicIdent)
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		// if (isLogged()) {
 		// model.addAttribute("comments", commentService.getComments("comment"));
 
@@ -115,7 +117,27 @@ public class UserController {
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		setCurrentTopicIdent(Long.parseLong(ident));
+		
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
+		return "topic";
+	}
+	
+	@RequestMapping("/addComment")
+	public String addComment(Comment comment, Model model) {		
+		comment.setTopic(topicService.getTopic(currentTopicIdent));
+		comment.setUsername(getLoggedUser().getLogin());
+		comment.setCreatedOn(new Date());		
+		topicService.getTopic(currentTopicIdent).addComment(comment);		
+		//commentService.addComment(comment);		
+		fillModel(model);
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
+		return "topic";
+	}
+	
+	@RequestMapping("/addTopic")
+	public String addTopic(Topic topic, Model model) {
+		topicService.addTopic(topic);
+		setCurrentTopicIdent(topic.getIdent());
 		return "topic";
 	}
 
@@ -124,16 +146,7 @@ public class UserController {
 		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
-	}
-
-	@RequestMapping("/deleteTopic")
-	public String deleteTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		Topic t = topicService.getTopic(Long.parseLong(ident));
-
-		System.err.println(t.getComments().toString());
-		topicService.deleteTopic(t);
-		return "index";
-	}
+	}	
 
 	@RequestMapping("/setAdmin")
 	public String updateRestriction(@RequestParam(value = "ident", required = false) String ident, Model model) {
