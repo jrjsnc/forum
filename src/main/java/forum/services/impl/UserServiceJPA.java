@@ -1,11 +1,17 @@
 package forum.services.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.hibernate.validator.constraints.Email;
+
 import forum.entity.ForumUser;
+import forum.entity.Restriction;
+import forum.entity.Topic;
 import forum.services.UserService;
 
 @Transactional
@@ -40,6 +46,21 @@ public class UserServiceJPA implements UserService {
 			return false;
 		}
 		return true;
-
 	}
+
+	@Override
+	public List<ForumUser> getUsers() {		
+		return entityManager.createQuery("SELECT u FROM ForumUser u").getResultList();			
+	}
+
+	@Override
+	public ForumUser getUser(Long ident) {
+		return entityManager.find(ForumUser.class, ident);
+}
+
+	@Override
+	public void setRestriction(Long ident, Restriction restriction) {
+		ForumUser user = entityManager.find(ForumUser.class, ident);
+		user.setRestriction(restriction);	
+	}	
 }

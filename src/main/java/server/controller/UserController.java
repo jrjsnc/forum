@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
+import forum.entity.Restriction;
 import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.TopicService;
@@ -23,23 +24,22 @@ import forum.services.UserService;
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
-	
+
 	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	Date date = new Date();
 
 	@Autowired
-	private UserService userService;	
-	
+	private UserService userService;
+
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private TopicService topicService;
-	
+
 	private ForumUser loggedUser;
-	
+
 	private Long currentTopicIdent;
-	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -52,11 +52,13 @@ public class UserController {
 		// addRatingToGames(games);
 		// model.addAttribute("games", games);
 		model.addAttribute("topics", topicService.getTopics());
-		//if (isLogged()) {
-			//model.addAttribute("comments", commentService.getComments("comment"));
-		
-			//model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
-		//}
+		model.addAttribute("users", userService.getUsers());
+		// if (isLogged()) {
+		// model.addAttribute("comments", commentService.getComments("comment"));
+
+		// model.addAttribute("favouriteGames",
+		// gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
+		// }
 
 	}
 
@@ -79,6 +81,7 @@ public class UserController {
 	@RequestMapping("/register")
 	public String register(ForumUser user, Model model) {
 		if (!userService.nameTaken(user.getLogin())) {
+			user.setRestriction(Restriction.BASIC);
 			userService.register(user);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			model.addAttribute("message", "");
@@ -87,15 +90,15 @@ public class UserController {
 		}
 		model.addAttribute("message", "Name already used. Try another name.");
 		return "login";
-	}	
-	
+	}
+
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedUser = null;
 		fillModel(model);
 		return "index";
-	}	
-	
+	}
+
 	@RequestMapping("/test")
 	public String test(Model model) {
 		Topic t = new Topic("ahoj");
@@ -105,33 +108,69 @@ public class UserController {
 		t.addComment(new Comment("test komentar 4", new Date()));
 
 		topicService.addTopic(t);
-		
+
 		return "index";
 	}
-	
+
 	@RequestMapping("/topic")
-	public String getTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {
-		setCurrentTopicIdent(Long.parseLong(ident));		
-		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());				
-		return "topic";
-	}
-	
-	@RequestMapping("/deleteComment")
-	public String deleteComment(@RequestParam(value = "ident", required = false)String ident, Model model) {
-		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));		
+	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
+		setCurrentTopicIdent(Long.parseLong(ident));
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
 	}
-	
+
+	@RequestMapping("/deleteComment")
+	public String deleteComment(@RequestParam(value = "ident", required = false) String ident, Model model) {
+		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
+		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
+		return "topic";
+	}
+
 	@RequestMapping("/deleteTopic")
-	public String deleteTopic(@RequestParam(value = "ident", required = false)String ident, Model model) {
-		Topic t = topicService.getTopic(Long.parseLong(ident));		
-		
+	public String deleteTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
+		Topic t = topicService.getTopic(Long.parseLong(ident));
+
 		System.err.println(t.getComments().toString());
 		topicService.deleteTopic(t);
 		return "index";
 	}
+
+	@RequestMapping("/setAdmin")
+	public String updateRestriction(@RequestParam(value = "ident", required = false) String ident, Model model) {
+				
+		
+		
+//		if(userService.getUser(Long.parseLong(ident)).getRestriction() == Restriction.BANNED) {
+//			userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
+//		}
+		
+		switch(userService.getUser(Long.parseLong(ident)).getRestriction()) {	
+		
+		case BASIC:
+			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
+			userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
+			break;
+		case ADMIN:
+			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
+			userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
+			break;			
+		case BANNED:
+			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
+			model.addAttribute("message", "Cannot set admin on banned user");
+			break;
+		}
+		
+		
+		fillModel(model);		
+		return "admin";
+	}	
 	
+	@RequestMapping("/admin")
+	public String admin(Model model) {		
+		fillModel(model);
+		return "admin";
+	}
+
 	public ForumUser getLoggedUser() {
 		return loggedUser;
 	}
@@ -139,7 +178,7 @@ public class UserController {
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
-	
+
 	public void setCurrentTopicIdent(Long ident) {
 		currentTopicIdent = ident;
 	}

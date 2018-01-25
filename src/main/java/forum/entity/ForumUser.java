@@ -1,6 +1,8 @@
 package forum.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -9,22 +11,25 @@ public class ForumUser {
 	
 	@Id
 	@GeneratedValue
-	private int ident;
+	private Long ident;
 	
 	private String login;
 	private String password;
 	private String email;
-//	private boolean isAdmin;
-//	
-//	public boolean isAdmin() {
-//		return isAdmin;
-//	}
-//	
-//	public void setAdmin(boolean isAdmin) {
-//		this.isAdmin = isAdmin;
-//	}
+
+	@Enumerated(EnumType.STRING)
+	private Restriction restriction;
 	
-	public int getIdent() {
+	
+	public Restriction getRestriction() {
+		return restriction;
+	}
+	
+	public void setRestriction(Restriction restriction) {
+		this.restriction = restriction;
+	}
+	
+	public Long getIdent() {
 		return ident;
 	}
 	public String getLogin() {
@@ -36,7 +41,7 @@ public class ForumUser {
 	public String getEmail() {
 		return email;
 	}
-	public void setIdent(int ident) {
+	public void setIdent(Long ident) {
 		this.ident = ident;
 	}
 	public void setLogin(String login) {

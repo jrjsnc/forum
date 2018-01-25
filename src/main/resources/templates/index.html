@@ -19,6 +19,9 @@
 								topic</a></span></td>
 					</tr>
 				</table>
+				<div>
+				<a th:href='${"/admin"}'>admin</a>
+				</div>
 								
 				<span th:if='${@userController.Logged}'>
 					<form action="/addTopic" method="post">
@@ -29,6 +32,8 @@
 				</span>
 			</div>
 		</div>
+		
+		
 		
 		<div class="row">
 			<div class="col" th:replace="fragments::footer"></div>
