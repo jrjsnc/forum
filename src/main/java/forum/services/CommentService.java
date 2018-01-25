@@ -13,5 +13,7 @@ public interface CommentService {
 	void deleteComment(Comment comment);
 	
 	void updateComment(Comment comment);
+
+	Comment getComment(long ident);
 	
 	}

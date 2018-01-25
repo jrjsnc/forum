@@ -11,4 +11,6 @@ public interface TopicService {
 	List<Topic> getTopics();
 	
 	void deleteTopic(Topic topic);
+
+	Topic getTopic(long ident);
 }

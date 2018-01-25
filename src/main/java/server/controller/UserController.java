@@ -113,8 +113,18 @@ public class UserController {
 	public String comment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
 		commentService.addComment(new Comment(getLoggedUser().getLogin(), "topic", newComment, new Date()));
 		fillModel(model);
-		return "index";
+		return "topic";
 	}
+	
+	
+//	@RequestMapping("/deleteComment")
+//	public String deleteComment(@RequestParam(value = "ident", required = false)String ident, Model model) {
+//		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));		
+//		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
+//		return "topic";
+//	}
+	
+	
 	
 //	@RequestMapping("/addComment2")
 //	public String comment2(Comment comment, Model model) {
@@ -123,8 +133,6 @@ public class UserController {
 //		fillModel(model);
 //		return "index";
 //	}
-	
-	
 	
 	
 	
