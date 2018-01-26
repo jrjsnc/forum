@@ -3,7 +3,6 @@
 
 <div class="header" th:fragment="header">
 <h1> Best movie forum ever </h1>
-<hr/>
 </div>
 
 
@@ -11,17 +10,21 @@
 <hr/>
 <a  href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
 <br/>
+</div>
 
+<div class="login" th:fragment="header2">
 <span th:if='${@userController.Logged}'>
-Logged as <span th:text='${@userController.LoggedUser?.Login}'/><br/>
-<a href="/logout">Logout</a>
+Logged as <span class="user" th:text='${@userController.LoggedUser?.Login}'/><br/>
+<a href="/logout" class="right_header2">Logout</a>
+<hr/>
 </span>
 
 <span th:if='${not @userController.Logged}'>
-<a href="/user">Log in</a>
+<a href="/user" class="right_header">Login / Register</a>
+<hr/>
 </span>
-
 </div>
+
 
 
 

@@ -9,6 +9,7 @@
 
 
 	<div class="col" th:replace="fragments::header"></div>
+	<div th:replace="fragments::header2"></div>
 
 	<select>
 		<option th:each="tag : ${tags}"><span th:text='${tag}' /></option>
@@ -16,12 +17,14 @@
 	<br />
 	<hr />
 
+
 <div class="topics">
 <div  th:each="topic : ${topics}">
 <div th:text='${topic.title}'/>
 
 </div>
 </div>
+
 
 	<span th:if='${@userController.Logged}'>
 		<form action="/addTopic" method="post">
@@ -42,7 +45,6 @@
 			<button type="submit" id="SaveComment">SEND</button>
 		</form>
 	</span>
-
 
 	<div th:replace="fragments::footer"></div>
 

@@ -9,6 +9,9 @@ body{
 	text-align: center;
 	font-family: "Tw Cen MT" !important;
 	font-size: 150%;
+	font-style: normal;
+	font-style: italic;
+	font-style: oblique;
 }
 .classlogin {
   display: inline-block;
@@ -57,10 +60,44 @@ fieldset{
 }
 .topics{
 	display: grid;
-	grid-row-gap: 1em;
-	font-size: 200%;
+	grid-row-gap: 0.5em;
+	font-size: 175%;
 	font-family: "Tw Cen MT" !important;
-	grid-auto-rows: minmax(150px, auto);
-	
+	font-style: italic;
+	grid-auto-rows: minmax(100px, auto);
+}
+.scroll{
+    overflow: scroll;
+    color: grey;
+    width: 5px;
+    height: 5px;
+}
+.login{
+	text-align: left !important;
+}
+.right_header{
+	color: blue !important;
+}
+.right_header2{
+	color: blue !important;
+}
+.user{
+	color: red;
+	text-decoration: underline;
+	font-style: italic;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #606af0; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #606af0; 
 }
 
