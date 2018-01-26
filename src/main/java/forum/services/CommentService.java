@@ -18,7 +18,7 @@ public interface CommentService {
 	@Modifying
 	void deleteComment(Comment comment);
 	
-	void updateComment(Comment comment);
+	//void updateComment(Comment comment);
 
 	Comment getComment(Long ident);
 	

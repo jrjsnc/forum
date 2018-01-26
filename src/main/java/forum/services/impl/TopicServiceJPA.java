@@ -28,7 +28,7 @@ public class TopicServiceJPA implements TopicService {
 	}
 	
 	@Override
-	public Topic getTopic(Long ident) {
+	public Topic getTopic(Long ident) {		
 		return entityManager.find(Topic.class, ident);
 	}
 

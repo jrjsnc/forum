@@ -10,19 +10,25 @@
 			<div class="col" th:replace="fragments::header"></div>
 		</div>
 
+		<!-- 						entry.description != null and entry.owner == true
+		 
+		ked je user zalogovany a jeho meno je rovnake ako je meno na komente
+		//and @userController.getLoggedUser().getIdent() == comment.user_ident}'-->
+
 		<div class="row">
 			<div class="col">
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
-						<td><span th:text='${comment.content}' /><span
-						
-						entry.description != null and entry.owner == true
-						
-						
-							th:if='${@userController.Logged and @userController.getLoggedUser().getIdent() == comment.user_ident}'><a
+						<td>
+						<span th:text='${comment.content}' />						
+						<span th:if='${@userController.Logged}'>						
+						<span
+							th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'><a
 								th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
-									comment</a></span></td>
+									comment</a></span>		</span></td>							
 					</tr>
+					
+					
 				</table>
 
 				<span th:if='${@userController.Logged}'>

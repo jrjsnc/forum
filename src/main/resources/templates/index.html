@@ -16,9 +16,7 @@
 					<tr th:each="topic : ${topics}">
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
 								th:text='${topic.title}' /></a> <span
-							th:if='${@userController.Logged}'><a
-								th:href='${"/deleteTopic?ident=" + topic.ident}'>Delete
-									topic</a></span></td>
+								th:text='${topic.getComments().size()}' /></td>
 					</tr>
 				</table>
 				<div>

@@ -3,6 +3,7 @@ package forum.entity;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,21 +22,23 @@ public class Comment {
 	@Id
 	@GeneratedValue
 	private Long ident;
-
-	private String username;	
-	private String content;
-	private Date createdOn;
 	
+	private String content;	
+	private Date createdOn;	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "topic_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private Topic topic;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
+	private ForumUser forumUser;	
 	
 	@Override
 	public boolean equals(Object o) {
 		if(this == o) return true;
 		if(!(o instanceof Comment)) return false;
-		return ident != null && ident.equals(((Comment) o).ident);
+		return ident != null && ident.equals(((Comment) o).getIdent());
 	}
 	
 	@Override
@@ -46,7 +50,7 @@ public class Comment {
 	
 	public Comment(String content, Date createdOn) {
 		super();
-		this.username = "Test user";
+		//this.username = "Test user";
 		this.content = content;
 		this.createdOn = createdOn;
 		//this.topic = topic;
@@ -55,6 +59,14 @@ public class Comment {
 	public Comment() {
 
 	}	
+	
+	public ForumUser getForumUser() {
+		return forumUser;
+	}
+	
+	public void setForumUser(ForumUser forumUser) {
+		this.forumUser = forumUser;
+	}
 
 	public Long getIdent() {
 		return ident;
@@ -62,15 +74,7 @@ public class Comment {
 	
 	public void setIdent(Long ident) {
 		this.ident = ident;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	}	
 	
 	public Topic getTopic() {
 		return topic;
@@ -98,7 +102,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return String.format("Coment (%d %s %s %s %tc)", ident, username, topic, content, createdOn);
+		return String.format("Coment (%d %s %s %s %tc)", ident, this.getForumUser().getLogin(), topic, content, createdOn);
 	}
 
 }

@@ -20,9 +20,8 @@ public class Topic {
 	
 	private String title;
 	
-	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "topic", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<Comment>();
-	
 	
 	public void addComment(Comment comment) {
 		comments.add(comment);

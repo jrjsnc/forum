@@ -110,12 +110,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/addComment")
-	public String addComment(Comment comment, Model model) {		
-		comment.setTopic(topicService.getTopic(currentTopicIdent));
-		comment.setUsername(getLoggedUser().getLogin());
-		comment.setCreatedOn(new Date());		
-		topicService.getTopic(currentTopicIdent).addComment(comment);		
-		//commentService.addComment(comment);		
+	public String addComment(Comment comment, Model model) {
+		
+		comment.setForumUser(getLoggedUser());
+		comment.setTopic(topicService.getTopic(currentTopicIdent));		
+		comment.setCreatedOn(new Date());
+		
+		topicService.getTopic(currentTopicIdent).addComment(comment);				
 		fillModel(model);
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
@@ -133,11 +134,8 @@ public class UserController {
 		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
-<<<<<<< HEAD
+
 	}
-=======
-	}	
->>>>>>> 15c83994fba2d19f6ea155ac9e50c5f0bd058e75
 
 	@RequestMapping("/setAdmin")
 	public String updateRestriction(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -161,22 +159,6 @@ public class UserController {
 		return "admin";
 	}
 
-	@RequestMapping("/addComment")
-	public String comment(Comment comment, Model model) {
-		
-		comment.setUsername(getLoggedUser();
-		comment.setTopic(topic);
-		commentService.addComment(new Comment(getLoggedUser().getLogin(), "topic", newComment, new Date()));
-		fillModel(model);
-		return "topic";
-	}
-
-	@RequestMapping("/addTopic")
-	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
-		topicService.addTopic(new Topic(newTopic, getLoggedUser().getLogin()));
-		fillModel(model);
-		return "index";
-	}
 
 	@RequestMapping("/admin")
 	public String admin(Model model) {
