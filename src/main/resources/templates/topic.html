@@ -14,18 +14,24 @@
 			<div class="col">
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
-						<td><span th:text='${comment.content}' /><span th:if='${@userController.Logged}'><a
-							th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
-								comment</a></span></td>
+						<td><span th:text='${comment.content}' /><span
+						
+						entry.description != null and entry.owner == true
+						
+						
+							th:if='${@userController.Logged and @userController.getLoggedUser().getIdent() == comment.user_ident}'><a
+								th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
+									comment</a></span></td>
 					</tr>
 				</table>
 
 				<span th:if='${@userController.Logged}'>
+
 					<form action="/addComment" method="post">
-						<label> Add Comment <input type="text" name="newComment"
-							placeholder="Add comment here" />
-						</label>
-						<button type="submit">Post</button>
+
+						Add Comment: <input type="text" name="content"
+							placeholder="Add comment here" /> <input type="submit"
+							value="Post" />
 					</form>
 				</span>
 			</div>
