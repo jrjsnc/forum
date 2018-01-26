@@ -126,26 +126,11 @@ public class UserController {
 		return "topic";
 	}
 
-	@RequestMapping("/deleteTopic")
-	public String deleteTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		Topic t = topicService.getTopic(Long.parseLong(ident));
-
-		System.err.println(t.getComments().toString());
-		topicService.deleteTopic(t);
-		return "index";
-	}
-
 	@RequestMapping("/setAdmin")
 	public String updateRestriction(@RequestParam(value = "ident", required = false) String ident, Model model) {
-				
-		
-		
-//		if(userService.getUser(Long.parseLong(ident)).getRestriction() == Restriction.BANNED) {
-//			userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
-//		}
-		
-		switch(userService.getUser(Long.parseLong(ident)).getRestriction()) {	
-		
+
+		switch (userService.getUser(Long.parseLong(ident)).getRestriction()) {
+
 		case BASIC:
 			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
 			userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
@@ -153,20 +138,35 @@ public class UserController {
 		case ADMIN:
 			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
 			userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
-			break;			
+			break;
 		case BANNED:
-			System.err.println(userService.getUser(Long.parseLong(ident)).getRestriction());
 			model.addAttribute("message", "Cannot set admin on banned user");
 			break;
 		}
-		
-		
-		fillModel(model);		
+
+		fillModel(model);
 		return "admin";
-	}	
-	
+	}
+
+	@RequestMapping("/addComment")
+	public String comment(Comment comment, Model model) {
+		
+		comment.setUsername(getLoggedUser();
+		comment.setTopic(topic);
+		commentService.addComment(new Comment(getLoggedUser().getLogin(), "topic", newComment, new Date()));
+		fillModel(model);
+		return "topic";
+	}
+
+	@RequestMapping("/addTopic")
+	public String topic(@RequestParam(value = "newTopic", required = false) String newTopic, Model model) {
+		topicService.addTopic(new Topic(newTopic, getLoggedUser().getLogin()));
+		fillModel(model);
+		return "index";
+	}
+
 	@RequestMapping("/admin")
-	public String admin(Model model) {		
+	public String admin(Model model) {
 		fillModel(model);
 		return "admin";
 	}
