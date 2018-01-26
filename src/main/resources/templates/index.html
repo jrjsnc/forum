@@ -6,7 +6,7 @@
 <title>Movie forum</title>
 </head>
 <body>
-<<<<<<< HEAD
+
 
 	<div class="col" th:replace="fragments::header"></div>
 
@@ -16,17 +16,12 @@
 	<br />
 	<hr />
 
-<!-- 	<table class="topics"> -->
-<!-- 		<tr th:each="topic : ${topics}"> -->
-<!-- 			<td th:text='${topic.title}' /> -->
-<!-- 		</tr> -->
-<!-- 	</table> -->
-
-<div class='topics' th:each="topic : ${topics}">
+<div class="topics">
+<div  th:each="topic : ${topics}">
 <div th:text='${topic.title}'/>
 
 </div>
-
+</div>
 
 	<span th:if='${@userController.Logged}'>
 		<form action="/addTopic" method="post">
@@ -50,63 +45,6 @@
 
 
 	<div th:replace="fragments::footer"></div>
-
-
-=======
-	<div class="container">
-		<div class="row">
-			<div class="col" th:replace="fragments::header"></div>
-		</div>
-		<select>
- 			<option th:each="tag : ${tags}"><span th:text='${tag}'/></option> 			
-		</select>
-		<div class="row">
-			<div class="col">
-				<table class="topics">
-					<tr th:each="topic : ${topics}">
-						<td th:text='${topic.title}' />
-					</tr>
-				</table>
-				
-				<span th:if='${@userController.Logged}'>
-					<form action="/addTopic" method="post">
-					<label> Add Topic <input type="text" name="newTopic" placeholder="Add topic here" required="required"/>
-					</label>
-					<button type="submit"> Post</button>
-					</form>
-				</span>
-			</div>
-		</div>
-		
-		
-
-		
-			
-			
-<!-- 			<div class="col-sm"> -->
-<!-- 				<table class='forum_comment_table'> -->
-<!-- 					<tr> -->
-<!-- 						<th>Topic </th> -->
-<!-- 						<th>Content</th> -->
-<!-- 						<th>Date</th> -->
-<!-- 					</tr> -->
-<!-- 					<tr th:each='comment : ${comment}'> -->
-<!-- 						<td th:text='${comment.username}' /> -->
-<!-- 						<td th:text='${comment.content}' /> -->
-<!-- 						<td th:text='${comment.createdOn}' /> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-<!-- 				<br /> -->
-<!-- 			</div> -->
-		
-
-
-		<div class="row">
-			<div class="col" th:replace="fragments::footer"></div>
-		</div>
-	</div>
->>>>>>> 9e7807666d271aab35b4e26289ad295a9a722038
-
 
 </body>
 </html>

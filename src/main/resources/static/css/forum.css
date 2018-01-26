@@ -47,20 +47,20 @@ fieldset{
 .classregister{
 	text-align: right;
 }
-
-.topics{
-	font-family: "Tw Cen MT" !important;
-    font-size: 200%;
-	background: #ddd;
-	display: grid;
-	padding: 1em;
-	grid-row-gap: 1em;
-	grid-auto-rows: minmax(100px, auto);
-	border: #333 1px solid;
-	grid-template-colums: 100%;
-}
-div{
+.topics > div{
 	background: #eee;
-	padding:1em;
+	padding: 1em;
+	border: #333 1px solid;
+}
+.topics > div:nth-child(odd){
+	background: #ddd;
+}
+.topics{
+	display: grid;
+	grid-row-gap: 1em;
+	font-size: 200%;
+	font-family: "Tw Cen MT" !important;
+	grid-auto-rows: minmax(150px, auto);
+	
 }
 
