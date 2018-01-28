@@ -16,7 +16,9 @@
 					<tr th:each="topic : ${topics}">
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
 								th:text='${topic.title}' /></a> <span
-								th:text='${topic.getComments().size()}' /></td>
+							th:text='${topic.getComments().size()}' /></td>
+						<td><span>(</span> <span
+							th:text='${topic.getForumUser().getLogin()}' /> <span>)</span></td>
 					</tr>
 				</table>
 				<div>
@@ -28,7 +30,8 @@
 					<form action="/addTopic" method="post">
 
 						Add Topic: <input type="text" name="title"
-							placeholder="Add topic here" /> <input type="submit" value="Post" />
+							placeholder="Add topic here" /> <input type="submit"
+							value="Post" />
 					</form>
 				</span>
 			</div>

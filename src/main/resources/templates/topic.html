@@ -20,7 +20,10 @@
 				<table class="comments">
 					<tr th:each="comment : ${comments}">
 						<td>
-						<span th:text='${comment.content}' />						
+						<span th:text='${comment.content}' />
+						<span>(</span>
+						<span th:text='${comment.getForumUser().getLogin()}' />
+						<span>)</span>						
 						<span th:if='${@userController.Logged}'>						
 						<span
 							th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'><a

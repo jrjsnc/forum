@@ -38,17 +38,7 @@ public class TopicServiceJPA implements TopicService {
 		Topic t = (Topic)entityManager.createQuery("SELECT t FROM Topic t JOIN FETCH t.comments WHERE t.ident = :ident")
 				.setParameter("ident", topic.getIdent()).getSingleResult();
 		
-		
-		
-		//int commentCount = t.getComments().size();
-		
-		t.getComments().clear();
-		
-//		for (int i = 0; i<commentCount; i++) {
-//			t.removeComment(t.getComments().get(i));
-//		}
-		
-		//t.removeComment(t.getComments().get(0));
+		t.getComments().clear();		
 		
 		entityManager.createQuery("DELETE FROM Topic t WHERE t.title=:title").setParameter("title", topic.getTitle())
 				.executeUpdate();		

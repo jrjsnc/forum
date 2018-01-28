@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
+import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.TopicService;
@@ -101,6 +102,13 @@ public class UserController {
 		topicService.addTopic(t);
 		return "index";
 	}
+	
+	@RequestMapping("/addTag")
+	public String addTag(Tag tag, Model model) {
+		
+		
+		return "admin";
+	}
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -124,6 +132,7 @@ public class UserController {
 	
 	@RequestMapping("/addTopic")
 	public String addTopic(Topic topic, Model model) {
+		topic.setForumUser(getLoggedUser());
 		topicService.addTopic(topic);
 		setCurrentTopicIdent(topic.getIdent());
 		return "topic";
@@ -158,8 +167,7 @@ public class UserController {
 		fillModel(model);
 		return "admin";
 	}
-
-
+	
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		fillModel(model);
