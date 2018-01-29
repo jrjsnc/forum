@@ -35,12 +35,16 @@ public class UserController {
 
 	@Autowired
 	protected TopicService topicService;
+	
+	@Autowired
+	protected TagService tagService;
 
 	private ForumUser loggedUser;
 
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("topics", topicService.getTopics());
+		model.addAttribute("tags", tagService.getAllTags());
 		return "index";
 	}
 

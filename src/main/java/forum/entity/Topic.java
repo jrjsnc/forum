@@ -109,5 +109,13 @@ public class Topic {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	
+	public Set<Tag> getTags() {
+		return tags;
+	}
+	
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
 
 }

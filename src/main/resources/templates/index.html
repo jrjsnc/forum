@@ -13,34 +13,72 @@
 		<div class="row">
 			<div class="col">
 				<table class="topics">
-				
-				<th>Topic</th><th>Comments count</th><th>Author</th>
-				
+
+					<th>Topic</th>
+<!-- 					<th>Tags</th> -->
+					<th>Comments count</th>
+					<th>Author</th>
+					
+
+					<span th:if='${@userController.Logged}'> 
+					<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+
+							<th>Add tag</th>
+							<th>Remove tag</th>
+
+					</span>
+					</span>
+
 					<tr th:each="topic : ${topics}">
+
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
-								th:text='${topic.title}' /></a> 
-								</td>
+								th:text='${topic.title}' /></a></td>
 								
-								<td>
-								<span
-							th:text='${topic.getComments().size()}' />
+<!-- 						<td th:each="tag : ${topic.getTags()}"><span th:text="${tag.name}"/></td> -->
+
+						<td><span th:text='${topic.getComments().size()}' /></td>
+
+						<td> <span
+							th:text='${topic.getForumUser().getLogin()}' /> </td>
+							
+							
+
+
+						<span th:if='${@userController.Logged}'> 
+						<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+						
+						<td>
+						
+						<select th:field="${tags}">														
+								<option th:each="tag : ${tags}" th:value="${tag}" th:text="${tag.getName()}"/>
+						</select>	
+						
+											
+						<a th:href='${"/addTag"}'>Add</a>
 						</td>
 						
-						<td><span>(</span> 
+						<td>
+						<select th:field="${tags}">
+								<option th:each="tag : ${topic.getTags()}" th:value="${tag}" th:text="${tag.getName()}"/>
+						</select>						
+						<a th:href='${"/removeTag"}'>Remove</a>
+						</td>
 						
-						<span
-							th:text='${topic.getForumUser().getLogin()}' /> <span>)</span></td>
+						</span>
+						</span>
+
 					</tr>
+
 				</table>
-				
+
 				<div>
-				
-				<span th:if='${@userController.Logged}'>
-				<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>				 
-					<a th:href='${"/admin"}'>admin</a>
+
+					<span th:if='${@userController.Logged}'> <span
+						th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+							<a th:href='${"/admin"}'>admin</a>
 					</span>
 					</span>
-					
+
 				</div>
 
 				<span th:if='${@userController.Logged}'>

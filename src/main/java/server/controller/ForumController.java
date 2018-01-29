@@ -27,15 +27,13 @@ public class ForumController {
 	@Autowired
 	private CommentService commentService;	
 	
-	@Autowired
-	private TagService tagService;
+	
 	
 	private Long currentTopicIdent;	
 	
 	
 	private void fillModel(Model model) {
-	model.addAttribute("users", userController.userService.getUsers());
-	model.addAttribute("tags", tagService.getAllTags());
+	model.addAttribute("users", userController.userService.getUsers());	
 	if(null != currentTopicIdent)
 	model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());	
 	}
@@ -43,8 +41,8 @@ public class ForumController {
 	
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
-		tagService.addTag(tag);
-		model.addAttribute("tags", tagService.getAllTags());		
+		userController.tagService.addTag(tag);
+		model.addAttribute("tags", userController.tagService.getAllTags());		
 		return "admin";
 	}
 	
