@@ -7,14 +7,13 @@
 body {
 	color: #6e6f59;
 	background-color: #c9cba3;
-/* 	color:#ffe1a8 ; */
 	line-height: 1,6;
 	font-family: 'Comic Sans MS';
 	padding: 1em;	
 }
 
 .container {
-	max-width: 400px;
+	max-width: 700px;
 	margin-left:auto;
 	margin-right:auto;
 	padding: 1em;	
@@ -126,7 +125,19 @@ fieldset{
 }
 
 
-
+@media(min-width:700px) {
+	.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	
+	
+	}
+	
+	.wrapper > *{
+	padding: 2em;
+	
+	}
+}
 
 
 
