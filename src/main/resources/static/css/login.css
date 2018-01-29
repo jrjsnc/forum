@@ -1,0 +1,140 @@
+*{
+	
+	box-sizing: border-box;
+}
+
+
+body {
+	color: #6e6f59;
+	background-color: #c9cba3;
+/* 	color:#ffe1a8 ; */
+	line-height: 1,6;
+	font-family: 'Comic Sans MS';
+	padding: 1em;	
+}
+
+.container {
+	max-width: 400px;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 1em;	
+}
+
+.header {
+	
+	text-align: center;
+}
+
+.header span{
+	
+	color:#ffe1a8;
+}
+
+.wrapper{
+	box-shadow: 0 0 20px 0 #6e6f59;
+	
+}
+
+.wrapper > *{
+	padding:1em;	
+}
+
+fieldset{
+	border: none;
+	
+}
+
+.login {
+	background-color: #ffe1a8;
+
+}
+
+.login h4, .login form{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+
+.login form {
+	display: grid;
+	grid-template-columns: 1fr 1fr ;	
+	grid-gap:20px;
+
+}
+
+.register {
+	background-color: #ffffff;
+
+}
+.register h4, .register form{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+
+.register form {
+	display: grid;
+	grid-template-columns: 1fr 1fr ;	
+	grid-gap:20px;
+
+}
+
+.login form label, .register form label {
+	
+	display: block;
+	
+}
+
+.login form p, .register form p {
+	
+	margin: 0;
+	
+}
+
+.login form button, .register form button, .login form input, .register form input {
+	
+	width: 100%;
+	padding: 0.5em;
+	
+}
+
+.login  button, .register button {
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+}
+
+.login  button:hover, .login button:focus, .register  button:focus, .register button:hover {
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+}
+
+.full {
+	align-items: center ;
+ 	width: 100px;
+	margin-left:auto;
+	margin-right:auto;
+ 	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

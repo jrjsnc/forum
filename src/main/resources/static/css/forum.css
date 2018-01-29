@@ -1,5 +1,6 @@
 body{
-	background: url("../pictures/white_backround.jpg");
+	background-image: url("/pictures/background.jpeg");
+	
 	-moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
