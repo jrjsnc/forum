@@ -44,28 +44,33 @@
 							
 
 
-						<span th:if='${@userController.Logged}'> 
-						<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+<!-- 						<span th:if='${@userController.Logged}'>  -->
+<!-- 						<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'> -->
 						
-						<td>
+<!-- 						<td> -->
 						
-						<select th:field="${tags}">														
-								<option th:each="tag : ${tags}" th:value="${tag}" th:text="${tag.getName()}"/>
-						</select>	
+<!-- 						<form th:action='${"/"}'> -->
 						
-											
-						<a th:href='${"/addTag"}'>Add</a>
-						</td>
+<!-- 						<select th:field="${tags}">	 -->
+																			
+<!-- 								<option th:each="tag : ${tags}" th:value="${tag}" th:text="${tag.getName()}"/> -->
+								
+<!-- 						</select>									 -->
+
+<!-- 						 <button type="submit" th:formaction='${"/addTopicTag?topic_ident" + topic.getIdent() + "?tag_ident" + tag.getIdent()}'>Add</button> -->
+<!-- 						</form> -->
+<!-- 						</td> -->
 						
-						<td>
-						<select th:field="${tags}">
-								<option th:each="tag : ${topic.getTags()}" th:value="${tag}" th:text="${tag.getName()}"/>
-						</select>						
-						<a th:href='${"/removeTag"}'>Remove</a>
-						</td>
 						
-						</span>
-						</span>
+<!-- 						<td> -->
+<!-- 						<select th:field="${tags}"> -->
+<!-- 								<option th:each="tag : ${topic.getTags()}" th:value="${tag}" th:text="${tag.getName()}"/> -->
+<!-- 						</select>						 -->
+<!-- 						<a th:href='${"/removeTag"}'>Remove</a> -->
+<!-- 						</td> -->
+						
+<!-- 						</span> -->
+<!-- 						</span> -->
 
 					</tr>
 

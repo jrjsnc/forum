@@ -36,7 +36,7 @@ public class Topic {
 	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.CONSTRAINT))	
 	private ForumUser forumUser;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "topic_tag", joinColumns = @JoinColumn(name = "topic_ident"), inverseJoinColumns = @JoinColumn(name = "tag_ident"))
 	private Set<Tag> tags = new HashSet<Tag>();
 	
