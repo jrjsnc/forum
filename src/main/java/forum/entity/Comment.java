@@ -49,11 +49,9 @@ public class Comment {
 	
 	
 	public Comment(String content, Date createdOn) {
-		super();
-		//this.username = "Test user";
+		super();		
 		this.content = content;
-		this.createdOn = createdOn;
-		//this.topic = topic;
+		this.createdOn = createdOn;		
 	}
 	
 	public Comment() {
