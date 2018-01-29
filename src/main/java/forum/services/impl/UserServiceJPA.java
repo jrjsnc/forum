@@ -23,7 +23,6 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public void register(ForumUser user) {
 		entityManager.persist(user);
-
 	}
 
 	@Override
