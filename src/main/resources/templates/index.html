@@ -13,16 +13,34 @@
 		<div class="row">
 			<div class="col">
 				<table class="topics">
+				
+				<th>Topic</th><th>Comments count</th><th>Author</th>
+				
 					<tr th:each="topic : ${topics}">
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
-								th:text='${topic.title}' /></a> <span
-							th:text='${topic.getComments().size()}' /></td>
-						<td><span>(</span> <span
+								th:text='${topic.title}' /></a> 
+								</td>
+								
+								<td>
+								<span
+							th:text='${topic.getComments().size()}' />
+						</td>
+						
+						<td><span>(</span> 
+						
+						<span
 							th:text='${topic.getForumUser().getLogin()}' /> <span>)</span></td>
 					</tr>
 				</table>
+				
 				<div>
+				
+				<span th:if='${@userController.Logged}'>
+				<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>				 
 					<a th:href='${"/admin"}'>admin</a>
+					</span>
+					</span>
+					
 				</div>
 
 				<span th:if='${@userController.Logged}'>

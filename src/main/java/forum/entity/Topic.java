@@ -38,7 +38,7 @@ public class Topic {
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "topic_tag", joinColumns = @JoinColumn(name = "topic_ident"), inverseJoinColumns = @JoinColumn(name = "tag_ident"))
-	private Set<Tag> tags = new HashSet<>();
+	private Set<Tag> tags = new HashSet<Tag>();
 	
 	@Override
 	public boolean equals(Object o) {

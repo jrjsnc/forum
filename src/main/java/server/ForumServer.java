@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
 import forum.services.CommentService;
+import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.CommentServiceJPA;
+import forum.services.impl.TagServiceJPA;
 import forum.services.impl.TopicServiceJPA;
 import forum.services.impl.UserServiceJPA;
 
@@ -35,6 +37,11 @@ public class ForumServer {
 	@Bean
 	public UserService userService() {
 		return new UserServiceJPA();
+	}
+	
+	@Bean
+	public TagService tagService() {
+		return new TagServiceJPA();
 	}
 
 }

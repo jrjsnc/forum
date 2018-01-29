@@ -19,6 +19,7 @@ import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
+import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
 
@@ -37,6 +38,9 @@ public class UserController {
 
 	@Autowired
 	private TopicService topicService;
+	
+	@Autowired
+	private TagService tagService;
 
 	private ForumUser loggedUser;
 
@@ -51,6 +55,7 @@ public class UserController {
 	private void fillModel(Model model) {		
 		model.addAttribute("topics", topicService.getTopics());
 		model.addAttribute("users", userService.getUsers());
+		model.addAttribute("tags", tagService.getAllTags());	
 		if(null != currentTopicIdent)
 		model.addAttribute("comments", topicService.getTopic(currentTopicIdent).getComments());		
 	}
@@ -105,10 +110,14 @@ public class UserController {
 	
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
-		
-		
+		tagService.addTag(tag);
+		model.addAttribute("tags", tagService.getAllTags());		
 		return "admin";
 	}
+	
+//	@RequestMapping("/updateTag")
+	
+//	@RequestMapping("/deleteTag")
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {

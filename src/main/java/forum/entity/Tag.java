@@ -20,7 +20,7 @@ public class Tag {
 	private String name;
 
 	@ManyToMany(mappedBy = "tags")
-	private Set<Topic> topics = new HashSet<>();
+	private Set<Topic> topics = new HashSet<Topic>();
 
 	@Override
 	public boolean equals(Object o) {

@@ -9,7 +9,8 @@
 
 	<div class="col" th:replace="fragments::header"></div>
 	
-	<table class="users">
+	<table class="users">	
+	<th>Forum Users</th>
 		<tr th:each="forumUser : ${users}">
 			
 			<td><span th:text='${forumUser.login}' />
@@ -21,6 +22,25 @@
 			</a></td>
 		</tr>
 	</table>
+	
+	<br/>
+	
+	<table class="tags">
+	<th>Tags</th>
+					<tr th:each="tag : ${tags}">
+					<td>
+					<span th:text='${tag.getName()}'/>
+					</td>
+	</tr>
+	
+	</table>
+	
+	
+	<form action="/addTag" method="post">
+	Add Tag: <input type="text" name="name"
+							placeholder="Add new tag here" /> <input type="submit"
+							value="Post" />
+	</form>
 	
 	<div class="col" th:replace="fragments::footer"></div>
 	
