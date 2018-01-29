@@ -1,6 +1,8 @@
 package forum.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -14,15 +16,18 @@ public class ForumUser {
 	private String login;
 	private String password;
 	private String email;
-	//private boolean isAdmin;
 	
-//	public boolean isAdmin() {
-//		return isAdmin;
-//	}
-//	
-//	public void setAdmin(boolean isAdmin) {
-//		this.isAdmin = isAdmin;
-//	}
+	@Enumerated(EnumType.STRING)
+	private Restriction restriction;
+	
+
+	public Restriction getRestriction() {
+		return restriction;
+	}
+	
+	public void setRestriction(Restriction restriction) {
+		this.restriction = restriction;
+	}
 	
 	public int getIdent() {
 		return ident;
