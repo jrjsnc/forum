@@ -3,13 +3,23 @@
 <link rel="stylesheet" href="css/login.css" />
 
 <div class="header" th:fragment="header">
-<<<<<<< HEAD
-<h1><span> Best </span>movie forum ever </h1>
 
-=======
-<h1> Best movie forum ever </h1>
->>>>>>> 81117f56e04afa31a2a40a4038b4ce406b76525a
+<span> Best </span>movie forum ever 
+
+<span class="linkLoginRegister">
+<span th:if='${@userController.Logged}'>
+Logged as <span  th:text='${@userController.LoggedUser?.Login}'/><br/>
+<a href="/logout" >Logout</a>
+
+</span>
+
+<span th:if='${not @userController.Logged}'>
+<a href="/user" >Login / Register</a>
+</span>
+</span>
+
 </div>
+
 
 
 <div class="footer" th:fragment="footer">
@@ -17,27 +27,5 @@
 <a  href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
 <br/>
 </div>
-
-<div class="login" th:fragment="header2">
-<span th:if='${@userController.Logged}'>
-Logged as <span class="user" th:text='${@userController.LoggedUser?.Login}'/><br/>
-<a href="/logout" class="right_header2">Logout</a>
-<hr/>
-</span>
-
-<span th:if='${not @userController.Logged}'>
-<a href="/user" class="right_header">Login / Register</a>
-<hr/>
-</span>
-</div>
-
-
-
-
-
-
-
-
-
 
 </html>

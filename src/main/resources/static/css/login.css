@@ -8,7 +8,7 @@ body {
 	color: #6e6f59;
 	background-color: #c9cba3;
 	line-height: 1,6;
-	font-family: 'Comic Sans MS';
+	font-family: 'Tw Cen MT';
 	padding: 1em;	
 }
 
@@ -20,10 +20,34 @@ body {
 }
 
 .header {
-	
+	font-size: 50px;
 	text-align: center;
+	padding: 0.5em;
+	
+}
+.header a{
+	font-size: 15px;
+	text-align: right;
+	float: right;
+	
 }
 
+.footer {
+	text-align: center;
+	
+}
+.footer a, .footer a:hover {
+	text-decoration: none;
+	color: #ffe1a8;
+	align: center;
+	
+}
+.footer a:focus  {
+	
+	text-decoration: none;
+	color: #6e6f59;
+	
+}
 .header span{
 	
 	color:#ffe1a8;
@@ -40,6 +64,18 @@ body {
 
 fieldset{
 	border: none;
+	
+}
+
+.linkLoginRegister a, .linkLoginRegister a:hover {
+	text-decoration: none;
+	color: #ffe1a8;
+	
+}
+.linkLoginRegister a:focus  {
+	
+	text-decoration: none;
+	color: #6e6f59;
 	
 }
 
