@@ -23,6 +23,7 @@ public class ForumUser {
 	private String login;
 	private String password;
 	private String email;
+	private byte[] photo;
 
 	@Enumerated(EnumType.STRING)
 	private Restriction restriction;
@@ -85,6 +86,15 @@ public class ForumUser {
 		this.email = email;
 	}
 	
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
 	@Override
 	public String toString() {
 		return String.valueOf(this.hashCode());		

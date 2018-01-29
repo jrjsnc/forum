@@ -33,7 +33,7 @@ public class Topic {
 	private List<Comment> comments = new ArrayList<Comment>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
+	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.CONSTRAINT))	
 	private ForumUser forumUser;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
