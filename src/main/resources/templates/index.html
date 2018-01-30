@@ -15,63 +15,21 @@
 				<table class="topics">
 
 					<th>Topic</th>
-<!-- 					<th>Tags</th> -->
+	 				<th>Tags</th>
 					<th>Comments count</th>
-					<th>Author</th>
+					<th>Author</th>	
 					
-
-					<span th:if='${@userController.Logged}'> 
-					<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
-
-							<th>Add tag</th>
-							<th>Remove tag</th>
-
-					</span>
-					</span>
-
 					<tr th:each="topic : ${topics}">
 
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
 								th:text='${topic.title}' /></a></td>
 								
-<!-- 						<td th:each="tag : ${topic.getTags()}"><span th:text="${tag.name}"/></td> -->
+- 						<td> <span th:each="tag : ${topic.getTags()}"><span th:text="${tag.name}"/></span></td>
 
 						<td><span th:text='${topic.getComments().size()}' /></td>
 
 						<td> <span
-							th:text='${topic.getForumUser().getLogin()}' /> </td>
-							
-							
-
-
-<!-- 						<span th:if='${@userController.Logged}'>  -->
-<!-- 						<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'> -->
-						
-<!-- 						<td> -->
-						
-<!-- 						<form th:action='${"/"}'> -->
-						
-<!-- 						<select th:field="${tags}">	 -->
-																			
-<!-- 								<option th:each="tag : ${tags}" th:value="${tag}" th:text="${tag.getName()}"/> -->
-								
-<!-- 						</select>									 -->
-
-<!-- 						 <button type="submit" th:formaction='${"/addTopicTag?topic_ident" + topic.getIdent() + "?tag_ident" + tag.getIdent()}'>Add</button> -->
-<!-- 						</form> -->
-<!-- 						</td> -->
-						
-						
-<!-- 						<td> -->
-<!-- 						<select th:field="${tags}"> -->
-<!-- 								<option th:each="tag : ${topic.getTags()}" th:value="${tag}" th:text="${tag.getName()}"/> -->
-<!-- 						</select>						 -->
-<!-- 						<a th:href='${"/removeTag"}'>Remove</a> -->
-<!-- 						</td> -->
-						
-<!-- 						</span> -->
-<!-- 						</span> -->
-
+							th:text='${topic.getForumUser().getLogin()}' /> </td>		
 					</tr>
 
 				</table>
@@ -91,7 +49,7 @@
 					<form action="/addTopic" method="post">
 
 						Add Topic: <input type="text" name="title"
-							placeholder="Add topic here" /> <input type="submit"
+							placeholder="Add topic here" required="required"/> <input type="submit"
 							value="Post" />
 					</form>
 				</span>
@@ -104,7 +62,6 @@
 			<div class="col" th:replace="fragments::footer"></div>
 		</div>
 	</div>
-
-
 </body>
+<script src="js/forum.js"/>
 </html>

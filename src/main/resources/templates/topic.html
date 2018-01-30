@@ -9,6 +9,8 @@
 		<div class="row">
 			<div class="col" th:replace="fragments::header"></div>
 		</div>
+		
+		<h3><span th:text="${currentTopicTitle}"/></h3>
 
 		<div class="row">
 			<div class="col">
@@ -31,7 +33,7 @@
 					<form action="/addComment" method="post">
 
 						Add Comment: <input type="text" name="content"
-							placeholder="Add comment here" /> <input type="submit"
+							placeholder="Add comment here" required="required"/> <input type="submit"
 							value="Post" />
 					</form>
 				</span>
@@ -43,38 +45,30 @@
 		Tags:
 		<span th:each="tag : ${topicTags}">
 							<span th:text="${tag.getName()}" /> </span>
-		<hr/>					
+		<hr/>					 
 
 		<span th:if='${@userController.Logged}'> <span
 			th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
 
-				<form th:action='${"/addTopicTag"}'>
 
-					<select th:field="${tags}">
-
-						<option th:each="tag : ${tags}" th:value="${tag.ident}"
+				<form th:action='${"/addTopicTag"}'>	
+					<select th:name= "ident">
+						<option th:each="tag : ${missingTags}" th:value="${tag.ident}"
 							th:text="${tag.getName()}" />
-					</select>
-					
-					<input type="submit"/>
-										
-<!-- 					<button type="submit" -->
-<!-- 						th:formaction='${"/addTopicTag?topic_ident" + topic.getIdent() + "?tag_ident" + tag.getIdent()}'>Add</button> -->
+					</select>					
+					<input type="submit" value="Add new tag"/>
 				</form> 
 				
-				
-				
-				
-<!-- 				<select th:field="${tags}"> -->
-<!-- 					<option th:each="tag : ${topic.getTags()}" th:value="${tag}" -->
-<!-- 						th:text="${tag.getName()}" /> -->
-<!-- 			</select> <a th:href='${"/removeTag"}'>Remove</a> -->
-
+					<form th:action='${"/removeTopicTag"}'>	
+					<select th:name= "ident">
+						<option th:each="tag : ${topicTags}" th:value="${tag.ident}"
+							th:text="${tag.getName()}" />
+					</select>					
+					<input type="submit" value="Remove tag"/>
+				</form> 
 
 		</span>
 		</span>
-
-
 
 		<div class="row">
 			<div class="col" th:replace="fragments::footer"></div>
@@ -83,4 +77,5 @@
 
 
 </body>
+<script src="js/forum.js"/>
 </html>

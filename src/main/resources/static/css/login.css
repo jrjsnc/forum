@@ -20,13 +20,13 @@ body {
 }
 
 .header {
-	font-size: 50px;
+	font-size: 40px;
 	text-align: left;
-	padding: 1em;
+	padding: 0.5em;
 	
 }
 .header a{
-	font-size: 21px;
+	font-size: 15px;
 	text-align: right;
 	float: right;
 	
@@ -64,6 +64,13 @@ fieldset{
 	
 }
 
+
+.linkLoginRegister span{
+	
+	font-size: 15px;
+	
+}
+
 .linkLoginRegister a, .linkLoginRegister a:hover {
 	text-decoration: none;
 	color: #ffe1a8;
@@ -89,7 +96,7 @@ fieldset{
 
 .login form {
 	display: grid;
-	grid-template-columns: 1fr 1fr ;	
+	grid-template-columns: 1fr  ;	
 	grid-gap:20px;
 
 }
@@ -106,7 +113,7 @@ fieldset{
 
 .register form {
 	display: grid;
-	grid-template-columns: 1fr 1fr ;	
+	grid-template-columns: 1fr  ;	
 	grid-gap:20px;
 
 }
@@ -161,8 +168,19 @@ fieldset{
 @media(min-width:700px) {
 	.wrapper {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 2fr;
 	
+	}
+	
+	.login form {
+	display: grid;
+	grid-template-columns: 1fr  ;
+	
+	}
+	
+	.register form {
+	display: grid;
+	grid-template-columns: 1fr 1fr ;
 	
 	}
 	
@@ -170,15 +188,6 @@ fieldset{
 	padding: 2em;
 	
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
 
