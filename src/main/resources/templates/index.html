@@ -10,6 +10,17 @@
 	
 			<div th:replace="fragments::header"></div>	
 			
+			<form th:action='${"/filterTopics"}'>	
+					<select th:name= "ident" th:onechane='${"/filterTopics"}'>
+					<option disabled="true" selected="true"> -- select an option -- </option>
+						<option th:each="tag : ${tags}" th:value="${tag.ident}"
+							th:text="${tag.getName()}" />
+							<option th:value="-1">all</option>
+						
+					</select>					
+					<input type="submit" value="Select topics"/>
+				</form> 
+			
 				<table>
 					<th>Topic</th>
 	 				<th>Tags</th>
