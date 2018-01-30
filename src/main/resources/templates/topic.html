@@ -11,7 +11,8 @@
 			<span th:replace="fragments::header"></span>
 		
 		
-		<span class="title" th:text="${currentTopicTitle}"/>
+		<div class="title" th:text="${currentTopicTitle}"/>
+		<br/>
 <div class="scroll">
 		<div class="wrapper2">
 				<div class="comments" th:each="comment : ${comments}">
@@ -35,6 +36,7 @@
 				</div>
 				</div>
 				</div>
+				<br/>
 <div class="form">
 				<span th:if='${@userController.Logged}'>
 
