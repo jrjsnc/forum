@@ -10,15 +10,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
-import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
-import forum.services.CommentService;
 import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
@@ -44,7 +41,26 @@ public class UserController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("topics", topicService.getTopics());
-		model.addAttribute("tags", tagService.getAllTags());
+		return "index";
+	}
+	
+	@RequestMapping("/filterTopics")
+	public String filterTopics(Tag tag, Model model) {
+		
+		List<Topic> topics = topicService.getTopics();
+		
+		System.err.println(topics.toString());
+		
+		for (Topic topic : topics) {
+			if(!topic.getTags().contains(tag))
+				topics.remove(topic);
+		}
+		
+		System.err.println(topics.toString());
+		
+		
+		model.addAttribute("topics", topicService.getTopics());
+		System.out.println(model.toString());		
 		return "index";
 	}
 
@@ -83,22 +99,7 @@ public class UserController {
 		loggedUser = null;
 		model.addAttribute("topics", topicService.getTopics());
 		return "index";
-	}
-
-	// @RequestMapping("/setup")
-	// public String test(Model model) {
-	// Topic t = new Topic("ahoj");
-	// t.addComment(new Comment("test komentar 1", new Date()));
-	// t.addComment(new Comment("test komentar 2", new Date()));
-	// t.addComment(new Comment("test komentar 3", new Date()));
-	// t.addComment(new Comment("test komentar 4", new Date()));
-	// topicService.addTopic(t);
-	// return "index";
-	// }
-
-	// @RequestMapping("/updateTag")
-
-	// @RequestMapping("/deleteTag")
+	}	
 
 	public ForumUser getLoggedUser() {
 		return loggedUser;

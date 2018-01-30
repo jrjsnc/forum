@@ -1,6 +1,7 @@
 package server.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,7 +16,6 @@ import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
-import forum.services.TagService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -32,9 +32,17 @@ public class ForumController {
 	private void fillModel(Model model) {
 		model.addAttribute("users", userController.userService.getUsers());
 		model.addAttribute("tags", userController.tagService.getAllTags());
-		if (null != currentTopicIdent)
-			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());		
-			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());			
+		if (null != currentTopicIdent) {
+			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
+			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
+			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
+
+			List<Tag> tags = userController.tagService.getAllTags();
+			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
+			model.addAttribute("missingTags", tags);
+
+			
+		}
 	}
 
 	@RequestMapping("/addTag")
@@ -46,19 +54,23 @@ public class ForumController {
 
 	@RequestMapping("/addTopicTag")
 	public String addTopicTag(Tag tag, Model model) {
-		
-		System.err.println(tag.toString());
-		
 		userController.topicService.getTopic(currentTopicIdent)
-		.addTag(tag);
-		
+				.addTag(userController.tagService.getTag(tag.getIdent()));
+		fillModel(model);
+		return "topic";
+	}
+
+	@RequestMapping("/removeTopicTag")
+	public String removeTopicTag(Tag tag, Model model) {
+		userController.topicService.getTopic(currentTopicIdent)
+				.removeTag(userController.tagService.getTag(tag.getIdent()));
 		fillModel(model);
 		return "topic";
 	}
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		setCurrentTopicIdent(Long.parseLong(ident));		
+		setCurrentTopicIdent(Long.parseLong(ident));
 		fillModel(model);
 		return "topic";
 	}
@@ -67,7 +79,7 @@ public class ForumController {
 	public String addTopic(Topic topic, Model model) {
 		topic.setForumUser(userController.getLoggedUser());
 		userController.topicService.addTopic(topic);
-		
+
 		setCurrentTopicIdent(topic.getIdent());
 		return "topic";
 	}
@@ -80,7 +92,7 @@ public class ForumController {
 		comment.setCreatedOn(new Date());
 
 		userController.topicService.getTopic(currentTopicIdent).addComment(comment);
-		fillModel(model);		
+		fillModel(model);
 		model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
 	}
