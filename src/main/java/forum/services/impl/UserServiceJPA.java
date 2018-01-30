@@ -7,11 +7,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.hibernate.validator.constraints.Email;
-
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
-import forum.entity.Topic;
 import forum.services.UserService;
 
 @Transactional
@@ -23,7 +20,6 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public void register(ForumUser user) {
 		entityManager.persist(user);
-
 	}
 
 	@Override

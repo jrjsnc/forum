@@ -33,10 +33,10 @@ public class Topic {
 	private List<Comment> comments = new ArrayList<Comment>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
+	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.CONSTRAINT))	
 	private ForumUser forumUser;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "topic_tag", joinColumns = @JoinColumn(name = "topic_ident"), inverseJoinColumns = @JoinColumn(name = "tag_ident"))
 	private Set<Tag> tags = new HashSet<Tag>();
 	
@@ -108,6 +108,14 @@ public class Topic {
 	
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public Set<Tag> getTags() {
+		return tags;
+	}
+	
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 
 }
