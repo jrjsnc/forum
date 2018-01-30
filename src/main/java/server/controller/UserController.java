@@ -42,30 +42,23 @@ public class UserController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("topics", topicService.getTopics());
+		model.addAttribute("tags", tagService.getAllTags());		
 		return "index";
 	}
 
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
-
-		List<Topic> topics = topicService.getTopics();
-
-		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
-
-		// List<Person> beerDrinkers = persons.stream()
-		// .filter(p -> p.getAge() > 16).collect(Collectors.toList());
-
-		System.err.println(topics.toString());
-
-		for (Topic topic : topics) {
-			if (!topic.getTags().contains(tag))
-				topics.remove(topic);
+		if(tag.getIdent() == -1) {
+			System.err.println("ahoj");
+			model.addAttribute("tags", tagService.getAllTags());
+			model.addAttribute("topics", topicService.getTopics());
+			return "index";
 		}
-
-		System.err.println(topics.toString());
-
-		model.addAttribute("topics", topicService.getTopics());
-		System.out.println(model.toString());
+		List<Topic> topics = topicService.getTopics();
+		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());		
+		
+		model.addAttribute("tags", tagService.getAllTags());
+		model.addAttribute("topics", topics);		
 		return "index";
 	}
 
