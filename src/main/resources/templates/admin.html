@@ -18,7 +18,7 @@
 			<td><span class="usercolor" th:text='${forumUser.login}' />
 			
 			
-			<a class="aclass" th:href='${"/setAdmin?ident=" + forumUser.ident}'>
+			<a class="aclass" th:href='${"/toggleAdmin?ident=" + forumUser.ident}'>
 			<span th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>Set user as admin</span>
 			<span th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>Set user as basic</span>
 			</a></td>

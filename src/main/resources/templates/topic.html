@@ -30,10 +30,16 @@
 					<span th:text='${comment.content}' /> 
 					 </p>
 					 <p>
+					 <span>Liked: </span>
+					 <span th:text='${comment.getLikers().size()}'/>
+					 </p>
+					 
+					 <p>
 							<span th:if='${@userController.Logged}'>
 					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-						    <span>Update comment</span>
+						    <span>Update comment??</span>
+						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span>
 							</span>
 					</p>
 <hr/>

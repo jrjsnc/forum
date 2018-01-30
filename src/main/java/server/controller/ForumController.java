@@ -2,6 +2,7 @@ package server.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
+import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
@@ -39,9 +41,7 @@ public class ForumController {
 
 			List<Tag> tags = userController.tagService.getAllTags();
 			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
-			model.addAttribute("missingTags", tags);
-
-			
+			model.addAttribute("missingTags", tags);		
 		}
 	}
 
@@ -67,11 +67,13 @@ public class ForumController {
 		fillModel(model);
 		return "topic";
 	}
+	
+	
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		setCurrentTopicIdent(Long.parseLong(ident));
-		fillModel(model);
+		fillModel(model);		
 		return "topic";
 	}
 
@@ -104,8 +106,14 @@ public class ForumController {
 		return "topic";
 
 	}
+	
+	@RequestMapping("/toggleLike")
+	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
+		// TODO 
+		return "topic";
+	}
 
-	@RequestMapping("/setAdmin")
+	@RequestMapping("/toggleAdmin")
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
 
 		switch (userController.userService.getUser(Long.parseLong(ident)).getRestriction()) {
