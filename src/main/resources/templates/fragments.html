@@ -4,11 +4,12 @@
 
 <div class="header" th:fragment="header">
 
-<span> Best </span>movie forum ever 
+ Best movie forum ever 
+
 
 <span class="linkLoginRegister">
 <span th:if='${@userController.Logged}'>
-Logged as <span  th:text='${@userController.LoggedUser?.Login}'/><br/>
+Logged as <span  th:text='${@userController.LoggedUser?.Login}'/>
 <a href="/logout" >Logout</a>
 
 </span>

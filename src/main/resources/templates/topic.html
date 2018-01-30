@@ -6,29 +6,36 @@
 <title>Movie forum</title>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col" th:replace="fragments::header"></div>
-		</div>
+	<div class="container2">
 		
-		<h3><span th:text="${currentTopicTitle}"/></h3>
+			<span th:replace="fragments::header"></span>
+		
+		
+		<span class="title" th:text="${currentTopicTitle}"/>
+<div class="scroll">
+		<div class="wrapper2">
+				<div class="comments" th:each="comment : ${comments}">
+					<p>
+					<span th:text='${comment.getForumUser().getLogin()}' />
+					
+					<span th:text='${comment.getCreatedOn()}' />
+					</p>
+					
+					<p>
+					<span th:text='${comment.content}' /> 
+					 </p>
+					 <p>
+							<span th:if='${@userController.Logged}'>
+					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
+					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
+						    <span>Update comment</span>
+							</span>
+					</p>
 
-		<div class="row">
-			<div class="col">
-				<table class="comments">
-					<tr th:each="comment : ${comments}">
-						<td><span th:text='${comment.content}' /> <span>(</span> <span
-							th:text='${comment.getForumUser().getLogin()}' /> <span>)</span>
-							<span th:if='${@userController.Logged}'> <span
-								th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'><a
-									th:href='${"/deleteComment?ident=" + comment.ident}'>Delete
-										comment</a></span>
-						</span></td>
-					</tr>
-
-
-				</table>
-
+				</div>
+				</div>
+				</div>
+<div class="form">
 				<span th:if='${@userController.Logged}'>
 
 					<form action="/addComment" method="post">
@@ -38,20 +45,21 @@
 							value="Post" />
 					</form>
 				</span>
-			</div>
-		</div>
+</div>
 		
 		
+		<div class="tags">
 		<hr/>
 		Tags:
 		<span th:each="tag : ${topicTags}">
-							<span th:text="${tag.getName()}" /> </span>
-		<hr/>					 
+							<span th:text="${tag.getName()}" >,</span> </span>
+		<hr/>	
+			</div>			 
 
 		<span th:if='${@userController.Logged}'> <span
 			th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
 
-
+<span class="addTags">
 				<form th:action='${"/addTopicTag"}'>	
 					<select th:name= "ident">
 						<option th:each="tag : ${missingTags}" th:value="${tag.ident}"
@@ -59,7 +67,9 @@
 					</select>					
 					<input type="submit" value="Add new tag"/>
 				</form> 
-				
+</span>	
+
+<span class="removeTags">
 					<form th:action='${"/removeTopicTag"}'>	
 					<select th:name= "ident">
 						<option th:each="tag : ${topicTags}" th:value="${tag.ident}"
@@ -67,14 +77,14 @@
 					</select>					
 					<input type="submit" value="Remove tag"/>
 				</form> 
-
+</span>
 		</span>
 		</span>
 
-		<div class="row">
-			<div class="col" th:replace="fragments::footer"></div>
+		
+			<span th:replace="fragments::footer"></span>
 		</div>
-	</div>
+	
 
 
 </body>
