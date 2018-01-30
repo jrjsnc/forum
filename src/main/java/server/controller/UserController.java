@@ -3,22 +3,15 @@ package server.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
-import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
-import forum.entity.Tag;
-import forum.entity.Topic;
-import forum.services.CommentService;
 import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
@@ -44,7 +37,6 @@ public class UserController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("topics", topicService.getTopics());
-		model.addAttribute("tags", tagService.getAllTags());
 		return "index";
 	}
 

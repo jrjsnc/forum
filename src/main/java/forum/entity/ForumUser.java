@@ -23,7 +23,7 @@ public class ForumUser {
 	private String login;
 	private String password;
 	private String email;
-	private byte[] photo;
+	private byte[] userImage;
 
 	@Enumerated(EnumType.STRING)
 	private Restriction restriction;
@@ -87,12 +87,12 @@ public class ForumUser {
 	}
 	
 	
-	public byte[] getPhoto() {
-		return photo;
+	public byte[] getUserImage() {
+		return userImage;
 	}
 
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+	public void setUserImage(byte[] photo) {
+		this.userImage = photo;
 	}
 
 	@Override
