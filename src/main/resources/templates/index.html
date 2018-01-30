@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="css/login.css"/>
 <head>
 <meta charset="UTF-8" />
 <title>Movie forum</title>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col" th:replace="fragments::header"></div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<table class="topics">
-
+	
+	
+			<div th:replace="fragments::header"></div>	
+			
+				<table>
 					<th>Topic</th>
 	 				<th>Tags</th>
 					<th>Comments count</th>
@@ -24,12 +21,13 @@
 						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
 								th:text='${topic.title}' /></a></td>
 								
-- 						<td> <span th:each="tag : ${topic.getTags()}"><span th:text="${tag.name}"/></span></td>
+ 						<td> <span th:each="tag : ${topic.getTags()}" th:text="${tag.name}"/>
+								</td>
 
-						<td><span th:text='${topic.getComments().size()}' /></td>
+<!-- 						<td><span th:text='${topic.getComments().size()}' /></td> -->
 
-						<td> <span
-							th:text='${topic.getForumUser().getLogin()}' /> </td>		
+<!-- 						<td> <span -->
+<!-- 							th:text='${topic.getForumUser().getLogin()}' /> </td>		 -->
 					</tr>
 
 				</table>
@@ -53,15 +51,10 @@
 							value="Post" />
 					</form>
 				</span>
-			</div>
-		</div>
-
-
-
-		<div class="row">
+						
 			<div class="col" th:replace="fragments::footer"></div>
-		</div>
-	</div>
+		
+	
 </body>
 <script src="js/forum.js"/>
 </html>
