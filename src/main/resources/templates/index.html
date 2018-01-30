@@ -49,7 +49,7 @@
 					<form action="/addTopic" method="post">
 
 						Add Topic: <input type="text" name="title"
-							placeholder="Add topic here" /> <input type="submit"
+							placeholder="Add topic here" required="required"/> <input type="submit"
 							value="Post" />
 					</form>
 				</span>
@@ -62,7 +62,6 @@
 			<div class="col" th:replace="fragments::footer"></div>
 		</div>
 	</div>
-
-
 </body>
+<script src="js/forum.js"/>
 </html>
