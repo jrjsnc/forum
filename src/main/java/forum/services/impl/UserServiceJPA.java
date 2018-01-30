@@ -59,4 +59,17 @@ public class UserServiceJPA implements UserService {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 		user.setRestriction(restriction);	
 	}	
+	
+	@Override
+	public byte[] getImage(String login) {
+		try {
+			return (byte[]) entityManager.createQuery("SELECT u.pic FROM ForumUser u.login = :login")
+					.setParameter("login", login)
+					.getSingleResult();
+		} catch(NoResultException e) {
+			return null;
+			
+		}
+		
+	}
 }
