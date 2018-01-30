@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +33,7 @@ public class UserController {
 
 	@Autowired
 	protected TopicService topicService;
-	
+
 	@Autowired
 	protected TagService tagService;
 
@@ -43,24 +44,28 @@ public class UserController {
 		model.addAttribute("topics", topicService.getTopics());
 		return "index";
 	}
-	
+
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
-		
+
 		List<Topic> topics = topicService.getTopics();
-		
+
+		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
+
+		// List<Person> beerDrinkers = persons.stream()
+		// .filter(p -> p.getAge() > 16).collect(Collectors.toList());
+
 		System.err.println(topics.toString());
-		
+
 		for (Topic topic : topics) {
-			if(!topic.getTags().contains(tag))
+			if (!topic.getTags().contains(tag))
 				topics.remove(topic);
 		}
-		
+
 		System.err.println(topics.toString());
-		
-		
+
 		model.addAttribute("topics", topicService.getTopics());
-		System.out.println(model.toString());		
+		System.out.println(model.toString());
 		return "index";
 	}
 
@@ -99,7 +104,7 @@ public class UserController {
 		loggedUser = null;
 		model.addAttribute("topics", topicService.getTopics());
 		return "index";
-	}	
+	}
 
 	public ForumUser getLoggedUser() {
 		return loggedUser;
