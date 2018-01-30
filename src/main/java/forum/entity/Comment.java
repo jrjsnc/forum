@@ -1,6 +1,8 @@
 package forum.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,6 +34,9 @@ public class Comment {
 	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private ForumUser forumUser;	
 	
+	@ManyToMany(mappedBy = "likedComments")
+	private Set<ForumUser> likers = new HashSet<ForumUser>();
+	
 	@Override
 	public boolean equals(Object o) {
 		if(this == o) return true;
@@ -40,15 +46,21 @@ public class Comment {
 	
 	@Override
     public int hashCode() {
-        return 31;
-    }
-	
-	
+        return 33;
+    }	
 	
 	public Comment(String content, Date createdOn) {
 		super();		
 		this.content = content;
 		this.createdOn = createdOn;		
+	}
+	
+	public Set<ForumUser> getLikers() {
+		return likers;
+	}
+	
+	public void setLikers(Set<ForumUser> likers) {
+		this.likers = likers;
 	}
 	
 	public Comment() {
