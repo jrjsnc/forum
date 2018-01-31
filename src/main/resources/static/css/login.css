@@ -33,19 +33,55 @@ body {
     margin-left:auto;
 	margin-right:auto;
 }
-.header {
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #6e6f59; 
+    border-radius: 10px;
+    background: #6e6f59; 
+}
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: white; 
+}
+.header a, .header a:hover{
 	font-size: 40px;
 	text-align: right;
 	padding: 0.5em;
+	color: #6e6f59;
+	text-decoration: none;
+	
+}
+.header a:hover{
+	color: #ffe1a8;
 	
 }
 
-.header a{
+.linkLoginRegister a, .linkLoginRegister a:hover {
+	text-decoration: none;
+	color: #ffe1a8;
 	font-size: 15px;
 	text-align: right;
 	
+}
+.linkLoginRegister a:hover {
+	color: #6e6f59;
+	}
+
+
+.linkLoginRegister a:focus  {
+	
+	text-decoration: none;
+	color: #6e6f59;
 	
 }
+
 
 .title {
 	
@@ -66,6 +102,11 @@ body {
 	text-decoration: none;
 	color: #ffe1a8;
 	align: center;
+	
+}
+
+.footer a:hover {
+	color: #6e6f59;
 	
 }
 .footer a:focus  {
@@ -127,17 +168,7 @@ fieldset{
 	
 }
 
-.linkLoginRegister a, .linkLoginRegister a:hover {
-	text-decoration: none;
-	color: #ffe1a8;
-	
-}
-.linkLoginRegister a:focus  {
-	
-	text-decoration: none;
-	color: #6e6f59;
-	
-}
+
 
 .login {
 	background-color: #ffe1a8;
@@ -226,7 +257,7 @@ fieldset{
 
 .tagsColor {
 	
-	color: #ffe1a8 ;
+	color: #6e6f59; 
 }
 
 .addTags select, .removeTags select{

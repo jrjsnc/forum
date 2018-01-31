@@ -20,6 +20,10 @@ public interface UserService {
 	ForumUser getUser(Long ident);
 
 	void setRestriction(Long ident, Restriction restriction);
+
+	byte[] getImage(String login);
+
+
 	
 	void toggleLike(Long ident, Comment comment);
 	
