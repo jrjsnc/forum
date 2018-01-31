@@ -130,25 +130,28 @@ public class UserController {
 	public String decodeToImage(String login) {
 		String finalImage = "";
 		BufferedImage image;
-		try {
-			byte[] imageInByteArray = userService.getImage(login);
-			if (imageInByteArray != null) {
-				ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
-				image = ImageIO.read(bis);
-				bis.close();
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(image, "png", baos);
-				baos.flush();
-				imageInByteArray = baos.toByteArray();
-				baos.close();
-				finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
-			} else {
-				return "";
+		
+			try {
+				byte[] imageInByteArray = userService.getImage(login);
+				if (imageInByteArray != null) {
+					ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
+					image = ImageIO.read(bis);
+					bis.close();
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(image, "png", baos);
+					baos.flush();
+					imageInByteArray = baos.toByteArray();
+					baos.close();
+					finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
+				} else {
+					return "";
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (NullPointerException f) {
+				f.printStackTrace();
 			}
-		} catch (Exception e) {
-			System.out.println("daco je zle ");
-			
-		}
+		
 		return "data:image/png;base64," + finalImage;
 	}
 	

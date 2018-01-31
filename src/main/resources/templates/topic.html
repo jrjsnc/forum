@@ -68,14 +68,15 @@
 		
 		<div class="tags">
 		<hr/>
-		Tags:
-		<span th:each="tag : ${topicTags}">
+		Tags
 		<br/>
+		<span th:each="tag : ${topicTags}">
+		
 		<span>( </span>
 							<span class="tagsColor" th:text="${tag.getName()}" >
 							</span>
 							<span> )</span>
-							<br/>
+							
 		</span>
 		<hr/>	
 			</div>			 
