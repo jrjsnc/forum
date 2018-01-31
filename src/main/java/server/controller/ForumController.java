@@ -40,6 +40,7 @@ public class ForumController {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
 			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
+			
 
 			List<Tag> tags = userController.tagService.getAllTags();
 			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
@@ -56,6 +57,7 @@ public class ForumController {
 
 	@RequestMapping("/addTopicTag")
 	public String addTopicTag(Tag tag, Model model) {
+		fillModel(model);
 		userController.topicService.getTopic(currentTopicIdent)
 				.addTag(userController.tagService.getTag(tag.getIdent()));
 		fillModel(model);
