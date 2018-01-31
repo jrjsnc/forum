@@ -59,7 +59,6 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public void setRestriction(Long ident, Restriction restriction) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-<<<<<<< HEAD
 		user.setRestriction(restriction);	
 	}	
 	
@@ -76,9 +75,7 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public Set<Comment> getLikedComments(Long ident) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-		return user.getLikedComments();
-=======
-		user.setRestriction(restriction);
+		return user.getLikedComments();		
 	}
 
 	
@@ -90,6 +87,5 @@ public class UserServiceJPA implements UserService {
 		} catch (NoResultException e) {
 			return null;
 		}
->>>>>>> b98358e7452518cb0ab3da9b28a3170dbc9c2988
 	}
 }
