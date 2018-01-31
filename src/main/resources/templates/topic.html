@@ -38,8 +38,9 @@
 							<span th:if='${@userController.Logged}'>
 					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-						    <span>Update comment??</span>
-						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span>
+					<br/>
+						    <span th:if='${controller.haveILiked(comment.ident) == false}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a></span>
+						    <span th:if='${controller.haveILiked(comment.ident) == true}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Unlike</a></span>						    
 							</span>
 					</p>
 <hr/>

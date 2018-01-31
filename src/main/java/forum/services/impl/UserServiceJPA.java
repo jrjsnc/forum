@@ -1,12 +1,14 @@
 package forum.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.UserService;
@@ -59,4 +61,20 @@ public class UserServiceJPA implements UserService {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 		user.setRestriction(restriction);	
 	}	
+	
+	@Override
+	public void toggleLike(Long ident, Comment comment) {
+		ForumUser user = entityManager.find(ForumUser.class, ident);
+		if(!user.getLikedComments().contains(comment)) {
+				user.getLikedComments().add(comment);
+		} else {
+			user.getLikedComments().remove(comment);
+		}
+	}
+	
+	@Override
+	public Set<Comment> getLikedComments(Long ident) {
+		ForumUser user = entityManager.find(ForumUser.class, ident);
+		return user.getLikedComments();
+	}
 }

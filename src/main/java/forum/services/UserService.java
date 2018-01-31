@@ -1,7 +1,9 @@
 package forum.services;
 
 import java.util.List;
+import java.util.Set;
 
+import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
 
@@ -19,6 +21,7 @@ public interface UserService {
 
 	void setRestriction(Long ident, Restriction restriction);
 	
-
-
-}
+	void toggleLike(Long ident, Comment comment);
+	
+	Set<Comment> getLikedComments(Long ident);
+	}
