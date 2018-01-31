@@ -17,8 +17,6 @@ password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
 
-
-
 function validateEmail() {
     var x = document.forms["loginForm"]["email"].value;
     var atpos = x.indexOf("@");
@@ -26,5 +24,15 @@ function validateEmail() {
     if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
         window.alert("Not a valid e-mail address");
         return false;
+    }
+}
+
+function ValidateSize(file) {
+    var FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 1) {
+        alert('File size exceeds 1 MB');
+        $(file).val('');
+    } else {
+
     }
 }

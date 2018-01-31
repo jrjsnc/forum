@@ -145,11 +145,15 @@ body {
 	
 }
 
+.wrapper2 a:hover{
+	text-decoration: underline;
+	
+}
 .removeAddTags {
 	text-align: center;
 }
 
-.wrapper2 a, .wrapper2 a:hover {
+.wrapper2 a {
 	
 	text-decoration: none;
 	color: #6e6f59;
@@ -242,6 +246,15 @@ fieldset{
 .tags{
 	
 	text-align: center;
+}
+
+.username{
+	font-size: 25px;
+}
+
+.date{
+	font-size: 15px;
+	align: right;
 }
 .form button {
 	align: center;
