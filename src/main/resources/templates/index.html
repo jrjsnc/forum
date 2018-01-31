@@ -25,7 +25,9 @@
 					<th>Topic</th>
 	 				<th>Tags</th>
 					<th>Comments count</th>
-					<th>Author</th>	
+					<th>Author</th>
+					<th>UserImage</th>	
+					
 					
 					<tr th:each="topic : ${topics}">
 
@@ -38,7 +40,13 @@
 						<td><span th:text='${topic.getComments().size()}' /></td>
 
 						<td> <span
-							th:text='${topic.getForumUser().getLogin()}' /> </td>		
+							th:text='${topic.getForumUser().getLogin()}' /> </td> 	
+							<td> 
+							<img class="image" width="30" height="30"
+											th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
+											onerror="this.src='image/default.jpg';" />
+									</td>
+								
 					</tr>
 
 				</table>

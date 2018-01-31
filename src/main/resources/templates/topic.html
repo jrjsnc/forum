@@ -12,18 +12,24 @@
 		
 		
 		<div class="title">
-		<span>"</span>
+		<span>" </span>
 		<span th:text="${currentTopicTitle}"/>
-		<span>"</span>
+		<span> "</span>
 		</div>
 		<br/>
 <div class="scroll">
 		<div class="wrapper2">
 				<div class="comments" th:each="comment : ${comments}">
 					<p>
-					<span th:text='${comment.getForumUser().getLogin()}' />
+						<img class="image" width="60" height="60"
+											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
+											onerror="this.src='image/default.jpg';" />
 					
-					<span th:text='${comment.getCreatedOn()}' />
+					
+					
+					<span class="username" th:text='${comment.getForumUser().getLogin()}' />
+					
+					<span class="date" th:text='${comment.getCreatedOn()}' />
 					</p>
 					
 					<p>
@@ -38,8 +44,9 @@
 							<span th:if='${@userController.Logged}'>
 					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-						    <span>Update comment??</span>
-						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span>
+					<br/>
+						    <span th:if='${controller.haveILiked(comment.ident) == false}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a></span>
+						    <span th:if='${controller.haveILiked(comment.ident) == true}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Unlike</a></span>					    
 							</span>
 					</p>
 <hr/>
@@ -62,11 +69,15 @@
 		
 		<div class="tags">
 		<hr/>
-		Tags:
+		Tags
+		<br/>
 		<span th:each="tag : ${topicTags}">
+		
+		<span>( </span>
 							<span class="tagsColor" th:text="${tag.getName()}" >
 							</span>
-							<span>,</span>
+							<span> )</span>
+							
 		</span>
 		<hr/>	
 			</div>			 

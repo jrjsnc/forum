@@ -34,7 +34,7 @@ public class Comment {
 	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private ForumUser forumUser;	
 	
-	@ManyToMany(mappedBy = "likedComments")
+	@ManyToMany(mappedBy = "liked")
 	private Set<ForumUser> likers = new HashSet<ForumUser>();
 	
 	@Override
@@ -109,7 +109,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return String.format("Coment (%d %s %s %s %tc)", ident, this.getForumUser().getLogin(), topic, content, createdOn);
+		return String.format("Coment (%d %s %s %tc)", ident, this.getForumUser().getLogin(), topic, createdOn);
 	}
 
 }
