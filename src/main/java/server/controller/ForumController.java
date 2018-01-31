@@ -18,6 +18,7 @@ import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
+import forum.services.UserService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -32,6 +33,7 @@ public class ForumController {
 	private Long currentTopicIdent;
 
 	private void fillModel(Model model) {
+		model.addAttribute("controller", this);
 		model.addAttribute("users", userController.userService.getUsers());
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		if (null != currentTopicIdent) {
@@ -41,7 +43,7 @@ public class ForumController {
 
 			List<Tag> tags = userController.tagService.getAllTags();
 			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
-			model.addAttribute("missingTags", tags);		
+			model.addAttribute("missingTags", tags);
 		}
 	}
 
@@ -67,13 +69,27 @@ public class ForumController {
 		fillModel(model);
 		return "topic";
 	}
-	
-	
+
+	@RequestMapping("/toggleLike")
+	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
+		Comment c = commentService.getComment(Long.parseLong(ident));
+		userController.userService.toggleLike(userController.getLoggedUser().getIdent(), c);
+		fillModel(model);
+		return "topic";
+	}
+
+	public boolean haveILiked(Long ident) {
+		if (userController.userService.getLikedComments(userController.getLoggedUser().getIdent())
+				.contains(commentService.getComment(ident)))
+			return true;
+		else
+			return false;
+	}
 
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		setCurrentTopicIdent(Long.parseLong(ident));
-		fillModel(model);		
+		fillModel(model);
 		return "topic";
 	}
 
@@ -83,6 +99,8 @@ public class ForumController {
 		userController.topicService.addTopic(topic);
 
 		setCurrentTopicIdent(topic.getIdent());
+		fillModel(model);
+
 		return "topic";
 	}
 
@@ -105,12 +123,6 @@ public class ForumController {
 		model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
 
-	}
-	
-	@RequestMapping("/toggleLike")
-	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		// TODO 
-		return "topic";
 	}
 
 	@RequestMapping("/toggleAdmin")
