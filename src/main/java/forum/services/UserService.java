@@ -20,6 +20,8 @@ public interface UserService {
 	void setRestriction(Long ident, Restriction restriction);
 
 	byte[] getImage(String login);
+
+
 	
 
 

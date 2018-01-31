@@ -31,7 +31,7 @@
 					
 					<tr th:each="topic : ${topics}">
 
-						<td><a th:href='${"/topic?ident=" +topic.title}'><span
+						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
 								th:text='${topic.title}' /></a></td>
 								
  						<td> <span th:each="tag : ${topic.getTags()}" th:text="${tag.name}"/>

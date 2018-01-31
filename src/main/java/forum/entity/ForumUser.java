@@ -120,8 +120,8 @@ public class ForumUser {
 		return userImage;
 	}
 
-	public void setUserImage(byte[] userImage) {
-		this.userImage = userImage;
+	public void setUserImage(byte[] photo) {
+		this.userImage = photo;
 	}
 
 	@Override

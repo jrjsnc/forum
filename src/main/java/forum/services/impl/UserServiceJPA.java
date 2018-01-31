@@ -36,8 +36,8 @@ public class UserServiceJPA implements UserService {
 	@Override
 	public boolean nameTaken(String login) {
 		try {
-			ForumUser fu = (ForumUser)entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login").setParameter("login", login)
-					.getSingleResult();
+			ForumUser fu = (ForumUser) entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.login = :login")
+					.setParameter("login", login).getSingleResult();
 		} catch (NoResultException e) {
 			return false;
 		}
@@ -45,31 +45,29 @@ public class UserServiceJPA implements UserService {
 	}
 
 	@Override
-	public List<ForumUser> getUsers() {		
-		return entityManager.createQuery("SELECT u FROM ForumUser u").getResultList();			
+	public List<ForumUser> getUsers() {
+		return entityManager.createQuery("SELECT u FROM ForumUser u").getResultList();
 	}
 
 	@Override
 	public ForumUser getUser(Long ident) {
 		return entityManager.find(ForumUser.class, ident);
-}
+	}
 
 	@Override
 	public void setRestriction(Long ident, Restriction restriction) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-		user.setRestriction(restriction);	
-	}	
+		user.setRestriction(restriction);
+	}
+
 	
 	@Override
 	public byte[] getImage(String login) {
 		try {
-			return (byte[]) entityManager.createQuery("SELECT u.pic FROM ForumUser u.login = :login")
-					.setParameter("login", login)
-					.getSingleResult();
-		} catch(NoResultException e) {
+			return (byte[]) entityManager.createQuery("SELECT u.userImage FROM ForumUser u WHERE u.login =:login")
+					.setParameter("login", login).getSingleResult();
+		} catch (NoResultException e) {
 			return null;
-			
 		}
-		
 	}
 }
