@@ -2,7 +2,6 @@ package server.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import forum.entity.Comment;
-import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
-import forum.services.UserService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -38,7 +35,11 @@ public class ForumController {
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		if (null != currentTopicIdent) {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
-			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
+
+			List<Comment> comments = userController.topicService.getTopic(currentTopicIdent).getComments();
+			comments.sort((Comment c1, Comment c2) -> c2.getLikers().size() - c1.getLikers().size());
+			model.addAttribute("comments", comments);
+
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
 			
 
