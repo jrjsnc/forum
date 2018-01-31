@@ -11,7 +11,12 @@
 			<span th:replace="fragments::header"></span>
 		
 		
-		<span class="title" th:text="${currentTopicTitle}"/>
+		<div class="title">
+		<span>"</span>
+		<span th:text="${currentTopicTitle}"/>
+		<span>"</span>
+		</div>
+		<br/>
 <div class="scroll">
 		<div class="wrapper2">
 				<div class="comments" th:each="comment : ${comments}">
@@ -25,24 +30,31 @@
 					<span th:text='${comment.content}' /> 
 					 </p>
 					 <p>
+					 <span>Liked: </span>
+					 <span th:text='${comment.getLikers().size()}'/>
+					 </p>
+					 
+					 <p>
 							<span th:if='${@userController.Logged}'>
 					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-						    <span>Update comment</span>
+						    <span>Update comment??</span>
+						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span>
 							</span>
 					</p>
-
+<hr/>
 				</div>
 				</div>
 				</div>
+				<br/>
 <div class="form">
 				<span th:if='${@userController.Logged}'>
 
 					<form action="/addComment" method="post">
 
 						Add Comment: <input type="text" name="content"
-							placeholder="Add comment here" required="required"/> <input type="submit"
-							value="Post" />
+							placeholder="Add comment here" required="required"/> <button type="submit"
+							value="Post" > Post</button>
 					</form>
 				</span>
 </div>
@@ -52,32 +64,36 @@
 		<hr/>
 		Tags:
 		<span th:each="tag : ${topicTags}">
-							<span th:text="${tag.getName()}" >,</span> </span>
+							<span class="tagsColor" th:text="${tag.getName()}" >
+							</span>
+							<span>,</span>
+		</span>
 		<hr/>	
 			</div>			 
 
 		<span th:if='${@userController.Logged}'> <span
 			th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
-
+<div class="removeAddTags">
 <span class="addTags">
 				<form th:action='${"/addTopicTag"}'>	
 					<select th:name= "ident">
 						<option th:each="tag : ${missingTags}" th:value="${tag.ident}"
 							th:text="${tag.getName()}" />
 					</select>					
-					<input type="submit" value="Add new tag"/>
+					<button type="submit" value="addTag">Add new tag</button>
 				</form> 
 </span>	
-
+<br/>
 <span class="removeTags">
 					<form th:action='${"/removeTopicTag"}'>	
 					<select th:name= "ident">
 						<option th:each="tag : ${topicTags}" th:value="${tag.ident}"
 							th:text="${tag.getName()}" />
 					</select>					
-					<input type="submit" value="Remove tag"/>
+					<button type="submit" value="removeTag">Remove tag</button>
 				</form> 
 </span>
+</div>
 		</span>
 		</span>
 
