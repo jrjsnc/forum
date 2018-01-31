@@ -12,9 +12,9 @@
 		
 		
 		<div class="title">
-		<span>"</span>
+		<span>" </span>
 		<span th:text="${currentTopicTitle}"/>
-		<span>"</span>
+		<span> "</span>
 		</div>
 		<br/>
 <div class="scroll">
@@ -44,8 +44,8 @@
 							<span th:if='${@userController.Logged}'>
 					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-						    <span>Update comment??</span>
-						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span>
+						    <span>Update comment</span>
+<!-- 						    <span> If userController.getLoggedUser().equals(comment.getLikers.contains???)</span> -->
 							</span>
 					</p>
 <hr/>
@@ -70,9 +70,12 @@
 		<hr/>
 		Tags:
 		<span th:each="tag : ${topicTags}">
+		<br/>
+		<span>( </span>
 							<span class="tagsColor" th:text="${tag.getName()}" >
 							</span>
-							<span>,</span>
+							<span> )</span>
+							<br/>
 		</span>
 		<hr/>	
 			</div>			 
