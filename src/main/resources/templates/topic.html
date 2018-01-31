@@ -21,6 +21,12 @@
 		<div class="wrapper2">
 				<div class="comments" th:each="comment : ${comments}">
 					<p>
+						<img class="image" width="100" height="100"
+											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
+											onerror="this.src='image/default.jpg';" />
+					
+					
+					
 					<span th:text='${comment.getForumUser().getLogin()}' />
 					
 					<span th:text='${comment.getCreatedOn()}' />
