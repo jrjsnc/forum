@@ -49,7 +49,10 @@ public class UserController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		model.addAttribute("topics", topicService.getTopics());
+		List<Topic> topics = topicService.getTopics();		
+		topics.sort((Topic t1, Topic t2)-> t2.getComments().size() - t1.getComments().size());		
+
+		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());		
 		return "index";
 	}
