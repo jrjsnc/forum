@@ -8,22 +8,22 @@
 <body>
 	<div class="container">
 
-		<span  th:replace="fragments::header"></span>
-		<hr /><br/>
+		<span th:replace="fragments::header"></span>
+		<hr />
+		<br />
 
 		<div class="scroll">
 			<div class="wrapper3">
 				<div class="users">
 					<h3>Forum Users</h3>
 					<div class="forum_users" th:each="forumUser : ${users}">
-
-						<span class="usercolor" th:text='${forumUser.login}'></span> <a
-							class="aclass"
+						Set <span class="usercolor" th:text='${forumUser.login}'></span>
+						as <a class="aclass"
 							th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
-							th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>Set
-								user as admin</span> <span
-							th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>Set
-								user as basic</span>
+							th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
+								admin</span> <span
+							th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
+								basic</span>
 						</a>
 					</div>
 				</div>
@@ -42,10 +42,10 @@
 
 				</div>
 			</div>
-		
 
-	</div>
-		<br/>
+
+		</div>
+		<br />
 
 
 		<form class="tag_action" action="/addTag" method="post">
@@ -55,7 +55,7 @@
 		</form>
 		<hr />
 		<span th:replace="fragments::footer"></span>
-	
-</div>
+
+	</div>
 </body>
 </html>

@@ -26,10 +26,8 @@ body {
 	
 }
 .header a{
-	font-size: 15px;
-	text-align: right;
-	float: right;
-	
+	text-decoration:none;
+	color:#6e6f59;
 }
 
 
@@ -42,8 +40,10 @@ body {
 .footer a:focus  {
 	
 	text-decoration: none;
-	color: #6e6f59;
-	
+	color: #6e6f59;	
+}
+.footer{
+	text-align: center;
 }
 .header span{
 	
@@ -195,13 +195,18 @@ fieldset{
 	font-style: oblique;
 }
 .aclass{
-	color: #959595!important;
+	color: #408080!important;
 	text-decoration: none !important;
 }
+.forum_users {
+	text-align:left;
+	padding-left: 60px;
+	padding-right: auto;
+}
 .usercolor{
-	color:#008040;
+	color:#0080ff;
 	font-style:italic;
-	text-decoration: underline;
+	text-align: right;
 }
 .tag_action{
 		font-size: 150%;
@@ -225,24 +230,27 @@ fieldset{
 .scroll{
     overflow: scroll;
     color: #000000;
-    width: 700px;
-    height: 300px;
+    width: 100%;
+	height: 300px;
     margin-left:auto;
 	margin-right:auto;
+	overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
-    width: 7px;
+    width: 10px;
 }
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 7px;
+    box-shadow: inset 0 0 5px #6e6f59; 
+    border-radius: 10px;
+    background: #6e6f59; 
 }
 ::-webkit-scrollbar-thumb {
-    background: #606af0; 
-    border-radius: 7px;
+    background:#ffe1a8;
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #606af0; 
+    background: #ffe1a8;
 }
 .users form {
 	display: grid;
@@ -251,6 +259,7 @@ fieldset{
 }
 .users {
 	background-color: #ffe1a8;
+	color: black;
 
 }
 
@@ -266,6 +275,7 @@ fieldset{
 }
 .tags {
 	background-color: #ffffff;
+	color: black;
 
 }
 .tags h3, .tags form{
@@ -300,4 +310,9 @@ fieldset{
 }
 h3{
 	border-bottom: #333 2px solid;
+}
+.forum_tags{
+	text-align:left;
+	padding-left: 100px;
+	padding-right: auto;
 }
