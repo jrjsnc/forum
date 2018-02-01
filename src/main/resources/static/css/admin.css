@@ -19,17 +19,28 @@ body {
 	padding: 1em;	
 }
 
-.header {
+.header{
+	text-align: center;
+	
+}
+.header a, .header a:hover{
 	font-size: 40px;
 	text-align: center;
 	padding: 0.5em;
+	color: #6e6f59;
+	text-decoration: none;
 	
 }
-.header a{
-	text-decoration:none;
-	color:#6e6f59;
+.header a:hover{
+	color: #ffe1a8;
+	
 }
 
+
+.footer{
+	
+	text-align: center;
+}
 
 .footer a, .footer a:hover {
 	text-decoration: none;
@@ -37,13 +48,16 @@ body {
 	align: center;
 	
 }
+
+.footer a:hover {
+	color: #6e6f59;
+	
+}
 .footer a:focus  {
 	
 	text-decoration: none;
-	color: #6e6f59;	
-}
-.footer{
-	text-align: center;
+	color: #6e6f59;
+	
 }
 .header span{
 	
