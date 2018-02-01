@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="css/admin.css"/>
+<link rel="stylesheet" href="css/admin.css" />
 <head>
 <meta charset="UTF-8" />
 <title>Admin</title>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-	<div class="col" th:replace="fragments::header"></div>
-	<hr/>
-	
-	<table class="users">	
-	<th>Forum Users</th>
-		<tr th:each="forumUser : ${users}">
-			
-			<td><span class="usercolor" th:text='${forumUser.login}' />
-			
-			
-			<a class="aclass" th:href='${"/toggleAdmin?ident=" + forumUser.ident}'>
-			<span th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>Set user as admin</span>
-			<span th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>Set user as basic</span>
-			</a></td>
-		</tr>
-	</table>
-	
-	<br/>
-	
-	<table class="tags">
-	<th>Tags</th>
-					<tr th:each="tag : ${tags}">
-					<td>
-					<span th:text='${tag.getName()}'/>
-					</td>
-	</tr>
-	
-	</table><br/>
-	
-	
-	<form action="/addTag" method="post">
-	Add Tag: <input type="text" name="name"
-							placeholder="Add new tag here" required="required" /> <input type="submit"
-							value="Post" />
-	</form>
-	<hr/>
-	<div class="col" th:replace="fragments::footer"></div>
-</div>	
+		<span th:replace="fragments::header"></span>
+		<hr />
+		<br />
+
+		<div class="scroll">
+			<div class="wrapper3">
+				<div class="users">
+					<h3>Forum Users</h3>
+					<div class="forum_users" th:each="forumUser : ${users}">
+						Set <span class="usercolor" th:text='${forumUser.login}'></span>
+						as <a class="aclass"
+							th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
+							th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
+								admin</span> <span
+							th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
+								basic</span>
+						</a>
+					</div>
+				</div>
+
+
+
+
+				<div class="tags">
+
+					<h3>Tags</h3>
+					<div class="forum_tags" th:each="tag : ${tags}">
+
+						<span th:text='${tag.getName()}' />
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+		<br />
+
+
+		<form class="tag_action" action="/addTag" method="post">
+			Add Tag: <input type="text" name="name"
+				placeholder="Add new tag here" required="required" /> <input
+				type="submit" value="Post" />
+		</form>
+		<hr />
+		<span th:replace="fragments::footer"></span>
+
+	</div>
 </body>
 </html>

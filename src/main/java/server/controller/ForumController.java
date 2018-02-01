@@ -40,6 +40,7 @@ public class ForumController {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
 			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
+			
 
 			List<Tag> tags = userController.tagService.getAllTags();
 			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
@@ -51,6 +52,7 @@ public class ForumController {
 	public String addTag(Tag tag, Model model) {
 		userController.tagService.addTag(tag);
 		model.addAttribute("tags", userController.tagService.getAllTags());
+		fillModel(model);
 		return "admin";
 	}
 
@@ -122,7 +124,14 @@ public class ForumController {
 		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
 		model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
+	}
 
+	@RequestMapping("/updateComment")
+	public String deleteComment(@RequestParam(value = "ident", required = false) String ident,
+			@RequestParam(value = "content", required = false) String content, Model model) {
+		commentService.updateComment(Long.parseLong(ident), content);
+		fillModel(model);
+		return "topic";
 	}
 
 	@RequestMapping("/toggleAdmin")

@@ -19,40 +19,47 @@
 		<br/>
 <div class="scroll">
 		<div class="wrapper2">
-				<div class="comments" th:each="comment : ${comments}">
-					<p>
-						<img class="image" width="60" height="60"
+		
+<div class="comments" th:each="comment : ${comments}">
+				<div class="picture">
+		<img class="image" width="120" height="120"
 											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
+											
+											<div class="username" th:text='${comment.getForumUser().getLogin()}' />
+											<br/>
+											<span th:if='${@userController.Logged}' >
+<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
+		<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a>
+</span>
+</span>
+					
+					</div>
+<div class="info">
 					
 					
-					
-					<span th:text='${comment.getForumUser().getLogin()}' />
-					
-					<span th:text='${comment.getCreatedOn()}' />
-					</p>
-					
-					<p>
-					<span th:text='${comment.content}' /> 
-					 </p>
-					 <p>
-					 <span>Liked: </span>
-					 <span th:text='${comment.getLikers().size()}'/>
-					 </p>
+<div class="date" th:text="${#dates.format(comment.createdOn, 'dd-MMM-yyyy')}" />
+<br/>
+
+<div class="content" th:text='${comment.content}' /> 
+<br/>
+<span>Likes: </span>
+<span th:text='${comment.getLikers().size()}'/>
 					 
-					 <p>
-							<span th:if='${@userController.Logged}'>
-					<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
-					<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a></span>
-					<br/>
-						    <span th:if='${controller.haveILiked(comment.ident) == false}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a></span>
-						    <span th:if='${controller.haveILiked(comment.ident) == true}'><a th:href='${"/toggleLike?ident=" + comment.ident}'>Unlike</a></span>					    
-							</span>
-					</p>
-<hr/>
+ <span th:if='${@userController.Logged}'>
+  <span th:if='${controller.haveILiked(comment.ident) == false}'>
+  <a th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a>
+  </span>
+  <span th:if='${controller.haveILiked(comment.ident) == true}'>
+  <a th:href='${"/toggleLike?ident=" + comment.ident}'>Unlike</a>
+  </span>					    
+</span>
+	</div>
+
 				</div>
 				</div>
 				</div>
+				
 				<br/>
 <div class="form">
 				<span th:if='${@userController.Logged}'>
@@ -110,8 +117,7 @@
 
 		
 			<span th:replace="fragments::footer"></span>
-		</div>
-	
+	</div>
 
 
 </body>

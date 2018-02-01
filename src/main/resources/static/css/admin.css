@@ -21,15 +21,13 @@ body {
 
 .header {
 	font-size: 40px;
-	text-align: left;
+	text-align: center;
 	padding: 0.5em;
 	
 }
 .header a{
-	font-size: 15px;
-	text-align: right;
-	float: right;
-	
+	text-decoration:none;
+	color:#6e6f59;
 }
 
 
@@ -42,8 +40,10 @@ body {
 .footer a:focus  {
 	
 	text-decoration: none;
-	color: #6e6f59;
-	
+	color: #6e6f59;	
+}
+.footer{
+	text-align: center;
 }
 .header span{
 	
@@ -74,7 +74,7 @@ fieldset{
 .linkLoginRegister a, .linkLoginRegister a:hover {
 	text-decoration: none;
 	color: #ffe1a8;
-	
+
 }
 .linkLoginRegister a:focus  {
 	
@@ -183,30 +183,136 @@ fieldset{
 	grid-template-columns: 1fr 1fr ;
 	
 	}
-	
-	.wrapper > *{
-	padding: 2em;
-	
-	}
 
 }
-td {
-	border-bottom: #333 1px solid;
-}
-th {
-	border-bottom: #333 1px solid;
-}
-.users, .tags {
+
+.users {
 	font-size: 135%;
 }
 .tags{
+	font-size: 135%;
 	font-style: italic;
 	font-style: oblique;
 }
 .aclass{
-	color: #ffe1a8!important;
+	color: #408080!important;
+	text-decoration: none !important;
+}
+.forum_users {
+	text-align:left;
+	padding-left: 60px;
+	padding-right: auto;
 }
 .usercolor{
-	color:blue;
+	color:#0080ff;
 	font-style:italic;
+	text-align: right;
+}
+.tag_action{
+		font-size: 150%;
+		text-align: center;
+}
+.wrapper3{
+	box-shadow: 0 0 20px 0 #6e6f59;
+	
+}
+
+.wrapper3 > *{
+	padding:1em;	
+}
+
+.wrapper3 {
+	background-color: #ffe1a8;
+	color:#6e6f59;
+	text-align: center;
+	align: center;
+}
+.scroll{
+    overflow: scroll;
+    color: #000000;
+    width: 100%;
+	height: 300px;
+    margin-left:auto;
+	margin-right:auto;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #6e6f59; 
+    border-radius: 10px;
+    background: #6e6f59; 
+}
+::-webkit-scrollbar-thumb {
+    background:#ffe1a8;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ffe1a8;
+}
+.users form {
+	display: grid;
+	grid-template-columns: 1fr  ;	
+	grid-gap:20px;
+}
+.users {
+	background-color: #ffe1a8;
+	color: black;
+
+}
+
+.users h3, .users form{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+.tags form {
+	display: grid;
+	grid-template-columns: 1fr  ;	
+	grid-gap:20px;
+}
+.tags {
+	background-color: #ffffff;
+	color: black;
+
+}
+.tags h3, .tags form{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+@media(min-width:900px) {
+	.wrapper3 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	
+	}
+	
+	.users form {
+	display: grid;
+	grid-template-columns: 1fr  ;
+	
+	}
+	
+	.tags form {
+	display: grid;
+	grid-template-columns: 1fr;
+	
+	}
+	
+	.wrapper3 > *{
+	padding: 1em;
+	
+	}
+
+}
+h3{
+	border-bottom: #333 2px solid;
+}
+.forum_tags{
+	text-align:left;
+	padding-left: 100px;
+	padding-right: auto;
 }

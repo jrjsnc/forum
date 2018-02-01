@@ -28,10 +28,11 @@ body {
 .scroll{
     overflow: scroll;
     color: #000000;
-    width: 500px;
-    height: 300px;
+    width: 100%;
+	height: 300px;
     margin-left:auto;
 	margin-right:auto;
+	overflow-x: hidden;
 }
 
 
@@ -50,9 +51,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: white; 
 }
+.header{
+	text-align: center;
+	
+}
 .header a, .header a:hover{
 	font-size: 40px;
-	text-align: right;
+	text-align: center;
 	padding: 0.5em;
 	color: #6e6f59;
 	text-decoration: none;
@@ -82,6 +87,53 @@ body {
 	
 }
 
+.imgUserName {
+	
+	position: relative;
+    width: 50%;
+ }
+
+.image {
+	
+opacity: 1;
+  display: block;
+  width: 50px;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle{
+	
+ transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;	
+	
+}
+
+.imgUserName:hover .image{
+	
+	 opacity: 0.3;
+	
+}
+
+.imgUserName:hover .middle{
+	
+	opacity: 1;
+	
+}
+
+.text {
+/*   background-color: #6e6f59; */
+  color: black;
+  font-size: 20px;
+  padding: 20px 20px;
+}
 
 .title {
 	
@@ -91,6 +143,20 @@ body {
 	font-style: italic;
 	
 	
+}
+
+.comments{
+	
+	 border-bottom-width:2px;
+	 border-color: black;
+	
+}
+
+.content {
+	
+	 overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .footer{
@@ -143,13 +209,18 @@ body {
 	align: center;
 	
 	
+	
 }
 
+.wrapper2 a:hover{
+	text-decoration: underline;
+	
+}
 .removeAddTags {
 	text-align: center;
 }
 
-.wrapper2 a, .wrapper2 a:hover {
+.wrapper2 a {
 	
 	text-decoration: none;
 	color: #6e6f59;
@@ -205,6 +276,12 @@ fieldset{
 
 }
 
+.comments{
+	display: grid;
+	grid-template-columns: 1fr 2fr ;	
+	grid-gap:20px;
+}
+
 .login form label, .register form label {
 	
 	display: block;
@@ -242,6 +319,15 @@ fieldset{
 .tags{
 	
 	text-align: center;
+}
+
+.username{
+	font-size: 25px;
+}
+
+.date{
+	font-size: 15px;
+	align: right;
 }
 .form button {
 	align: center;
@@ -299,9 +385,18 @@ background:#c9cba3 ;
 	
 }
 
-
+.content {
+	font-size: 20px;
+	
+}
 @media(min-width:700px) {
 	.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	
+	}
+	
+	.comments {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	
