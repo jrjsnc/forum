@@ -12,19 +12,13 @@ body {
 	padding: 1em;	
 }
 
-.container {
+.container, .container2, .container3 {
 	max-width: 700px;
 	margin-left:auto;
 	margin-right:auto;
 	padding: 1em;	
 }
 
-.container2 {
-	max-width: 700px;
-	margin-left:auto;
-	margin-right:auto;
-	padding: 1em;	
-}
 .scroll{
     overflow: scroll;
     color: #000000;
@@ -86,14 +80,20 @@ body {
 	color: #6e6f59;
 	
 }
-
+#updateComment {	
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
 .imgUserName {
 	
 	position: relative;
     width: 50%;
  }
 
-.image {
+.imageIndex {
 	
 opacity: 1;
   display: block;
@@ -116,7 +116,7 @@ opacity: 1;
 	
 }
 
-.imgUserName:hover .image{
+.imgUserName:hover .imageIndex{
 	
 	 opacity: 0.3;
 	
@@ -154,7 +154,7 @@ opacity: 1;
 
 .content {
 	
-	 overflow-wrap: break-word;
+  overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
 }
@@ -234,13 +234,6 @@ opacity: 1;
 	
 }
 
-fieldset{
-	border: none;
-	
-}
-
-
-
 .login {
 	background-color: #ffe1a8;
 
@@ -301,7 +294,7 @@ fieldset{
 	
 }
 
-.container2 button {
+.container2 button, .container3 button{
 	
 	align: center;
 	border: none;
@@ -352,6 +345,16 @@ fieldset{
 	
 	
 }
+
+.container3 button:focus, .container3 button:hover {
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+}
+
 .container2 button:hover, .container2 button:focus {
 background:#c9cba3 ;
 	color:#6e6f59 ;

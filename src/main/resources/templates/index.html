@@ -10,6 +10,7 @@
 	<div class="container3">
 	
 			<span th:replace="fragments::header"></span>	
+			<br/>
 			
 			<div class="indexForm">
 			
@@ -25,12 +26,12 @@
 				</form> 
 				
 			</div>
+			<br/>
 			
 				<table>
 					<th>Topic</th>
 	 				<th>Tags</th>
-					<th>Comments count</th>
-					<th>Author</th>
+					<th>Comments</th>
 					<th>UserImage</th>	
 					
 					
@@ -51,7 +52,7 @@
 							
 							<div class="imgUserName"> 
 							
-							<img class="image" width="40" height="40"
+							<img class="imageIndex" width="40" height="40"
 											th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
 											<div class="middle">

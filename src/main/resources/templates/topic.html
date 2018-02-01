@@ -30,7 +30,7 @@
 											<br/>
 											<span th:if='${@userController.Logged}' >
 <span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
-		<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a>
+		<a th:href='${"/deleteComment?ident=" + comment.ident}'>Update comment</a>
 </span>
 </span>
 					
@@ -42,6 +42,17 @@
 <br/>
 
 <div class="content" th:text='${comment.content}' /> 
+
+
+<div id="updateComment">
+<form action="/updateComment" method="post">
+<input type="text" name="updateComment"
+placeholder="update" required="required"/> <button type="submit"
+value="Post" onclick="updateComment()" > Update </button>
+</form>
+</div>
+
+
 <br/>
 <span>Likes: </span>
 <span th:text='${comment.getLikers().size()}'/>
