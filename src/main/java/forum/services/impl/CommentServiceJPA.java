@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import forum.entity.Comment;
+import forum.entity.ForumUser;
+import forum.entity.Restriction;
 import forum.services.CommentService;
 
 @Transactional
@@ -47,26 +49,12 @@ public class CommentServiceJPA implements CommentService {
 		entityManager.createQuery("DELETE FROM Comment c WHERE c.ident= :ident")
 				.setParameter("ident", comment.getIdent()).executeUpdate();
 
+	}	
+	
+	@Override
+	public void updateComment(Long ident, String content) {
+		Comment comment = entityManager.find(Comment.class, ident);
+		comment.setContent(content);
 	}
-
-//	@Override
-//	public void updateComment(Comment comment) {
-//
-//		try {
-//			Comment c = (Comment) entityManager
-//					.createQuery("SELECT c FROM Comment c WHERE c.content = :content AND c.username = :username")
-//					.setParameter("content", comment.getContent()).setParameter("username", comment.getUsername())
-//					.getSingleResult();
-//
-//			deleteComment(c);
-//
-//			addComment(comment);
-//
-//		} catch (NoResultException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
 
 }
