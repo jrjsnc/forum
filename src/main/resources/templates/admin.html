@@ -14,22 +14,32 @@
 
 		<div class="scroll">
 			<div class="wrapper3">
-				<div class="users">
-					<h3>Forum Users</h3>
-					<div class="forum_users" th:each="forumUser : ${users}">
-						Set <span class="usercolor" th:text='${forumUser.login}'></span>
-						as <a class="aclass"
-							th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
-							th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
-								admin</span> <span
-							th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
-								basic</span>
-						</a>
-					</div>
-				</div>
+				<table class="users">
+					<th>Users</th>
+					<th>Condition</th>
+					<th>Ban</th>
+					<tr>
+						<td>
+							<div th:each="forumUser : ${users}">
+								<div class="usercolor" th:text='${forumUser.login}'></div>
+							</div>
+						</td>
+
+						<td>
+							<div th:each="forumUser : ${users}">
+								<a class="aclass"
+									th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
+									th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
+										Set to admin</span> <span
+									th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
+										Set to basic</span>
+								</a>
+							</div>
+						</td>
 
 
-
+					</tr>
+				</table>
 
 				<div class="tags">
 
