@@ -6,7 +6,13 @@
 
  <a  href='http://localhost:8080'>Best movie forum ever </a>
 
+</div>
 
+
+<div class="footer" th:fragment="footer">
+
+<a  href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
+<br/>
 <span class="linkLoginRegister">
 <span th:if='${@userController.Logged}'>
 Logged as <span  th:text='${@userController.LoggedUser?.Login}'/>
@@ -18,15 +24,6 @@ Logged as <span  th:text='${@userController.LoggedUser?.Login}'/>
 <a href="/user" >Login / Register</a>
 </span>
 </span>
-</div>
-
-
-
-
-<div class="footer" th:fragment="footer">
-
-<a  href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
-<br/>
 </div>
 
 </html>
