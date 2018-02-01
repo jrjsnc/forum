@@ -57,7 +57,6 @@ public class UserController {
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
 		if(tag.getIdent() == -1) {
-			System.err.println("ahoj");
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
