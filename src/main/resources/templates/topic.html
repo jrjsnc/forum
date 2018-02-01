@@ -47,7 +47,7 @@
 <div class="content" th:text='${comment.content}' /> 
 
 
-<div class="updateCommentForm" th:id="${comment.getIdent()}" >
+<div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
 <form action="/updateComment" method="post">
 <input type="text" name="updateComment"
 placeholder="update" required="required"/> <button type="submit"

@@ -38,8 +38,9 @@ function ValidateSize(file) {
 }
 
 function showUpdateComment(elementId) {
+	
     var x = document.getElementById(elementId);
-    
+    console.log(x.style.display);
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
