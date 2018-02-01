@@ -28,8 +28,10 @@
 											
 											<div class="username" th:text='${comment.getForumUser().getLogin()}' />
 											<br/>
+											<span th:if='${@userController.Logged}' >
 <span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 		<a th:href='${"/deleteComment?ident=" + comment.ident}'>Delete comment</a>
+</span>
 </span>
 					
 					</div>
