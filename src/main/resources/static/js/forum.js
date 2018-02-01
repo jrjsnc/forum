@@ -37,8 +37,9 @@ function ValidateSize(file) {
     }
 }
 
-function myFunction() {
+function showUpdateComment() {
     var x = document.getElementById("updateComment");
+    
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
