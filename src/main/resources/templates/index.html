@@ -70,8 +70,8 @@
 
 				<div>
 
-					<span th:if='${@userController.Logged}'> <span
-						th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+					<span th:if='${@userController.Logged}'> 
+					<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
 							<a th:href='${"/admin"}'>admin</a>
 					</span>
 					</span>

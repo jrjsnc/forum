@@ -56,6 +56,10 @@ public class Comment {
 		this.createdOn = createdOn;		
 	}
 	
+	public Comment() {
+
+	}	
+	
 	public Set<ForumUser> getLikers() {
 		return likers;
 	}
@@ -64,9 +68,6 @@ public class Comment {
 		this.likers = likers;
 	}
 	
-	public Comment() {
-
-	}	
 	
 	public ForumUser getForumUser() {
 		return forumUser;
