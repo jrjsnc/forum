@@ -80,7 +80,7 @@ body {
 	color: #6e6f59;
 	
 }
-#updateComment {	
+.updateCommentForm {	
    display:none;
 }
 .imgUserName {
