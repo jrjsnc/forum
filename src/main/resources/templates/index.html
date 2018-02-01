@@ -7,25 +7,31 @@
 </head>
 <body>
 	
+	<div class="container3">
 	
-			<div th:replace="fragments::header"></div>	
+			<span th:replace="fragments::header"></span>	
+			<br/>
+			
+			<div class="indexForm">
 			
 			<form th:action='${"/filterTopics"}'>	
-					<select th:name= "ident" th:onechane='${"/filterTopics"}'>
-					<option disabled="true" selected="true"> -- select an option -- </option>
+					<select th:name= "ident" th:onechane='${"/filterTopics"}' value="select topic">
+
 						<option th:each="tag : ${tags}" th:value="${tag.ident}"
 							th:text="${tag.getName()}" />
-							<option th:value="-1">all</option>
+							<option th:value="-1" selected="true">all</option>
 						
 					</select>					
-					<input type="submit" value="Select topics"/>
+					<button type="submit" value="Select topics">Select topic</button>
 				</form> 
+				
+			</div>
+			<br/>
 			
 				<table>
 					<th>Topic</th>
 	 				<th>Tags</th>
-					<th>Comments count</th>
-					<th>Author</th>
+					<th>Comments</th>
 					<th>UserImage</th>	
 					
 					
@@ -40,12 +46,23 @@
 						<td><span th:text='${topic.getComments().size()}' /></td>
 
 						<td> <span
-							th:text='${topic.getForumUser().getLogin()}' /> </td> 	
-							<td> 
-							<img class="image" width="30" height="30"
+							th:text='${topic.getForumUser().getLogin()}' /> </td> 
+								
+							<td>
+							
+							<div class="imgUserName"> 
+							
+							<img class="imageIndex" width="40" height="40"
 											th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
-									</td>
+											<div class="middle">
+							<div class="text" th:text='${topic.getForumUser().getLogin()}'/>
+									
+											</div>
+									
+									</div>
+									
+							</td>
 								
 					</tr>
 
@@ -53,8 +70,8 @@
 
 				<div>
 
-					<span th:if='${@userController.Logged}'> <span
-						th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+					<span th:if='${@userController.Logged}'> 
+					<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
 							<a th:href='${"/admin"}'>admin</a>
 					</span>
 					</span>
@@ -66,12 +83,13 @@
 					<form action="/addTopic" method="post">
 
 						Add Topic: <input type="text" name="title"
-							placeholder="Add topic here" required="required"/> <input type="submit"
-							value="Post" />
+							placeholder="Add topic here" required="required"/> <button type="submit"
+							value="Post" > Post </button>
 					</form>
 				</span>
 						
-			<div class="col" th:replace="fragments::footer"></div>
+			<span th:replace="fragments::footer"></span>
+			</div>
 		
 	
 </body>
