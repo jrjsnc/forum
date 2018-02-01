@@ -28,27 +28,19 @@
 			</div>
 			<br/>
 			
-				<table>
-					<th>Topic</th>
-	 				<th>Tags</th>
-					<th>Comments</th>
-					<th>UserImage</th>	
+			<div class="scroll">
+		<div class="wrapper2">
+				
 					
-					
-					<tr th:each="topic : ${topics}">
+					<div class="topics" th:each="topic : ${topics}">
 
-						<td><a th:href='${"/topic?ident=" +topic.ident}'><span
-								th:text='${topic.title}' /></a></td>
+
+						<div><a th:href='${"/topic?ident=" +topic.ident}'><span
+								th:text='${topic.title}' /></a></div>
 								
- 						<td> <span th:each="tag : ${topic.getTags()}" th:text="${tag.name}"/>
-								</td>
-
-						<td><span th:text='${topic.getComments().size()}' /></td>
-
-						<td> <span
-							th:text='${topic.getForumUser().getLogin()}' /> </td> 
-								
-							<td>
+						
+						<div ><span th:text='${topic.getComments().size()}' /><span> Comments </span></div>
+							
 							
 							<div class="imgUserName"> 
 							
@@ -56,17 +48,15 @@
 											th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
 											<div class="middle">
-							<div class="text" th:text='${topic.getForumUser().getLogin()}'/>
+							<span class="text" th:text='${topic.getForumUser().getLogin()}'/>
 									
 											</div>
-									
 									</div>
-									
-							</td>
-								
-					</tr>
+									</div>
+	</div>
+		</div>
 
-				</table>
+<br/>
 
 				<div>
 

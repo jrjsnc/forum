@@ -11,40 +11,45 @@
 			<span th:replace="fragments::header"></span>
 		
 		
-		<div class="title">
-		<span>" </span>
-		<span th:text="${currentTopicTitle}"/>
-		<span> "</span>
-		</div>
+			<div class="title">
+				<span>" </span>
+					<span th:text="${currentTopicTitle}"/>
+				<span> "</span>
+			</div>
+			
 		<br/>
+		
+		
 <div class="scroll">
 		<div class="wrapper2">
 		
 <div class="comments" th:each="comment : ${comments}">
+
 				<div class="picture">
-		<img class="image" width="120" height="120"
+		<img class="image" width="90" height="90"
 											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
 											
 											<div class="username" th:text='${comment.getForumUser().getLogin()}' />
-											<br/>
+											
 											<span th:if='${@userController.Logged}' >
 <span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>			
 		
-		<button th:onclick="'showUpdateComment(\''+${comment.getIdent()}+'\');'" value="updateComment">Update comment</button>
+		<button class="updateButton" th:onclick="'showUpdateComment(\''+${comment.getIdent()}+'\');'" value="updateComment">Update comment</button>
 		
 		
 </span>
 </span>
 					
 					</div>
+					
 <div class="info">
 					
 					
 <div class="date" th:text="${#dates.format(comment.createdOn, 'dd-MMM-yyyy')}" />
-<br/>
 
-<div class="content" th:text='${comment.content}' /> 
+
+<div  class="content" th:text='${comment.content}' /> 
 
 
 <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
@@ -55,11 +60,10 @@ value="Post"> Update </button>
 </form>
 </div>
 
-
-<br/>
+<br/><br/>
 <span>Likes: </span>
 <span th:text='${comment.getLikers().size()}'/>
-					 
+			<br/>		 
  <span th:if='${@userController.Logged}'>
   <span th:if='${controller.haveILiked(comment.ident) == false}'>
   <a th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a>
@@ -70,10 +74,44 @@ value="Post"> Update </button>
 </span>
 	</div>
 
+</div>
 				</div>
 				</div>
-				</div>
-				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
 				<br/>
 <div class="form">
 				<span th:if='${@userController.Logged}'>
@@ -131,7 +169,7 @@ value="Post"> Update </button>
 
 		
 			<span th:replace="fragments::footer"></span>
-	</div>
+</div>
 
 
 </body>

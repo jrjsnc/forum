@@ -19,16 +19,30 @@ body {
 	padding: 1em;	
 }
 
+
 .scroll{
     overflow: scroll;
     color: #000000;
     width: 100%;
-	height: 300px;
+	height: 400px;
     margin-left:auto;
 	margin-right:auto;
 	overflow-x: hidden;
 }
+.topics {
+	padding:1rem;
+}
+.topics a{
+	font-size: 20px;
+	font-style:italic;
+	margin-top: auto;
+	margin-bottom: auto;
+}
 
+.updateButton {
+	font-size: 10px;
+	
+}
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -85,14 +99,17 @@ body {
 	
 	position: relative;
     width: 50%;
+    margin-left: auto;
+	margin-right: auto;
+    
  }
 
 .imageIndex {
 	
 opacity: 1;
   display: block;
-  width: 50px;
-  height: auto;
+  margin-left: auto;
+	margin-right: auto;
   transition: .5s ease;
   backface-visibility: hidden;
 }
@@ -123,7 +140,6 @@ opacity: 1;
 }
 
 .text {
-/*   background-color: #6e6f59; */
   color: black;
   font-size: 20px;
   padding: 20px 20px;
@@ -139,18 +155,14 @@ opacity: 1;
 	
 }
 
-.comments{
-	
-	 border-bottom-width:2px;
-	 border-color: black;
-	
-}
+
 
 .content {
 	
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+  font-size: 25px;
 }
 
 .footer{
@@ -201,10 +213,16 @@ opacity: 1;
 	color:#6e6f59;
 	text-align: center;
 	align: center;
-	
-	
-	
 }
+	.wrapper2 .comments:nth-child(2n), .topics:nth-child(2n) {
+	background: #ffffff;
+	border-style: solid;
+    border-width: 1px 0px 1px 0px;
+	}
+	
+	
+	
+
 
 .wrapper2 a:hover{
 	text-decoration: underline;
@@ -266,7 +284,7 @@ opacity: 1;
 .comments{
 	display: grid;
 	grid-template-columns: 1fr 2fr ;	
-	grid-gap:20px;
+	grid-gap:20Spx;
 }
 
 .login form label, .register form label {
@@ -309,7 +327,7 @@ opacity: 1;
 }
 
 .username{
-	font-size: 25px;
+	font-size: 15px;
 }
 
 .date{
@@ -382,10 +400,6 @@ background:#c9cba3 ;
 	
 }
 
-.content {
-	font-size: 20px;
-	
-}
 @media(min-width:700px) {
 	.wrapper {
 	display: grid;
@@ -398,7 +412,11 @@ background:#c9cba3 ;
 	grid-template-columns: 1fr 2fr;
 	
 	}
+	.topics {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 	
+	}
 	.login form {
 	display: grid;
 	grid-template-columns: 1fr  ;
