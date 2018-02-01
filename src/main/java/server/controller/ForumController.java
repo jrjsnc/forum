@@ -124,7 +124,14 @@ public class ForumController {
 		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
 		model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
 		return "topic";
+	}
 
+	@RequestMapping("/updateComment")
+	public String deleteComment(@RequestParam(value = "ident", required = false) String ident,
+			@RequestParam(value = "content", required = false) String content, Model model) {
+		commentService.updateComment(Long.parseLong(ident), content);
+		fillModel(model);
+		return "topic";
 	}
 
 	@RequestMapping("/toggleAdmin")
