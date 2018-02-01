@@ -82,6 +82,7 @@ public class UserController {
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
 		}
+		model.addAttribute("message", "Wrong login or password");
 		return "login";
 	}
 
