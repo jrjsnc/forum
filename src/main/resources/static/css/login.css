@@ -32,11 +32,22 @@ body {
 .topics {
 	padding:1rem;
 }
-.topics a{
-	font-size: 20px;
+
+#topicName{
+	font-size: 25px;
 	font-style:italic;
 	margin-top: auto;
 	margin-bottom: auto;
+	font-color:#3b3a30;	
+	
+}
+
+.topics span{
+	font-size: 15px;
+	font-style:italic;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: #6e6f59;
 }
 
 .updateButton {
@@ -67,7 +78,7 @@ body {
 	font-size: 40px;
 	text-align: center;
 	padding: 0.5em;
-	color: #6e6f59;
+	color: #3b3a30;
 	text-decoration: none;
 	
 }
@@ -78,20 +89,17 @@ body {
 
 .linkLoginRegister a, .linkLoginRegister a:hover {
 	text-decoration: none;
-	color: #ffe1a8;
+	color:#6e6f59;
 	font-size: 15px;
 	text-align: right;
 	
 }
-.linkLoginRegister a:hover {
-	color: #6e6f59;
-	}
 
 
 .linkLoginRegister a:focus  {
 	
 	text-decoration: none;
-	color: #6e6f59;
+	color:#ffe1a8;;
 	
 }
 
@@ -163,6 +171,7 @@ opacity: 1;
   word-wrap: break-word;
   hyphens: auto;
   font-size: 25px;
+  color:#3b3a30;
 }
 
 .footer{
@@ -172,13 +181,13 @@ opacity: 1;
 
 .footer a, .footer a:hover {
 	text-decoration: none;
-	color: #ffe1a8;
+	color:#3b3a30;
 	align: center;
 	
 }
 
 .footer a:hover {
-	color: #6e6f59;
+	color:#ffe1a8;
 	
 }
 .footer a:focus  {
