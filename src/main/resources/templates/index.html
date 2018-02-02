@@ -35,8 +35,7 @@
 					<div class="topics" th:each="topic : ${topics}">
 
 
-						<div><a th:href='${"/topic?ident=" +topic.ident}'><span
-								th:text='${topic.title}' /></a></div>
+<div><a th:href='${"/topic?ident=" +topic.ident}'><span id="topicName" th:text='${topic.title}' /></a></div>
 								
 						
 						<div ><span th:text='${topic.getComments().size()}' /><span> Comments </span></div>

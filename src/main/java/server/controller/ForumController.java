@@ -38,7 +38,12 @@ public class ForumController {
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		if (null != currentTopicIdent) {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
-			model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
+			
+			List<Comment> comments = userController.topicService.getTopic(currentTopicIdent).getComments();
+			comments.sort((Comment c1, Comment c2)-> c2.getLikers().size() - c1.getLikers().size());
+			
+			model.addAttribute("comments", comments);
+			
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
 			
 
@@ -127,9 +132,15 @@ public class ForumController {
 	}
 
 	@RequestMapping("/updateComment")
-	public String deleteComment(@RequestParam(value = "ident", required = false) String ident,
-			@RequestParam(value = "content", required = false) String content, Model model) {
-		commentService.updateComment(Long.parseLong(ident), content);
+	public String deleteComment(Comment comment, Model model) {
+		
+		System.err.println(comment.getIdent());
+		System.err.println(comment.getContent());
+		
+		
+		
+		commentService.updateComment(comment.getIdent(), comment.getContent());
+		
 		fillModel(model);
 		return "topic";
 	}

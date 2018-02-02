@@ -54,7 +54,7 @@ public class CommentServiceJPA implements CommentService {
 	@Override
 	public void updateComment(Long ident, String content) {
 		Comment comment = entityManager.find(Comment.class, ident);
-		comment.setContent(content);
+		comment.setContent(content);		
 	}
 
 }
