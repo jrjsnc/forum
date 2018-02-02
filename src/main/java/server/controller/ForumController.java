@@ -149,12 +149,10 @@ public class ForumController {
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
 
 		switch (userController.userService.getUser(Long.parseLong(ident)).getRestriction()) {
-		case BASIC:
-			System.err.println(userController.userService.getUser(Long.parseLong(ident)).getRestriction());
+		case BASIC:			
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
 			break;
-		case ADMIN:
-			System.err.println(userController.userService.getUser(Long.parseLong(ident)).getRestriction());
+		case ADMIN:			
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
 			break;
 		case BANNED:
@@ -163,12 +161,12 @@ public class ForumController {
 		}
 		fillModel(model);
 		return "admin";
-	}
+	}	
 
-	@RequestMapping("/setBan")
+	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
-
-		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED) {
+		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED ||
+				userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.ADMIN) {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BANNED);
 		} else {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
