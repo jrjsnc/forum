@@ -33,11 +33,11 @@ body {
 	padding:1rem;
 }
 
-.like, .like:hover, .like:focus{
+.like input{
 	text-decoration: none;
-	
-	background-color: #c9cba3;
-	color:#000000;
+	background-color: #6e6f59;
+	color:#ffffff;
+	border:none;
 }
 #topicName{
 	font-size: 25px;

@@ -73,12 +73,17 @@
 <span th:text='${comment.getLikers().size()}'/>
 			<p></p>	 
  <span  th:if='${@userController.Logged}'>
+ <form class="like" th:action="@{/toggleLike?ident=} + ${{comment.ident}}" method="post" >
   <span th:if='${controller.haveILiked(comment.ident) == false}'>
- <a class="like" th:href='${"/toggleLike?ident=" + comment.ident}'>Like</a>
+ <input type="submit" value="Like" method="Post"></input>
   </span>
+  
+  
   <span th:if='${controller.haveILiked(comment.ident) == true}'>
-  <a class="like" th:href='${"/toggleLike?ident=" + comment.ident}'>Unlike</a>
-  </span>					    
+  <input type="submit" value="Unlike" method="Post" ></input>
+  </span>	
+  
+  	</form>			    
 </span>
 	</div>
 
