@@ -34,14 +34,17 @@ public class ForumController {
 
 	private void fillModel(Model model) {
 		model.addAttribute("controller", this);
-		model.addAttribute("users", userController.userService.getUsers());
+		
+		List<ForumUser> users = userController.userService.getUsers();
+		users.sort((ForumUser u1, ForumUser u2)-> u1.getLogin().compareToIgnoreCase(u2.getLogin()));
+		model.addAttribute("users", users);
+		
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		if (null != currentTopicIdent) {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
 			
 			List<Comment> comments = userController.topicService.getTopic(currentTopicIdent).getComments();
-			comments.sort((Comment c1, Comment c2)-> c2.getLikers().size() - c1.getLikers().size());
-			
+			comments.sort((Comment c1, Comment c2)-> c2.getLikers().size() - c1.getLikers().size());			
 			model.addAttribute("comments", comments);
 			
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());

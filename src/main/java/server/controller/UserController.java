@@ -51,21 +51,32 @@ public class UserController {
 	public String index(Model model) {
 		List<Topic> topics = topicService.getTopics();		
 		topics.sort((Topic t1, Topic t2)-> t2.getComments().size() - t1.getComments().size());		
-
+		model.addAttribute("message", "");
+		model.addAttribute("selectedTag", "All");
+		
+//		if(getLoggedUser().getRestriction() == Restriction.BANNED)
+//			model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
+		
 		model.addAttribute("topics", topics);
-		model.addAttribute("tags", tagService.getAllTags());		
+		model.addAttribute("tags", tagService.getAllTags());
+		
+		
 		return "index";
 	}
 
 	@RequestMapping("/filterTopics")
-	public String filterTopics(Tag tag, Model model) {
+	public String filterTopics(Tag tag, Model model) {		
 		if(tag.getIdent() == -1) {
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
+			model.addAttribute("selectedTag", "All");
 			return "index";
 		}
 		List<Topic> topics = topicService.getTopics();
 		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());		
+		
+		System.err.println(tag.toString());
+		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());
 		
 		model.addAttribute("tags", tagService.getAllTags());
 		model.addAttribute("topics", topics);		
