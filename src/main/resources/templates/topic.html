@@ -53,11 +53,16 @@
 
 
 <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
-<form action="/updateComment" method="post">
-<input type="text" name="updateComment"
-placeholder="update" required="required"/> <button type="submit"
-value="Post"> Update </button>
-</form>
+	<form th:action='${"/updateComment"}' method="post">
+	
+		<input type="hidden" th:value='${comment.getIdent()}' name="ident" />
+	
+		<input type="text" name="content"
+		placeholder="update" required="required" th:value = '${comment.getContent()}' /> 
+		
+		<button type="submit"
+		value="Post"> Update </button>
+	</form>
 </div>
 
 <br/><br/>
@@ -78,39 +83,7 @@ value="Post"> Update </button>
 				</div>
 				</div>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 			
 				<br/>
 <div class="form">
