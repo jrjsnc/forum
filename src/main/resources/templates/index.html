@@ -15,14 +15,14 @@
 			<div class="indexForm">
 			
 			<form th:action='${"/filterTopics"}'>	
-					<select th:name= "ident" th:onechane='${"/filterTopics"}' value="select topic">
+					<label for="tags">Tags: </label>	<select th:name= "ident" th:onechane='${"/filterTopics"}' value="select topic" id="tags">
 
 						<option th:each="tag : ${tags}" th:value="${tag.ident}"
 							th:text="${tag.getName()}" />
 							<option th:value="-1" selected="true">all</option>
 						
 					</select>					
-					<button type="submit" value="Select topics">Select topic</button>
+					<button type="submit" value="Select opics">Select topics</button>
 				</form> 
 				
 			</div>
@@ -38,7 +38,7 @@
 <div><a th:href='${"/topic?ident=" +topic.ident}'><span id="topicName" th:text='${topic.title}' /></a></div>
 								
 						
-						<div ><span th:text='${topic.getComments().size()}' /><span> Comments </span></div>
+						<div ><span> Comments: </span><span th:text='${topic.getComments().size()}' /></div>
 							
 							
 							<div class="imgUserName"> 
