@@ -54,8 +54,7 @@ public class UserController {
 		model.addAttribute("message", "");
 		model.addAttribute("selectedTag", "All");
 		
-//		if(getLoggedUser().getRestriction() == Restriction.BANNED)
-//			model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
+		
 		
 		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());
@@ -75,9 +74,7 @@ public class UserController {
 		List<Topic> topics = topicService.getTopics();
 		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());		
 		
-		System.err.println(tag.toString());
-		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());
-		
+		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());		
 		model.addAttribute("tags", tagService.getAllTags());
 		model.addAttribute("topics", topics);		
 		return "index";
@@ -92,10 +89,15 @@ public class UserController {
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
 		if (isLogged()) {
+			if(getLoggedUser().getRestriction() == Restriction.BANNED) {
+				model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
+				return "login";
+			}			
 			model.addAttribute("message", "");
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
 		}
+		
 		model.addAttribute("message", "Wrong login or password");
 		return "login";
 	}
