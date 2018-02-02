@@ -75,12 +75,12 @@
  <span  th:if='${@userController.Logged}'>
  <form class="like" th:action="@{/toggleLike?ident=} + ${{comment.ident}}" method="post" >
   <span th:if='${controller.haveILiked(comment.ident) == false}'>
- <button  method="Post">Like</button>
+ <input type="submit" value="Like" method="Post"></input>
   </span>
   
   
   <span th:if='${controller.haveILiked(comment.ident) == true}'>
-  <button method="Post" >Unlike</button>
+  <input type="submit" value="Unlike" method="Post" ></input>
   </span>	
   
   	</form>			    
