@@ -38,7 +38,7 @@ body {
 	font-style:italic;
 	margin-top: auto;
 	margin-bottom: auto;
-	font-color:#3b3a30;	
+	color:#3b3a30;	
 	
 }
 
@@ -148,7 +148,7 @@ opacity: 1;
 }
 
 .text {
-  color: black;
+  color:#3b3a30;
   font-size: 20px;
   padding: 20px 20px;
 }
