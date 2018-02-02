@@ -238,9 +238,17 @@ fieldset{
 	text-align: center;
 	align: center;
 }
+.wrapper3 {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-column-gap: 1px;
+	
+	}
+
 .scroll{
     overflow: scroll;
     color: #000000;
+    background-color: #ffe1a8;
     width: 100%;
 	height: 300px;
     margin-left:auto;
@@ -250,6 +258,7 @@ fieldset{
 .scroll2{
     overflow: scroll;
     color: #000000;
+    background-color: #ffffff;
     width: 100%;
 	height: 300px;
     margin-left:auto;
@@ -303,10 +312,11 @@ fieldset{
 	margin: 0 0 1rem 0;
 	
 }
-@media(min-width:850px) {
+@media(min-width:700px) {
 	.wrapper3 {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 1px;
 	
 	}
 	
