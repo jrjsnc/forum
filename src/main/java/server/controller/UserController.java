@@ -96,6 +96,7 @@ public class UserController {
 			model.addAttribute("message", "");
 			model.addAttribute("selectedTag", "All");
 			model.addAttribute("topics", topicService.getTopics());
+			model.addAttribute("tags", tagService.getAllTags());
 			return "index";
 		}
 		
@@ -134,6 +135,7 @@ public class UserController {
 		loggedUser = null;
 		model.addAttribute("selectedTag", "All");
 		model.addAttribute("topics", topicService.getTopics());
+		model.addAttribute("tags", tagService.getAllTags());
 		return "index";
 	}
 
