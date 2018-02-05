@@ -33,6 +33,14 @@ body {
 	padding:1rem;
 }
 
+.container2 textarea{
+	
+	outline:none;
+	resize:none;
+	overflow:auto;
+	
+}
+
 .like input{
 	text-decoration: none;
 	background-color: #6e6f59;

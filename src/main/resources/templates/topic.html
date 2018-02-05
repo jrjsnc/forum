@@ -59,12 +59,15 @@
 	
 		<input type="hidden" th:value='${comment.getIdent()}' name="ident" />
 	
-		<input type="text" name="content"
+		<textarea class="input"  name="content" cols="40" 
+       rows="5" maxLength="255"
 		placeholder="update" required="required" th:value = '${comment.getContent()}' /> 
 		
-		<button type="submit"
-		value="Post"> Update </button>
+		<div><button type="submit"
+		value="Post"> Update </button></div>
+		
 	</form>
+	
 </div>
 
 <br/><br/>
@@ -91,21 +94,21 @@
 				</div>
 				</div>
 		
-
-			
 				<br/>
 <div class="form">
 				<span th:if='${@userController.Logged}'>
 
 					<form action="/addComment" method="post">
 
-						Add Comment: <input type="text" name="content"
-							placeholder="Add comment here" required="required"/> <button type="submit"
-							value="Post" > Post</button>
+						Add Comment: <div><textarea class="input" cols="40" 
+       rows="5"  name="textarea" maxlength="255" id="textarea"
+							placeholder="Add comment here" required="required"/></div> <div><button type="submit"
+							value="Post" > Post</button></div>
 					</form>
+					
 				</span>
+				<div id="count"></div>
 </div>
-		
 		
 		<div class="tags">
 		<hr/>
