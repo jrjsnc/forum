@@ -18,28 +18,41 @@
 <div class="users1">
 				<table class="users">
 					<th>Users</th>
-					<th>Admin</th>
-					<th>Ban</th>
-					<tr>
-						<td>
-							<div th:each="forumUser : ${users}">
-								<div class="usercolor" th:text='${forumUser.login}'></div>
-							</div>
+					<th>Toggle admin</th>
+					<th>Toggle ban</th>
+					
+					
+					
+					
+					<tr th:each="forumUser : ${users}" th:if='${@userController.getLoggedUser() != forumUser}'>
+						
+						<td>							
+								<div class="usercolor" th:text='${forumUser.login}'></div>															
 						</td>
 
-						<td>
-							<div th:each="forumUser : ${users}">
+						<td>							
 								<a class="aclass"
-									th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
-									th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
-										Set to admin</span> <span
-									th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
-										Set to basic</span>
-								</a>
-							</div>
+									th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> 
+									<span th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
+										Set as admin</span> 
+									<span th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
+										Set as basic</span>
+								</a>							
 						</td>
-
+						
+						<td>							
+								<a class="aclass"
+									th:href='${"/toggleBan?ident=" + forumUser.ident}'> 
+									<span th:if='${#strings.toString(forumUser.restriction) == "BASIC" or #strings.toString(forumUser.restriction) == "ADMIN"}'>
+										Ban user</span> 
+									<span th:if='${#strings.toString(forumUser.restriction) == "BANNED"}'>
+										Unban user</span>
+								</a>							
+						</td>
+						
 					</tr>
+					
+					
 				</table>
 					</div> 
 </div>

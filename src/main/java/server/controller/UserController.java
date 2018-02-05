@@ -94,6 +94,7 @@ public class UserController {
 				return "login";
 			}			
 			model.addAttribute("message", "");
+			model.addAttribute("selectedTag", "All");
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
 		}
@@ -120,6 +121,7 @@ public class UserController {
 			userService.register(user);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			model.addAttribute("message", "");
+			model.addAttribute("selectedTag", "All");
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
 		}
@@ -130,6 +132,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedUser = null;
+		model.addAttribute("selectedTag", "All");
 		model.addAttribute("topics", topicService.getTopics());
 		return "index";
 	}

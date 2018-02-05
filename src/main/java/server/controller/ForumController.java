@@ -168,18 +168,19 @@ public class ForumController {
 
 	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED ||
-				userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.ADMIN) {
+		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED)				
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BANNED);
-		} else {
+		else
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
-		}
+		
 		fillModel(model);
 		return "admin";
 	}
 
 	@RequestMapping("/admin")
 	public String admin(Model model) {
+		if (!userController.isLogged() || userController.getLoggedUser().getRestriction() != Restriction.ADMIN)
+			return "404";
 		fillModel(model);
 		return "admin";
 	}

@@ -423,6 +423,27 @@ background:#c9cba3 ;
 	
 }
 
+#lionel{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered{	
+	font-size: 6em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#text1{
+	font-size: 4em;
+	position: absolute;
+	left: 54%;	
+    transform: translate(-50%);
+}
+
 @media(min-width:700px) {
 	.wrapper {
 	display: grid;
