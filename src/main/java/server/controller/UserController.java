@@ -85,6 +85,8 @@ public class UserController {
 		return "login";
 	}
 
+	
+	
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
@@ -102,6 +104,15 @@ public class UserController {
 		
 		model.addAttribute("message", "Wrong login or password");
 		return "login";
+	}
+	
+	
+	@RequestMapping("/updateUser")
+	public String updateUser(Model model) {
+		if (!isLogged())
+			return "login";
+		model.addAttribute("userController", this);
+		return "updateUser";
 	}
 
 	@RequestMapping("/register")

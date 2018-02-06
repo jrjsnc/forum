@@ -176,7 +176,9 @@ public class ForumController {
 		fillModel(model);
 		return "admin";
 	}
-
+	
+	
+	
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		if (!userController.isLogged() || userController.getLoggedUser().getRestriction() != Restriction.ADMIN)

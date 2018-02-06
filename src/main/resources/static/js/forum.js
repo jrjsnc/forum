@@ -48,19 +48,14 @@ function showUpdateComment(elementId) {
     }
 }
 
+function showUpdateUser(elementId) {
+	
+    var x = document.getElementById(elementId);
+    console.log(x.style.display);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
-
-function maxLength(el) {
-	  if (!('maxLength' in el)) {
-	    var max = el.attributes.maxLength.value;
-	    el.onkeypress = function() {
-	      if (this.value.length >= max) return false;
-	    };
-	  }
-	}
-
-	maxLength(document.getElementById("textarea"));
-
-	document.getElementById('textarea').onkeyup = function () {
-	  document.getElementById('count').innerHTML = "Characters left: " + (255 - this.value.length);
-	};

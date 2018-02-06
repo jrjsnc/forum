@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="css/login.css" />
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+</head>
+<body>
+<div class="container">
+ 
+<div class="profile">
+
+
+<div th:text='${userController.getLoggedUser().getLogin()}'/>			
+<div th:text='${userController.getLoggedUser().getEmail()}'/>
+<div >
+<img width="100" height="100" th:src="*{userController.decodeToImage(userController.getLoggedUser().getLogin())}"
+											onerror="this.src='image/default.jpg';" />
+</div>
+<button class="updateButton" th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update User </button>
+
+
+<div style="display: none;"  th:id="${userController.getLoggedUser().getIdent()}">
+
+<form action="/updateUser" method="post" id="formUpdateUser" name="formUpdateUser">
+
+<input type="text" name="updateUsername" placeholder="update login" />
+
+<input type="text" name="updateEmail" placeholder="update email" />
+</form>
+		
+</div>
+
+
+</div>
+</div>
+
+</body>
+<script src="js/forum.js"/>
+</html>

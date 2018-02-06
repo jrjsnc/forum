@@ -54,21 +54,36 @@
 <p></p>
 
 
+
+
 <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
-	<form th:action='${"/updateComment"}' method="post">
+ <form th:action="@{/updateComment?ident=} + ${{comment.ident}}" method="post">
+ <input type="text" name="updateComment"
+ placeholder="update" required="required"/> 
+ <button type="submit"
+ value="Post"> Update </button>
+  </form>
+  </div>
+
+
+
+
+
+
+<!-- <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" > -->
+<!-- 	<form action="/updateComment" method="post" id="formUpdateComment" name="formUpdateComment"> -->
 	
-		<input type="hidden" th:value='${comment.getIdent()}' name="ident" />
+<!-- 		<input type="hidden" th:value='${comment.getIdent()}' name="ident" /> -->
 	
-		<textarea class="input"  name="content" cols="40" 
-       rows="5" maxLength="255"
-		placeholder="update" required="required" th:value = '${comment.getContent()}' /> 
+<!-- 		<textarea  form="formUpdateComment" cols="40"  -->
+<!--        rows="5" placeholder="update" required="required" th:value = '${comment.getContent()}' />  -->
 		
-		<div><button type="submit"
-		value="Post"> Update </button></div>
+<!-- 		<div><button type="submit" -->
+<!-- 		value="Post"> Update </button></div> -->
 		
-	</form>
+<!-- 	</form> -->
 	
-</div>
+<!-- </div> -->
 
 <br/><br/>
 <span>Likes: </span>
@@ -98,17 +113,25 @@
 <div class="form">
 				<span th:if='${@userController.Logged}'>
 
-					<form action="/addComment" method="post">
+					<form action="/addComment" method="post" id="formAddComment">
 
-						Add Comment: <div><textarea class="input" cols="40" 
-       rows="5"  name="textarea" maxlength="255" id="textarea"
-							placeholder="Add comment here" required="required"/></div> <div><button type="submit"
+ 						Add Comment: 
+ 						
+ 						<div>
+<textarea class="input" cols="40" 
+       rows="5"  name="content" form="formAddComment" id="textarea" maxlength="255"
+							placeholder="Add comment here" required="required"/></div> 
+							<div><button type="submit"
 							value="Post" > Post</button></div>
+							
+							
 					</form>
 					
 				</span>
-				<div id="count"></div>
+				
 </div>
+		
+		
 		
 		<div class="tags">
 		<hr/>
@@ -157,5 +180,6 @@
 
 
 </body>
+
 <script src="js/forum.js"/>
 </html>
