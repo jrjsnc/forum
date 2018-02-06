@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -28,6 +30,7 @@ import forum.entity.Topic;
 import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
+import forum.services.impl.MailService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -45,38 +48,54 @@ public class UserController {
 	@Autowired
 	protected TagService tagService;
 
+	@Autowired
+	protected MailService mailService;
+
 	private ForumUser loggedUser;
+
+
+	//testing thread mailing only
+	@RequestMapping("/mail")
+	public String mail(Model model) {		
+		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+		emailExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				mailService.sendMail("jurajsenic@gmail.com", "vlakna",
+						"email z vlakna poslany, asi nepojde, ale ked hej ta party");
+			}
+		});
+		emailExecutor.shutdown();
+		return "index";
+	}
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		List<Topic> topics = topicService.getTopics();		
-		topics.sort((Topic t1, Topic t2)-> t2.getComments().size() - t1.getComments().size());		
+		List<Topic> topics = topicService.getTopics();
+		topics.sort((Topic t1, Topic t2) -> t2.getComments().size() - t1.getComments().size());
 		model.addAttribute("message", "");
 		model.addAttribute("selectedTag", "All");
-		
-		
-		
+
 		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());
-		
-		
+
 		return "index";
 	}
 
 	@RequestMapping("/filterTopics")
-	public String filterTopics(Tag tag, Model model) {		
-		if(tag.getIdent() == -1) {
+	public String filterTopics(Tag tag, Model model) {
+		if (tag.getIdent() == -1) {
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
 			model.addAttribute("selectedTag", "All");
 			return "index";
 		}
 		List<Topic> topics = topicService.getTopics();
-		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());		
-		
-		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());		
+		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
+
+		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());
 		model.addAttribute("tags", tagService.getAllTags());
-		model.addAttribute("topics", topics);		
+		model.addAttribute("topics", topics);
 		return "index";
 	}
 
@@ -91,17 +110,17 @@ public class UserController {
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
 		if (isLogged()) {
-			if(getLoggedUser().getRestriction() == Restriction.BANNED) {
+			if (getLoggedUser().getRestriction() == Restriction.BANNED) {
 				model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
 				return "login";
-			}			
+			}
 			model.addAttribute("message", "");
 			model.addAttribute("selectedTag", "All");
 			model.addAttribute("topics", topicService.getTopics());
 			model.addAttribute("tags", tagService.getAllTags());
 			return "index";
 		}
-		
+
 		model.addAttribute("message", "Wrong login or password");
 		return "login";
 	}
@@ -116,24 +135,37 @@ public class UserController {
 	}
 
 	@RequestMapping("/register")
-	public String register(@RequestParam("file") MultipartFile file,ForumUser user, Model model) {
+	public String register(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
 		if (!userService.nameTaken(user.getLogin())) {
 			user.setRestriction(Restriction.BASIC);
-			
+
 			if (file != null && !file.isEmpty()) {
 				try {
 					user.setUserImage(file.getBytes());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
-			
+
 			userService.register(user);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("You have successfully registered at our movie forum.");
+			sb.append(System.lineSeparator());
+			sb.append(System.lineSeparator());
+			sb.append("username: " + user.getLogin());
+			sb.append(System.lineSeparator());
+			sb.append("password: " + user.getPassword());
+			sb.append(System.lineSeparator());
+			sb.append(System.lineSeparator());
+			sb.append("In case you forgot your password, you can contact our admin at this email (movieforum@azet.sk)");
+
+			mailService.sendMail(user.getEmail(), "MovieForum Registration", sb.toString());
+
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			model.addAttribute("message", "");
 			model.addAttribute("selectedTag", "All");
+			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
 			return "index";
 		}
@@ -157,35 +189,33 @@ public class UserController {
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
-	
-	
+
 	public String decodeToImage(String login) {
 		String finalImage = "";
 		BufferedImage image;
-		
-			try {
-				byte[] imageInByteArray = userService.getImage(login);
-				if (imageInByteArray != null) {
-					ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
-					image = ImageIO.read(bis);
-					bis.close();
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					ImageIO.write(image, "png", baos);
-					baos.flush();
-					imageInByteArray = baos.toByteArray();
-					baos.close();
-					finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
-				} else {
-					return "";
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (NullPointerException f) {
-				f.printStackTrace();
+
+		try {
+			byte[] imageInByteArray = userService.getImage(login);
+			if (imageInByteArray != null) {
+				ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
+				image = ImageIO.read(bis);
+				bis.close();
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(image, "png", baos);
+				baos.flush();
+				imageInByteArray = baos.toByteArray();
+				baos.close();
+				finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
+			} else {
+				return "";
 			}
-		
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException f) {
+			f.printStackTrace();
+		}
+
 		return "data:image/png;base64," + finalImage;
 	}
-	
 
 }
