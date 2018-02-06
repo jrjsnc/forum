@@ -10,6 +10,7 @@ import forum.services.TagService;
 import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.CommentServiceJPA;
+import forum.services.impl.MailService;
 import forum.services.impl.TagServiceJPA;
 import forum.services.impl.TopicServiceJPA;
 import forum.services.impl.UserServiceJPA;
@@ -42,6 +43,11 @@ public class ForumServer {
 	@Bean
 	public TagService tagService() {
 		return new TagServiceJPA();
+	}
+	
+	@Bean
+	public MailService mailService() {
+		return new MailService();
 	}
 
 }

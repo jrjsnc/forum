@@ -34,21 +34,20 @@ public class ForumController {
 
 	private void fillModel(Model model) {
 		model.addAttribute("controller", this);
-		
+
 		List<ForumUser> users = userController.userService.getUsers();
-		users.sort((ForumUser u1, ForumUser u2)-> u1.getLogin().compareToIgnoreCase(u2.getLogin()));
+		users.sort((ForumUser u1, ForumUser u2) -> u1.getLogin().compareToIgnoreCase(u2.getLogin()));
 		model.addAttribute("users", users);
-		
+
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		if (null != currentTopicIdent) {
 			model.addAttribute("currentTopicTitle", userController.topicService.getTopic(currentTopicIdent).getTitle());
-			
+
 			List<Comment> comments = userController.topicService.getTopic(currentTopicIdent).getComments();
-			comments.sort((Comment c1, Comment c2)-> c2.getLikers().size() - c1.getLikers().size());			
+			comments.sort((Comment c1, Comment c2) -> c2.getLikers().size() - c1.getLikers().size());
 			model.addAttribute("comments", comments);
-			
+
 			model.addAttribute("topicTags", userController.topicService.getTopic(currentTopicIdent).getTags());
-			
 
 			List<Tag> tags = userController.tagService.getAllTags();
 			tags.removeAll(userController.topicService.getTopic(currentTopicIdent).getTags());
@@ -136,14 +135,7 @@ public class ForumController {
 
 	@RequestMapping("/updateComment")
 	public String deleteComment(Comment comment, Model model) {
-		
-		System.err.println(comment.getIdent());
-		System.err.println(comment.getContent());
-		
-		
-		
 		commentService.updateComment(comment.getIdent(), comment.getContent());
-		
 		fillModel(model);
 		return "topic";
 	}
@@ -152,11 +144,13 @@ public class ForumController {
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
 
 		switch (userController.userService.getUser(Long.parseLong(ident)).getRestriction()) {
-		case BASIC:			
+		case BASIC:
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.ADMIN);
+			mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.ADMIN);
 			break;
-		case ADMIN:			
+		case ADMIN:
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
+			mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BASIC);
 			break;
 		case BANNED:
 			model.addAttribute("message", "Cannot set admin on banned user");
@@ -164,15 +158,17 @@ public class ForumController {
 		}
 		fillModel(model);
 		return "admin";
-	}	
+	}
 
 	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED)				
+		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED) {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BANNED);
-		else
+		mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BANNED);
+		} else {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
-		
+			mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BASIC);
+		}
 		fillModel(model);
 		return "admin";
 	}
@@ -183,6 +179,17 @@ public class ForumController {
 			return "404";
 		fillModel(model);
 		return "admin";
+	}
+
+	private void mailRestriction(String email, Restriction restriction) {
+		String subject = "MovieForum restriction";
+		StringBuilder messageText = new StringBuilder();
+		messageText.append("Your profile permissions has been updated to ");
+		messageText.append(System.lineSeparator());
+		messageText.append(restriction.toString().toLowerCase());
+		
+		messageText.append(". For more information contact our admin at this email (movieforum@azet.sk)");
+		userController.mailService.sendMail(email, subject, messageText.toString());
 	}
 
 	public void setCurrentTopicIdent(Long ident) {
