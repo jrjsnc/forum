@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +59,13 @@ public class ForumController {
 
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
-		userController.tagService.addTag(tag);
+		model.addAttribute("message", "");
+		try {
+			tag.setName(tag.getName().toLowerCase());
+			userController.tagService.addTag(tag);
+		} catch (DataIntegrityViolationException e) {
+			model.addAttribute("message", "Cannot add the same tag twice");			
+		}		
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		fillModel(model);
 		return "admin";
@@ -134,7 +142,7 @@ public class ForumController {
 	}
 
 	@RequestMapping("/updateComment")
-	public String deleteComment(Comment comment, Model model) {
+	public String updateComment(Comment comment, Model model) {
 		commentService.updateComment(comment.getIdent(), comment.getContent());
 		fillModel(model);
 		return "topic";
@@ -164,7 +172,7 @@ public class ForumController {
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED) {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BANNED);
-		mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BANNED);
+			mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BANNED);
 		} else {
 			userController.userService.setRestriction(Long.parseLong(ident), Restriction.BASIC);
 			mailRestriction(userController.userService.getUser(Long.parseLong(ident)).getEmail(), Restriction.BASIC);
@@ -172,9 +180,7 @@ public class ForumController {
 		fillModel(model);
 		return "admin";
 	}
-	
-	
-	
+
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		if (!userController.isLogged() || userController.getLoggedUser().getRestriction() != Restriction.ADMIN)
@@ -189,7 +195,6 @@ public class ForumController {
 		messageText.append("Your profile permissions has been updated to ");
 		messageText.append(System.lineSeparator());
 		messageText.append(restriction.toString().toLowerCase());
-		
 		messageText.append(". For more information contact our admin at this email (movieforum@azet.sk)");
 		userController.mailService.sendMail(email, subject, messageText.toString());
 	}

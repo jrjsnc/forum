@@ -8,15 +8,13 @@
 <body>
 	<div class="container2">
 		
-			<span th:replace="fragments::header"></span>
-		
+			<span th:replace="fragments::header"></span>	
 		
 			<div class="title">
 				<span>" </span>
 					<span th:text="${currentTopicTitle}"/>
 				<span> "</span>
-			</div>
-			
+			</div>			
 		<br/>
 		
 		
@@ -24,17 +22,13 @@
 		<div class="wrapper2">
 		
 <div class="comments" th:each="comment : ${comments}">
-
 				<div class="picture">
 		<img class="image" width="90" height="90"
 											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
 											
 											<div class="username" th:text='${comment.getForumUser().getLogin()}' />
-											
-											
-					
-					</div>
+											</div>
 					
 <div class="info">
 					
@@ -54,36 +48,19 @@
 <p></p>
 
 
-
-
 <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
- <form th:action="@{/updateComment?ident=} + ${{comment.ident}}" method="post">
- <input type="text" name="updateComment"
- placeholder="update" required="required"/> 
+ <form th:action='${"/updateComment"}' method="post" id="forumUpdateComment"> 
+ <input type="hidden" th:value='${comment.getIdent()}' name="ident" />  
+ <textarea name = "content" cols="40"
+ rows="5" required="required"/>
+ 
+ <br/>
+  
  <button type="submit"
  value="Post"> Update </button>
   </form>
   </div>
-
-
-
-
-
-
-<!-- <div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" > -->
-<!-- 	<form action="/updateComment" method="post" id="formUpdateComment" name="formUpdateComment"> -->
-	
-<!-- 		<input type="hidden" th:value='${comment.getIdent()}' name="ident" /> -->
-	
-<!-- 		<textarea  form="formUpdateComment" cols="40"  -->
-<!--        rows="5" placeholder="update" required="required" th:value = '${comment.getContent()}' />  -->
-		
-<!-- 		<div><button type="submit" -->
-<!-- 		value="Post"> Update </button></div> -->
-		
-<!-- 	</form> -->
-	
-<!-- </div> -->
+  
 
 <br/><br/>
 <span>Likes: </span>
@@ -123,12 +100,8 @@
 							placeholder="Add comment here" required="required"/></div> 
 							<div><button type="submit"
 							value="Post" > Post</button></div>
-							
-							
-					</form>
-					
-				</span>
-				
+					</form>					
+				</span>				
 </div>
 		
 		
@@ -173,9 +146,7 @@
 </div>
 		</span>
 		</span>
-
-		
-			<span th:replace="fragments::footer"></span>
+		<span th:replace="fragments::footer"></span>
 </div>
 
 

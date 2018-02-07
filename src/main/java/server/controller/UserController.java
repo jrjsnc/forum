@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,21 +54,42 @@ public class UserController {
 	protected MailService mailService;
 
 	private ForumUser loggedUser;
-
-
-	//testing thread mailing only
-	@RequestMapping("/mail")
-	public String mail(Model model) {		
+	
+	private void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
 		emailExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
-				mailService.sendMail("jurajsenic@gmail.com", "vlakna",
-						"email z vlakna poslany, asi nepojde, ale ked hej ta party");
+				mailService.sendMail(to, subject, messageText);
 			}
 		});
 		emailExecutor.shutdown();
-		return "index";
+	}
+
+	@RequestMapping("/mailLogin")
+	public String mailLogin(ForumUser user, Model model) {
+		model.addAttribute("message", "");		
+		ForumUser fu = userService.getUserByEmail(user.getEmail());
+
+		if (null != fu) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("You have requested to resend your login information.");
+			sb.append(System.lineSeparator());
+			sb.append(System.lineSeparator());
+			sb.append("username: " + fu.getLogin());
+			sb.append(System.lineSeparator());
+			sb.append("password: " + fu.getPassword());
+			sb.append(System.lineSeparator());
+
+			sendMailInThread(fu.getEmail(), "Movie Forum Login", sb.toString());
+
+			model.addAttribute("message", "Your login information was sent. Check your mailbox.");
+			return "login";
+		} else {
+			model.addAttribute("message", "Incorrect email.");
+			return "login";
+		}
+
 	}
 
 	@RequestMapping("/")
@@ -105,8 +127,6 @@ public class UserController {
 		return "login";
 	}
 
-	
-	
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
@@ -125,10 +145,12 @@ public class UserController {
 		model.addAttribute("message", "Wrong login or password");
 		return "login";
 	}
+
 	
 	
 	@RequestMapping("/userProfile")
 	public String updateProfile(ForumUser user,Model model) {
+
 		if (!isLogged())
 			return "login";
 		model.addAttribute("userController", this);
@@ -155,17 +177,17 @@ public class UserController {
 
 	@RequestMapping("/register")
 	public String register(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
-		if (!userService.nameTaken(user.getLogin())) {
-			user.setRestriction(Restriction.BASIC);
+		user.setRestriction(Restriction.BASIC);
 
-			if (file != null && !file.isEmpty()) {
-				try {
-					user.setUserImage(file.getBytes());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		if (file != null && !file.isEmpty()) {
+			try {
+				user.setUserImage(file.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+		}
 
+		try {
 			userService.register(user);
 
 			StringBuilder sb = new StringBuilder();
@@ -186,10 +208,12 @@ public class UserController {
 			model.addAttribute("selectedTag", "All");
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
-			return "index";
+
+		} catch (DataIntegrityViolationException e) {
+			model.addAttribute("message", "Name or email already used. Try another name.");
+			return "login";
 		}
-		model.addAttribute("message", "Name already used. Try another name.");
-		return "login";
+		return "index";
 	}
 
 	@RequestMapping("/logout")
