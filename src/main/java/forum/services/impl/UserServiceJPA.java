@@ -8,6 +8,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
@@ -20,7 +22,7 @@ public class UserServiceJPA implements UserService {
 	private EntityManager entityManager;
 
 	@Override
-	public void register(ForumUser user) {
+	public void register(ForumUser user) throws DataIntegrityViolationException {
 		entityManager.persist(user);
 	}
 
@@ -57,28 +59,39 @@ public class UserServiceJPA implements UserService {
 	}
 
 	@Override
+	public ForumUser getUserByEmail(String email) {
+		ForumUser fu = new ForumUser();
+		try {
+			fu = (ForumUser) entityManager.createQuery("SELECT u FROM ForumUser u WHERE u.email = :email")
+					.setParameter("email", email).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		return fu;
+	}
+
+	@Override
 	public void setRestriction(Long ident, Restriction restriction) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-		user.setRestriction(restriction);	
-	}	
-	
+		user.setRestriction(restriction);
+	}
+
 	@Override
 	public void toggleLike(Long ident, Comment comment) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-		if(!user.getLikedComments().contains(comment)) {
-				user.getLikedComments().add(comment);
+		if (!user.getLikedComments().contains(comment)) {
+			user.getLikedComments().add(comment);
 		} else {
 			user.getLikedComments().remove(comment);
 		}
 	}
-	
+
 	@Override
 	public Set<Comment> getLikedComments(Long ident) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
-		return user.getLikedComments();		
+		return user.getLikedComments();
 	}
 
-	
 	@Override
 	public byte[] getImage(String login) {
 		try {

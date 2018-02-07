@@ -18,6 +18,8 @@ public interface UserService {
 	boolean nameTaken(String login);
 	
 	ForumUser getUser(Long ident);
+	
+	ForumUser getUserByEmail(String email);
 
 	void setRestriction(Long ident, Restriction restriction);
 

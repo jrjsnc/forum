@@ -7,7 +7,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import forum.entity.Comment;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import forum.entity.Tag;
 import forum.services.TagService;
 
@@ -19,7 +20,7 @@ public class TagServiceJPA implements TagService{
 	private EntityManager entityManager;
 
 	@Override
-	public void addTag(Tag tag) {
+	public void addTag(Tag tag) throws DataIntegrityViolationException {
 		entityManager.persist(tag);		
 	}
 	

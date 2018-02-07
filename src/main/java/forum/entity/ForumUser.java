@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,9 +27,15 @@ public class ForumUser {
 	@GeneratedValue
 	private Long ident;
 
+	@Column(unique=true, nullable=false)
 	private String login;
+	
+	@Column(nullable=false)
 	private String password;
+	
+	@Column(unique=true, nullable=false)
 	private String email;
+	
 	private byte[] userImage;
 
 	@Enumerated(EnumType.STRING)
