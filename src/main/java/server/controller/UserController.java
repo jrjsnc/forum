@@ -55,7 +55,7 @@ public class UserController {
 
 	private ForumUser loggedUser;
 	
-	private void sendMailInThread(String to, String subject, String messageText) {
+	protected void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
 		emailExecutor.execute(new Runnable() {
 			@Override
@@ -89,7 +89,6 @@ public class UserController {
 			model.addAttribute("message", "Incorrect email.");
 			return "login";
 		}
-
 	}
 
 	@RequestMapping("/")
@@ -199,16 +198,15 @@ public class UserController {
 			sb.append("password: " + user.getPassword());
 			sb.append(System.lineSeparator());
 			sb.append(System.lineSeparator());
-			sb.append("In case you forgot your password, you can contact our admin at this email (movieforum@azet.sk)");
-
-			mailService.sendMail(user.getEmail(), "MovieForum Registration", sb.toString());
+			sb.append("In case you forgot your password, you can contact our admin at this email (movieforum@azet.sk)");	
+			
+			sendMailInThread(user.getEmail(), "Movie Forum Registration", sb.toString());
 
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			model.addAttribute("message", "");
 			model.addAttribute("selectedTag", "All");
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", topicService.getTopics());
-
 		} catch (DataIntegrityViolationException e) {
 			model.addAttribute("message", "Name or email already used. Try another name.");
 			return "login";

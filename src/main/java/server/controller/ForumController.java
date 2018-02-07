@@ -191,12 +191,13 @@ public class ForumController {
 
 	private void mailRestriction(String email, Restriction restriction) {
 		String subject = "MovieForum restriction";
-		StringBuilder messageText = new StringBuilder();
-		messageText.append("Your profile permissions has been updated to ");
-		messageText.append(System.lineSeparator());
-		messageText.append(restriction.toString().toLowerCase());
-		messageText.append(". For more information contact our admin at this email (movieforum@azet.sk)");
-		userController.mailService.sendMail(email, subject, messageText.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append("Your profile permissions has been updated to ");
+		sb.append(System.lineSeparator());
+		sb.append(restriction.toString().toLowerCase());
+		sb.append(". For more information contact our admin at this email (movieforum@azet.sk)");
+		
+		userController.sendMailInThread(email, subject, sb.toString());		
 	}
 
 	public void setCurrentTopicIdent(Long ident) {
