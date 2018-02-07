@@ -167,8 +167,8 @@ public class UserController {
 		if (!userService.nameTaken(user.getLogin())) {
 			user.setRestriction(Restriction.BASIC);
 			
-			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), file);					
-			loggedUser = userService.login(user.getLogin(), loggedUser.getPassword());
+			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);					
+			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			
 		}	
 		return "index";
@@ -258,5 +258,6 @@ public class UserController {
 
 		return "data:image/png;base64," + finalImage;
 	}
-
 }
+
+

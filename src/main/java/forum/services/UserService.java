@@ -36,7 +36,7 @@ public interface UserService {
 	@Modifying
 	void deleteUser(ForumUser user);
 	
-	void updateUser(Long ident, String login, String email, MultipartFile userImage);
+	void updateUser(Long ident, String login, String email, String password, MultipartFile userImage);
 
 
 	

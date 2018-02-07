@@ -25,9 +25,13 @@
 
 <input type="hidden" th:value='${userController.getLoggedUser().getIdent()}' name="ident" />
 
-<input type="text" name="login" placeholder="update login" />
+<input type="text" th:value="${@userController.loggedUser?.login}"  name="login" placeholder="update login" />
 
-<input type="text" name="email" placeholder="update email" />
+<input type="text"  th:value="${@userController.loggedUser?.email}" name="email" placeholder="update email" />
+
+<input type="password"  th:value="${@userController.loggedUser?.password}" name="password" placeholder="update password" />
+
+
 
 <input type="file" name="file"
 							accept="image/*" />

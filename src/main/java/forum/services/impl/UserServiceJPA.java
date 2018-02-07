@@ -115,12 +115,13 @@ public class UserServiceJPA implements UserService {
 	}
 
 	@Override
-	public void updateUser(Long ident, String login, String email, MultipartFile userImage) {
+	public void updateUser(Long ident, String login, String email, String password, MultipartFile userImage) {
 		System.err.println(ident);
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 	
 		user.setLogin(login);
 		user.setEmail(email);
+		user.setPassword(password);
 		try {
 			user.setUserImage(userImage.getBytes());
 		} catch (IOException e) {
