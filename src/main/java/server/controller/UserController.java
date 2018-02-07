@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
@@ -126,12 +127,30 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/updateUser")
-	public String updateUser(Model model) {
+	@RequestMapping("/userProfile")
+	public String updateProfile(ForumUser user,Model model) {
 		if (!isLogged())
 			return "login";
 		model.addAttribute("userController", this);
-		return "updateUser";
+		return "userProfile";
+	}
+	
+	
+	@RequestMapping("/updateUser")
+	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user,Model model) {
+				
+		System.err.println(user.getIdent());
+		System.err.println(user.getLogin());
+		System.err.println(user.getPassword());
+		
+		if (!userService.nameTaken(user.getLogin())) {
+			user.setRestriction(Restriction.BASIC);
+			
+			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), file);					
+			loggedUser = userService.login(user.getLogin(), loggedUser.getPassword());
+			
+		}	
+		return "index";
 	}
 
 	@RequestMapping("/register")

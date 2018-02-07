@@ -3,13 +3,12 @@
 <link rel="stylesheet" href="css/login.css" />
 <head>
 <meta charset="UTF-8" />
-<title>Login</title>
+<title>userProfile</title>
 </head>
 <body>
 <div class="container">
  
 <div class="profile">
-
 
 <div th:text='${userController.getLoggedUser().getLogin()}'/>			
 <div th:text='${userController.getLoggedUser().getEmail()}'/>
@@ -22,11 +21,20 @@
 
 <div style="display: none;"  th:id="${userController.getLoggedUser().getIdent()}">
 
-<form action="/updateUser" method="post" id="formUpdateUser" name="formUpdateUser">
+<form action="/updateUser" method="post" name="formUpdateUser" enctype="multipart/form-data">
 
-<input type="text" name="updateUsername" placeholder="update login" />
+<input type="hidden" th:value='${userController.getLoggedUser().getIdent()}' name="ident" />
 
-<input type="text" name="updateEmail" placeholder="update email" />
+<input type="text" name="login" placeholder="update login" />
+
+<input type="text" name="email" placeholder="update email" />
+
+<input type="file" name="file"
+							accept="image/*" />
+					
+
+<button type="submit" value="Post"> Update </button>
+
 </form>
 		
 </div>

@@ -1,5 +1,6 @@
 package forum.services.impl;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -7,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
@@ -87,5 +90,29 @@ public class UserServiceJPA implements UserService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public void deleteUser(ForumUser user) {
+		entityManager.createQuery("DELETE FROM Forum_user f WHERE f.ident= :ident")
+		.setParameter("ident", user.getIdent()).executeUpdate();
+
+		
+	}
+
+	@Override
+	public void updateUser(Long ident, String login, String email, MultipartFile userImage) {
+		System.err.println(ident);
+		ForumUser user = entityManager.find(ForumUser.class, ident);
+	
+		user.setLogin(login);
+		user.setEmail(email);
+		try {
+			user.setUserImage(userImage.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
