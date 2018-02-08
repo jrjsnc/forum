@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="css/login.css" />
+<head>
+<meta charset="UTF-8" />
+<title>userProfile</title>
+</head>
+<body>
+<div class="container">
+ 
+<div class="profile">
+
+<div th:text='${userController.getLoggedUser().getLogin()}'/>			
+<div th:text='${userController.getLoggedUser().getEmail()}'/>
+<div >
+<img width="100" height="100" th:src="*{userController.decodeToImage(userController.getLoggedUser().getLogin())}"
+											onerror="this.src='image/default.jpg';" />
+</div>
+<button class="updateButton" th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update User </button>
+
+
+<div style="display: none;"  th:id="${userController.getLoggedUser().getIdent()}">
+
+<form action="/updateUser" method="post" name="formUpdateUser" enctype="multipart/form-data">
+
+<input type="hidden" th:value='${userController.getLoggedUser().getIdent()}' name="ident" />
+
+<input type="text" th:value="${@userController.loggedUser?.login}"  name="login" placeholder="update login" />
+
+<input type="text"  th:value="${@userController.loggedUser?.email}" name="email" placeholder="update email" />
+
+<input type="password"  th:value="${@userController.loggedUser?.password}" name="password" placeholder="update password" />
+
+
+
+<input type="file" name="file"
+							accept="image/*" />
+					
+
+<button type="submit" value="Post"> Update </button>
+
+</form>
+		
+</div>
+
+
+</div>
+</div>
+
+</body>
+<script src="js/forum.js"/>
+</html>

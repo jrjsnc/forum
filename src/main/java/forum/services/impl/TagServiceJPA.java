@@ -7,7 +7,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import forum.entity.Comment;
+import forum.entity.ForumUser;
 import forum.entity.Tag;
 import forum.services.TagService;
 
@@ -19,7 +22,7 @@ public class TagServiceJPA implements TagService{
 	private EntityManager entityManager;
 
 	@Override
-	public void addTag(Tag tag) {
+	public void addTag(Tag tag) throws DataIntegrityViolationException {
 		entityManager.persist(tag);		
 	}
 	
@@ -36,17 +39,13 @@ public class TagServiceJPA implements TagService{
 
 	@Override
 	public Tag getTag(Long ident) {
-		try {
-			Tag t = (Tag) entityManager
-					.createQuery("SELECT t FROM Tag t WHERE t.ident = :ident")
-					.setParameter("ident", ident).getSingleResult();			
-			return t;
-			
-		} catch (NoResultException e) {
-				e.printStackTrace();
-			}
-
-		return null;
+		return entityManager.find(Tag.class, ident);
+	}
+	
+	@Override
+	public void updateTag(Long ident, String name) {
+		Tag tag = entityManager.find(Tag.class, ident);
+		tag.setName(name);		
 	}
 
 	

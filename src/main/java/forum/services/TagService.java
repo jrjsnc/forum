@@ -10,4 +10,5 @@ public interface TagService {
 	public List<Tag> getAllTags();
 	public  Tag getTag(Long ident);
 	public void deleteTag(Tag tag);
+	public void updateTag(Long ident, String name);
 }
