@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package forum.services.impl;
 
 import java.util.List;
@@ -12,23 +18,37 @@ import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.CommentService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CommentServiceJPA.
+ */
 @Transactional
 public class CommentServiceJPA implements CommentService {
 
+	/** The entity manager. */
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/* (non-Javadoc)
+	 * @see forum.services.CommentService#addComment(forum.entity.Comment)
+	 */
 	@Override
 	public void addComment(Comment comment) {
 		entityManager.persist(comment);
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.CommentService#getComments(java.lang.String)
+	 */
 	@Override
 	public List<Comment> getComments(String topic) {
 		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.topic= :topic ORDER BY c.createdOn")
 				.setParameter("topic", topic).getResultList();
 	}
 	
+	/* (non-Javadoc)
+	 * @see forum.services.CommentService#getComment(java.lang.Long)
+	 */
 	@Override
 	public Comment getComment(Long ident) {
 		try {
@@ -44,6 +64,9 @@ public class CommentServiceJPA implements CommentService {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.CommentService#deleteComment(forum.entity.Comment)
+	 */
 	@Override
 	public void deleteComment(Comment comment) {
 		entityManager.createQuery("DELETE FROM Comment c WHERE c.ident= :ident")
@@ -51,6 +74,9 @@ public class CommentServiceJPA implements CommentService {
 
 	}	
 	
+	/* (non-Javadoc)
+	 * @see forum.services.CommentService#updateComment(java.lang.Long, java.lang.String)
+	 */
 	@Override
 	public void updateComment(Long ident, String content) {
 		Comment comment = entityManager.find(Comment.class, ident);

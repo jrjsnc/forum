@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package server.controller;
 
 import java.util.Date;
@@ -22,18 +28,30 @@ import forum.entity.Topic;
 import forum.services.CommentService;
 import forum.services.UserService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ForumController.
+ */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class ForumController {
 
+	/** The user controller. */
 	@Autowired
 	private UserController userController;
 
+	/** The comment service. */
 	@Autowired
 	private CommentService commentService;
 
+	/** The current topic ident. */
 	private Long currentTopicIdent;
 
+	/**
+	 * Fill model.
+	 *
+	 * @param model the model
+	 */
 	private void fillModel(Model model) {
 		model.addAttribute("controller", this);
 
@@ -57,6 +75,13 @@ public class ForumController {
 		}
 	}
 
+	/**
+	 * Adds the tag.
+	 *
+	 * @param tag the tag
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
 		model.addAttribute("message", "");
@@ -71,6 +96,13 @@ public class ForumController {
 		return "admin";
 	}
 	
+	/**
+	 * Update tag.
+	 *
+	 * @param tag the tag
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/updateTag")
 	public String updateTag(Tag tag, Model model) {
 		userController.tagService.updateTag(tag.getIdent(), tag.getName());
@@ -79,6 +111,13 @@ public class ForumController {
 		return "admin";
 	}
 
+	/**
+	 * Adds the topic tag.
+	 *
+	 * @param tag the tag
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/addTopicTag")
 	public String addTopicTag(Tag tag, Model model) {
 		userController.topicService.getTopic(currentTopicIdent)
@@ -87,6 +126,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Removes the topic tag.
+	 *
+	 * @param tag the tag
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/removeTopicTag")
 	public String removeTopicTag(Tag tag, Model model) {
 		userController.topicService.getTopic(currentTopicIdent)
@@ -95,6 +141,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Toggle like.
+	 *
+	 * @param ident the ident
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/toggleLike")
 	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		Comment c = commentService.getComment(Long.parseLong(ident));
@@ -103,6 +156,12 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Have I liked.
+	 *
+	 * @param ident the ident
+	 * @return true, if successful
+	 */
 	public boolean haveILiked(Long ident) {
 		if (userController.userService.getLikedComments(userController.getLoggedUser().getIdent())
 				.contains(commentService.getComment(ident)))
@@ -111,6 +170,13 @@ public class ForumController {
 			return false;
 	}
 
+	/**
+	 * Gets the topic.
+	 *
+	 * @param ident the ident
+	 * @param model the model
+	 * @return the topic
+	 */
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		setCurrentTopicIdent(Long.parseLong(ident));
@@ -118,6 +184,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Adds the topic.
+	 *
+	 * @param topic the topic
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/addTopic")
 	public String addTopic(Topic topic, Model model) {
 		topic.setForumUser(userController.getLoggedUser());
@@ -129,6 +202,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Adds the comment.
+	 *
+	 * @param comment the comment
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/addComment")
 	public String addComment(Comment comment, Model model) {
 
@@ -142,6 +222,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Delete comment.
+	 *
+	 * @param ident the ident
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/deleteComment")
 	public String deleteComment(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
@@ -149,6 +236,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Update comment.
+	 *
+	 * @param comment the comment
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/updateComment")
 	public String updateComment(Comment comment, Model model) {
 		commentService.updateComment(comment.getIdent(), comment.getContent());
@@ -156,6 +250,13 @@ public class ForumController {
 		return "topic";
 	}
 
+	/**
+	 * Toggle admin.
+	 *
+	 * @param ident the ident
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/toggleAdmin")
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
 
@@ -176,6 +277,13 @@ public class ForumController {
 		return "admin";
 	}
 
+	/**
+	 * Toggle ban.
+	 *
+	 * @param ident the ident
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
 		if (userController.userService.getUser(Long.parseLong(ident)).getRestriction() != Restriction.BANNED) {
@@ -189,6 +297,12 @@ public class ForumController {
 		return "admin";
 	}
 
+	/**
+	 * Admin.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		if (!userController.isLogged() || userController.getLoggedUser().getRestriction() != Restriction.ADMIN)
@@ -197,6 +311,12 @@ public class ForumController {
 		return "admin";
 	}
 
+	/**
+	 * Mail restriction.
+	 *
+	 * @param email the email
+	 * @param restriction the restriction
+	 */
 	private void mailRestriction(String email, Restriction restriction) {
 		String subject = "MovieForum restriction";
 		StringBuilder sb = new StringBuilder();
@@ -208,6 +328,11 @@ public class ForumController {
 		userController.sendMailInThread(email, subject, sb.toString());		
 	}
 
+	/**
+	 * Sets the current topic ident.
+	 *
+	 * @param ident the new current topic ident
+	 */
 	public void setCurrentTopicIdent(Long ident) {
 		currentTopicIdent = ident;
 	}

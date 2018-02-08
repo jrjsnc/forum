@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package server.controller;
 
 import java.awt.image.BufferedImage;
@@ -33,27 +39,46 @@ import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.MailService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserController.
+ */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
 
+	/** The date format. */
 	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	
+	/** The date. */
 	Date date = new Date();
 
+	/** The user service. */
 	@Autowired
 	protected UserService userService;
 
+	/** The topic service. */
 	@Autowired
 	protected TopicService topicService;
 
+	/** The tag service. */
 	@Autowired
 	protected TagService tagService;
 
+	/** The mail service. */
 	@Autowired
 	protected MailService mailService;
 
+	/** The logged user. */
 	private ForumUser loggedUser;
 	
+	/**
+	 * Send mail in thread.
+	 *
+	 * @param to the to
+	 * @param subject the subject
+	 * @param messageText the message text
+	 */
 	protected void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
 		emailExecutor.execute(new Runnable() {
@@ -65,6 +90,13 @@ public class UserController {
 		emailExecutor.shutdown();
 	}
 
+	/**
+	 * Mail login.
+	 *
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/mailLogin")
 	public String mailLogin(ForumUser user, Model model) {
 		model.addAttribute("message", "");		
@@ -90,6 +122,12 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/")
 	public String index(Model model) {
 		List<Topic> topics = topicService.getTopics();
@@ -103,6 +141,13 @@ public class UserController {
 		return "index";
 	}
 
+	/**
+	 * Filter topics.
+	 *
+	 * @param tag the tag
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
 		if (tag.getIdent() == -1) {
@@ -120,11 +165,24 @@ public class UserController {
 		return "index";
 	}
 
+	/**
+	 * User.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/user")
 	public String user(Model model) {
 		return "login";
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
@@ -146,6 +204,13 @@ public class UserController {
 
 	
 	
+	/**
+	 * Update profile.
+	 *
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/userProfile")
 	public String updateProfile(ForumUser user,Model model) {
 
@@ -156,6 +221,14 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * Update user.
+	 *
+	 * @param file the file
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/updateUser")
 	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user,Model model) {
 				
@@ -173,6 +246,14 @@ public class UserController {
 		return "index";
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @param file the file
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/register")
 	public String register(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
 		user.setRestriction(Restriction.BASIC);
@@ -213,6 +294,12 @@ public class UserController {
 		return "index";
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedUser = null;
@@ -222,14 +309,30 @@ public class UserController {
 		return "index";
 	}
 
+	/**
+	 * Gets the logged user.
+	 *
+	 * @return the logged user
+	 */
 	public ForumUser getLoggedUser() {
 		return loggedUser;
 	}
 
+	/**
+	 * Checks if is logged.
+	 *
+	 * @return true, if is logged
+	 */
 	public boolean isLogged() {
 		return loggedUser != null;
 	}
 
+	/**
+	 * Decode to image.
+	 *
+	 * @param login the login
+	 * @return the string
+	 */
 	public String decodeToImage(String login) {
 		String finalImage = "";
 		BufferedImage image;
