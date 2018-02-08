@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package server;
 
 import org.springframework.boot.SpringApplication;
@@ -16,35 +22,70 @@ import forum.services.impl.TopicServiceJPA;
 import forum.services.impl.UserServiceJPA;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ForumServer.
+ */
 @SpringBootApplication
 //@EnableWs
 @EntityScan({"forum.entity"})
 
 public class ForumServer {	
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 	      SpringApplication.run(ForumServer.class, args);
 	  }
 	
+	/**
+	 * Comment service.
+	 *
+	 * @return the comment service
+	 */
 	@Bean
 	public CommentService commentService() {
 		return new CommentServiceJPA();
 	}
 	
+	/**
+	 * Topic service.
+	 *
+	 * @return the topic service
+	 */
 	@Bean
 	public TopicService topicService() {
 		return new TopicServiceJPA();
 	}
 	
+	/**
+	 * User service.
+	 *
+	 * @return the user service
+	 */
 	@Bean
 	public UserService userService() {
 		return new UserServiceJPA();
 	}
 	
+	/**
+	 * Tag service.
+	 *
+	 * @return the tag service
+	 */
 	@Bean
 	public TagService tagService() {
 		return new TagServiceJPA();
 	}
 	
+	/**
+	 * Mail service.
+	 *
+	 * @return the mail service
+	 */
 	@Bean
 	public MailService mailService() {
 		return new MailService();

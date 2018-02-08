@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package forum.services.impl;
 
 import javax.mail.*;
@@ -5,9 +11,20 @@ import javax.mail.internet.*;
 import javax.transaction.Transactional;
 import java.util.Properties;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MailService.
+ */
 @Transactional
 public class MailService {
 
+	/**
+	 * Send mail.
+	 *
+	 * @param to the to
+	 * @param subject the subject
+	 * @param messageText the message text
+	 */
 	public void sendMail(String to, String subject, String messageText) {
 
 		String host = "smtp.zoznam.sk";

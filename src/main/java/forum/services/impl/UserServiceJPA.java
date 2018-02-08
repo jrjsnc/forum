@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package forum.services.impl;
 
 import java.io.IOException;
@@ -19,17 +25,28 @@ import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.UserService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserServiceJPA.
+ */
 @Transactional
 public class UserServiceJPA implements UserService {
 
+	/** The entity manager. */
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#register(forum.entity.ForumUser)
+	 */
 	@Override
 	public void register(ForumUser user) throws DataIntegrityViolationException {
 		entityManager.persist(user);
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#login(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public ForumUser login(String login, String password) {
 		try {
@@ -41,6 +58,9 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#nameTaken(java.lang.String)
+	 */
 	@Override
 	public boolean nameTaken(String login) {
 		try {
@@ -52,16 +72,25 @@ public class UserServiceJPA implements UserService {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#getUsers()
+	 */
 	@Override
 	public List<ForumUser> getUsers() {
 		return entityManager.createQuery("SELECT u FROM ForumUser u").getResultList();
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#getUser(java.lang.Long)
+	 */
 	@Override
 	public ForumUser getUser(Long ident) {
 		return entityManager.find(ForumUser.class, ident);
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#getUserByEmail(java.lang.String)
+	 */
 	@Override
 	public ForumUser getUserByEmail(String email) {
 		ForumUser fu = new ForumUser();
@@ -74,12 +103,18 @@ public class UserServiceJPA implements UserService {
 		return fu;
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#setRestriction(java.lang.Long, forum.entity.Restriction)
+	 */
 	@Override
 	public void setRestriction(Long ident, Restriction restriction) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 		user.setRestriction(restriction);
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#toggleLike(java.lang.Long, forum.entity.Comment)
+	 */
 	@Override
 	public void toggleLike(Long ident, Comment comment) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
@@ -90,12 +125,18 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#getLikedComments(java.lang.Long)
+	 */
 	@Override
 	public Set<Comment> getLikedComments(Long ident) {
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 		return user.getLikedComments();
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#getImage(java.lang.String)
+	 */
 	@Override
 	public byte[] getImage(String login) {
 		try {
@@ -106,6 +147,9 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#deleteUser(forum.entity.ForumUser)
+	 */
 	@Override
 	public void deleteUser(ForumUser user) {
 		entityManager.createQuery("DELETE FROM Forum_user f WHERE f.ident= :ident")
@@ -114,6 +158,9 @@ public class UserServiceJPA implements UserService {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see forum.services.UserService#updateUser(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, org.springframework.web.multipart.MultipartFile)
+	 */
 	@Override
 	public void updateUser(Long ident, String login, String email, String password, MultipartFile userImage) {
 		System.err.println(ident);
