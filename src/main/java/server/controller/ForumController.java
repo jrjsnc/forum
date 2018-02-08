@@ -64,10 +64,18 @@ public class ForumController {
 			tag.setName(tag.getName().toLowerCase());
 			userController.tagService.addTag(tag);
 		} catch (DataIntegrityViolationException e) {
-			model.addAttribute("message", "Cannot add the same tag twice");			
+			model.addAttribute("message", "Cannot add the same tag twice.");			
 		}		
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		fillModel(model);
+		return "admin";
+	}
+	
+	@RequestMapping("/updateTag")
+	public String updateTag(Tag tag, Model model) {
+		userController.tagService.updateTag(tag.getIdent(), tag.getName());
+		model.addAttribute("tags", userController.tagService.getAllTags());
+		fillModel(model);		
 		return "admin";
 	}
 
