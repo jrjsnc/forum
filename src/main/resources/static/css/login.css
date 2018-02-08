@@ -12,7 +12,7 @@ body {
 	padding: 1em;	
 }
 
-.container, .container2, .container3 {
+.container, .container2, .container3, .containerProfile {
 	max-width: 700px;
 	margin-left:auto;
 	margin-right:auto;
@@ -269,41 +269,51 @@ opacity: 1;
 	
 }
 
-.login {
+.login, .profile {
 	background-color: #ffe1a8;
 
 }
 
-.login h4, .login form{
+.login h4, .login form, .profile div{
 	text-align: center;
 	margin: 0 0 1rem 0;
 	
 }
 
-.login form {
+.login form, .profile div {
 	display: grid;
 	grid-template-columns: 1fr  ;	
 	grid-gap:20px;
 
 }
 
-.register {
+.register, .updateForm {
 	background-color: #ffffff;
 
 }
-.register h4, .register form{
+.register h4, .register form, .updateForm form{
 	text-align: center;
 	margin: 0 0 1rem 0;
 	
 }
 
-.register form {
+.register form, .updateForm form {
 	display: grid;
-	grid-template-columns: 1fr  ;	
+	grid-template-columns: 1fr ;	
 	grid-gap:20px;
 
 }
 
+.profile span {
+	color: black;
+}
+
+.updateForm form {
+	display: grid;
+	grid-template-columns: 2fr 1fr ;	
+	grid-gap:20px;
+
+}
 .comments{
 	display: grid;
 	grid-template-columns: 1fr 2fr ;	
@@ -322,14 +332,14 @@ opacity: 1;
 	
 }
 
-.login form button, .register form button, .login form input, .register form input {
+.login form button, .register form button, .login form input, .register form input, .updateForm form input, .updateForm form button {
 	
 	width: 100%;
 	padding: 0.5em;
 	
 }
 
-.container2 button, .container3 button{
+.container2 button, .container3 button, .containerProfile button{
 	
 	align: center;
 	border: none;
@@ -396,7 +406,7 @@ background:#c9cba3 ;
 	outline: 0;
 	transition: background-color 1s ease-out ;
 }
-.login  button, .register button {
+.login  button, .register button, .updateForm button, .profile button {
 	
 	align: center;
 	border: none;
@@ -406,12 +416,16 @@ background:#c9cba3 ;
 	color:#c9cba3 ;
 }
 
-.login  button:hover, .login button:focus, .register  button:focus, .register button:hover {
+.login  button:hover, .login button:focus, .register  button:focus, .register button:hover, .updateForm button:hover, .updateForm button:focus, .profile button:hover, .profile button:focus {
 	
 	background:#c9cba3 ;
 	color:#6e6f59 ;
 	outline: 0;
 	transition: background-color 1s ease-out ;
+}
+
+.photo img {
+	text-align:right;
 }
 
 .full {
@@ -440,13 +454,13 @@ background:#c9cba3 ;
 	grid-template-columns: 1fr 1fr 1fr;
 	
 	}
-	.login form {
+	.login form, .profile div {
 	display: grid;
 	grid-template-columns: 1fr  ;
 	
 	}
 	
-	.register form {
+	.register form, .updateForm form{
 	display: grid;
 	grid-template-columns: 1fr 1fr ;
 	
