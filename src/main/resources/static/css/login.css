@@ -12,13 +12,12 @@ body {
 	padding: 1em;	
 }
 
-.container, .container2, .container3, .containerProfile {
+.container, .container2, .container3, .containerProfile, .container4 {
 	max-width: 700px;
 	margin-left:auto;
 	margin-right:auto;
 	padding: 1em;	
 }
-
 
 .scroll{
     overflow: scroll;
@@ -216,7 +215,30 @@ opacity: 1;
 	font-size: 15px;
 	text-align: right;
 }
+.lionel {
+	box-shadow: 0 0 20px 0 #6e6f59;
+	text-align: center;
+	align:center;
+	}
 
+.lionel img {
+	margin:auto;
+}
+	
+.lionel h4{
+	font-size:50px;
+	margin:0;
+	padding:0.5em;
+}
+
+.lionel div{
+	font-size:25px;
+}
+	
+.lionel > *{
+	padding:0.5em;	
+}
+}
 .wrapper{
 	box-shadow: 0 0 20px 0 #6e6f59;
 	
@@ -225,7 +247,6 @@ opacity: 1;
 .wrapper > *{
 	padding:1em;	
 }
-
 
 .wrapper2 > *{
 	padding:0.3em;	
@@ -237,7 +258,7 @@ opacity: 1;
 	text-align: center;
 	align: center;
 }
-	.wrapper2 .comments:nth-child(2n), .topics:nth-child(2n) {
+.wrapper2 .comments:nth-child(2n), .topics:nth-child(2n) {
 	background: #ffffff;
 	border-style: solid;
     border-width: 1px 0px 1px 0px;
@@ -339,7 +360,7 @@ opacity: 1;
 	
 }
 
-.container2 button, .container3 button, .containerProfile button{
+.container form button,.container2 button, .container3 button, .containerProfile button, .404admin button{
 	
 	align: center;
 	border: none;
@@ -390,7 +411,25 @@ opacity: 1;
 	
 	
 }
+.lionel button {
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	
+}
 
+.lionel button:hover, .lionel button:focus{
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+	
+}
 .container3 button:focus, .container3 button:hover {
 	
 	background:#c9cba3 ;
@@ -444,6 +483,11 @@ background:#c9cba3 ;
 	
 	}
 	
+	.lionel {
+	display: grid;
+	grid-template-columns: 1fr;
+	
+	}
 	.comments {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
