@@ -8,9 +8,7 @@ package server.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,7 +24,7 @@ import forum.entity.Restriction;
 import forum.entity.Tag;
 import forum.entity.Topic;
 import forum.services.CommentService;
-import forum.services.UserService;
+
 
 // TODO: Auto-generated Javadoc
 /**
