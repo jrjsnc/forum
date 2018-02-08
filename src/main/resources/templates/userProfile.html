@@ -6,37 +6,69 @@
 <title>userProfile</title>
 </head>
 <body>
-<div class="container">
+<div class="containerProfile">
+
+ <span th:replace="fragments::header"></span>
  
+ 
+ <div class="wrapper">
 <div class="profile">
 
-<div th:text='${userController.getLoggedUser().getLogin()}'/>			
-<div th:text='${userController.getLoggedUser().getEmail()}'/>
-<div >
+<div>
+Username : 
+<span th:text='${userController.getLoggedUser().getLogin()}'/>
+</div>	
+<br/>
+<div>
+E-mail :
+<span th:text='${userController.getLoggedUser().getEmail()}'/>
+</div>
+<br/>
+<div class="photo">
+Profile photo : 
+<br/>
 <img width="100" height="100" th:src="*{userController.decodeToImage(userController.getLoggedUser().getLogin())}"
 											onerror="this.src='image/default.jpg';" />
 </div>
-<button class="updateButton" th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update User </button>
+<br/>
+<button class="updateButton" th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update Profile </button>
+
+</div>
 
 
-<div style="display: none;"  th:id="${userController.getLoggedUser().getIdent()}">
 
-<form action="/updateUser" method="post" name="formUpdateUser" enctype="multipart/form-data">
+<div class="updateForm" style="display: none;"  th:id="${userController.getLoggedUser().getIdent()}">
+
+<form action="/updateUser" method="post" name="loginForm" onsubmit="return validateEmail() ;" enctype="multipart/form-data">
 
 <input type="hidden" th:value='${userController.getLoggedUser().getIdent()}' name="ident" />
-
+<div>
+New Username : 
 <input type="text" th:value="${@userController.loggedUser?.login}"  name="login" placeholder="update login" />
-
+</div>
+<br/>
+<div>
+New E-mail : 
 <input type="text"  th:value="${@userController.loggedUser?.email}" name="email" placeholder="update email" />
-
+</div>
+<br/>
+<div>
+New Password : 
 <input type="password"  th:value="${@userController.loggedUser?.password}" name="password" placeholder="update password" />
-
-
-
+</div>
+<br/>
+<div>
+Reenter Password : 
+<input type="password"  name="confirm_password" placeholder="reenter password" required="required" />
+</div>
+<br/>
+<div>
+New Profile Picture : 
 <input type="file" name="file"
-							accept="image/*" />
+							accept="image/*" required="required" />
 					
-
+</div>
+<br/>
 <button type="submit" value="Post"> Update </button>
 
 </form>
@@ -45,6 +77,7 @@
 
 
 </div>
+<span th:replace="fragments::footer"></span>
 </div>
 
 </body>
