@@ -12,76 +12,99 @@
 		<hr />
 		<br />
 
-	
-			<div class="wrapper3">
-			<div class="scroll"> 
-<div class="users1">
-				<table class="users">
-					<th>Users</th>
-					<th>Toggle admin</th>
-					<th>Toggle ban</th>
-					
-					<tr th:each="forumUser : ${users}" th:if='${@userController.getLoggedUser() != forumUser}'>
-						
-						<td>							
-								<div class="usercolor" th:text='${forumUser.login}'></div>															
-						</td>
 
-						<td>							
-								<a class="aclass"
-									th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> 
-									<span th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
-										Set as admin</span> 
-									<span th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
+		<div class="wrapper3">
+			<div class="scroll">
+				<div class="users1">
+					<table class="users">
+						<th>Users</th>
+						<th>Toggle admin</th>
+						<th>Toggle ban</th>
+
+						<tr th:each="forumUser : ${users}"
+							th:if='${@userController.getLoggedUser() != forumUser}'>
+
+							<td>
+								<div class="usercolor" th:text='${forumUser.login}'></div>
+							</td>
+
+							<td><a class="aclass"
+								th:href='${"/toggleAdmin?ident=" + forumUser.ident}'> <span
+									th:if='${#strings.toString(forumUser.restriction) == "BASIC"}'>
+										Set as admin</span> <span
+									th:if='${#strings.toString(forumUser.restriction) == "ADMIN"}'>
 										Set as basic</span>
-								</a>							
-						</td>
-						
-						<td>							
-								<a class="aclass"
-									th:href='${"/toggleBan?ident=" + forumUser.ident}'> 
-									<span th:if='${#strings.toString(forumUser.restriction) == "BASIC" or #strings.toString(forumUser.restriction) == "ADMIN"}'>
-										Ban user</span> 
-									<span th:if='${#strings.toString(forumUser.restriction) == "BANNED"}'>
+							</a></td>
+
+							<td><a class="aclass"
+								th:href='${"/toggleBan?ident=" + forumUser.ident}'> <span
+									th:if='${#strings.toString(forumUser.restriction) == "BASIC" or #strings.toString(forumUser.restriction) == "ADMIN"}'>
+										Ban user</span> <span
+									th:if='${#strings.toString(forumUser.restriction) == "BANNED"}'>
 										Unban user</span>
-								</a>							
-						</td>
-						
-					</tr>
-				</table>
-					</div> 
-</div>
-				
-				<div class="scroll2">
+							</a></td>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="scroll2">
 				<div class="tags">
 
 					<h3>Tags</h3>
 					<div class="forum_tags" th:each="tag : ${tags}">
 
-						<span th:text='${tag.getName()}' />
+						<div><span th:text='${tag.getName()}' />
+</div>
+<div>
+							<button class="updateButton"
+								th:onclick="'showUpdateTag(\''+${tag.getIdent()}+'\');'"
+								value="updateTag">Update Tag</button>
+	</div>							
+								
+					<br/>
+						<div style="display: none" class="updateTagForm"
+							th:id="${tag.getIdent()}">
+							<br/>
+							<form th:action='${"/updateTag"}' method="post"
+								id="forumUpdateTag">
+								
+								<input type="hidden" th:value='${tag.getIdent()}' name="ident" />
+								
+								<textarea name="name" cols="20" rows="3" required="required" />
+
+					
+								<button type="submit" value="Post">Update Tag "<span th:text='${tag.getName()}'></span>"</button>
+							</form>
+						</div>
 
 					</div>
-
 				</div>
-			</div> 
+			</div>
 
 
-</div>
-		
+		</div>
+
 		<br />
 
 
 		<form class="tag_action" action="/addTag" method="post">
 			Add Tag: <input type="text" name="name"
-				placeholder="Add new tag here" required="required" /> <input
-				type="submit" value="Post" />
+				placeholder="Add new tag here" required="required" /> <button
+				type="submit" value="Post" >Post</button>
 		</form>
-		
-		<span th:text='${message}'/>
-		
+
+
+
+
+		<span th:text='${message}' />
+
 		<hr />
 		<span th:replace="fragments::footer"></span>
 
 	</div>
 </body>
+
+<script src="js/forum.js" />
 </html>

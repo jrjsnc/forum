@@ -47,6 +47,16 @@ function showUpdateComment(elementId) {
         x.style.display = "none";
     }
 }
+function showUpdateTag(elementId) {
+	
+    var x = document.getElementById(elementId);
+    console.log(x.style.display);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
 function showUpdateUser(elementId) {
 	

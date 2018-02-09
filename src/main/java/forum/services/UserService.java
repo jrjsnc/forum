@@ -23,50 +23,56 @@ import forum.entity.Restriction;
  * The Interface UserService.
  */
 public interface UserService {
-	
+
 	/**
 	 * Register.
 	 *
-	 * @param user the user
+	 * @param user
+	 *            the user
 	 */
-	void register(ForumUser user);	
-	
+	void register(ForumUser user);
+
 	/**
 	 * Login.
 	 *
-	 * @param login the login
-	 * @param password the password
+	 * @param login
+	 *            the login
+	 * @param password
+	 *            the password
 	 * @return the forum user
 	 */
-	ForumUser login(String login, String password);	
-	
+	ForumUser login(String login, String password);
+
 	/**
 	 * Gets the users.
 	 *
 	 * @return the users
 	 */
 	List<ForumUser> getUsers();
-	
+
 	/**
 	 * Name taken.
 	 *
-	 * @param login the login
+	 * @param login
+	 *            the login
 	 * @return true, if successful
 	 */
 	boolean nameTaken(String login);
-	
+
 	/**
 	 * Gets the user.
 	 *
-	 * @param ident the ident
+	 * @param ident
+	 *            the ident
 	 * @return the user
 	 */
 	ForumUser getUser(Long ident);
-	
+
 	/**
 	 * Gets the user by email.
 	 *
-	 * @param email the email
+	 * @param email
+	 *            the email
 	 * @return the user by email
 	 */
 	ForumUser getUserByEmail(String email);
@@ -74,57 +80,64 @@ public interface UserService {
 	/**
 	 * Sets the restriction.
 	 *
-	 * @param ident the ident
-	 * @param restriction the restriction
+	 * @param ident
+	 *            the ident
+	 * @param restriction
+	 *            the restriction
 	 */
 	void setRestriction(Long ident, Restriction restriction);
 
 	/**
 	 * Gets the image.
 	 *
-	 * @param login the login
+	 * @param login
+	 *            the login
 	 * @return the image
 	 */
 	byte[] getImage(String login);
-	
-	
-	
+
 	/**
 	 * Delete user.
 	 *
-	 * @param user the user
+	 * @param user
+	 *            the user
 	 */
 	@Transactional
 	@Modifying
 	void deleteUser(ForumUser user);
-	
+
 	/**
 	 * Update user.
 	 *
-	 * @param ident the ident
-	 * @param login the login
-	 * @param email the email
-	 * @param password the password
-	 * @param userImage the user image
+	 * @param ident
+	 *            the ident
+	 * @param login
+	 *            the login
+	 * @param email
+	 *            the email
+	 * @param password
+	 *            the password
+	 * @param userImage
+	 *            the user image
 	 */
 	void updateUser(Long ident, String login, String email, String password, MultipartFile userImage);
 
-
-	
 	/**
 	 * Toggle like.
 	 *
-	 * @param ident the ident
-	 * @param comment the comment
+	 * @param ident
+	 *            the ident
+	 * @param comment
+	 *            the comment
 	 */
 	void toggleLike(Long ident, Comment comment);
-	
+
 	/**
 	 * Gets the liked comments.
 	 *
-	 * @param ident the ident
+	 * @param ident
+	 *            the ident
 	 * @return the liked comments
 	 */
 	Set<Comment> getLikedComments(Long ident);
-
-	}
+}

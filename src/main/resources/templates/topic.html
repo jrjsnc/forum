@@ -7,150 +7,146 @@
 </head>
 <body>
 	<div class="container2">
-		
-			<span th:replace="fragments::header"></span>	
-		
-			<div class="title">
-				<span>" </span>
-					<span th:text="${currentTopicTitle}"/>
-				<span> "</span>
-			</div>			
-		<br/>
-		
-		
-<div class="scroll">
-		<div class="wrapper2">
-		
-<div class="comments" th:each="comment : ${comments}">
-				<div class="picture">
-		<img class="image" width="90" height="90"
-											th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
-											onerror="this.src='image/default.jpg';" />
-											
-											<div class="username" th:text='${comment.getForumUser().getLogin()}' />
-											</div>
-					
-<div class="info">
-					
-					
-<div class="date" th:text="${#dates.format(comment.createdOn, 'dd-MMM-yyyy')}" />
+
+		<span th:replace="fragments::header"></span>
+
+		<div class="title">
+			<span>" </span> <span th:text="${currentTopicTitle}" /> <span>
+				"</span>
+		</div>
+		<br />
 
 
-<div  class="content" th:text='${comment.content}' /> 
-<span th:if='${@userController.Logged}' >
-<span th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>			
-		
-		<button class="updateButton" th:onclick="'showUpdateComment(\''+${comment.getIdent()}+'\');'" value="updateComment">Update comment</button>
-		
-		
-</span>
-</span>
-<p></p>
+		<div class="scroll">
+			<div class="wrapper2">
+
+				<div class="comments" th:each="comment : ${comments}">
+					<div class="picture">
+						<img class="image" width="90" height="90"
+							th:src="*{@userController.decodeToImage(comment.getForumUser().getLogin())}"
+							onerror="this.src='image/default.jpg';" />
+
+						<div class="username"
+							th:text='${comment.getForumUser().getLogin()}' />
+					</div>
+
+					<div class="info">
 
 
-<div style="display:none" class="updateCommentForm" th:id="${comment.getIdent()}" >
- <form th:action='${"/updateComment"}' method="post" id="forumUpdateComment"> 
- <input type="hidden" th:value='${comment.getIdent()}' name="ident" />  
- <textarea name = "content" cols="40"
- rows="5" required="required"/>
- 
- <br/>
-  
- <button type="submit"
- value="Post"> Update </button>
-  </form>
-  </div>
-  
+						<div class="date"
+							th:text="${#dates.format(comment.createdOn, 'dd-MMM-yyyy')}" />
 
-<br/><br/>
-<span>Likes: </span>
 
-<span th:text='${comment.getLikers().size()}'/>
-			<p></p>	 
- <span  th:if='${@userController.Logged}'>
- <form class="like" th:action="@{/toggleLike?ident=} + ${{comment.ident}}" method="post" >
-  <span th:if='${controller.haveILiked(comment.ident) == false}'>
- <input type="submit" value="Like" method="Post"></input>
-  </span>
-  
-  
-  <span th:if='${controller.haveILiked(comment.ident) == true}'>
-  <input type="submit" value="Unlike" method="Post" ></input>
-  </span>	
-  
-  	</form>			    
-</span>
-	</div>
+						<div class="content" th:text='${comment.content}' />
+						<span th:if='${@userController.Logged}'> <span
+							th:if='${@userController.getLoggedUser().equals(comment.getForumUser())}'>
 
-</div>
+								<button class="updateButton"
+									th:onclick="'showUpdateComment(\''+${comment.getIdent()}+'\');'"
+									value="updateComment">Update comment</button>
+
+
+						</span>
+						</span>
+						<p></p>
+
+
+						<div style="display: none" class="updateCommentForm"
+							th:id="${comment.getIdent()}">
+							<form th:action='${"/updateComment"}' method="post"
+								id="forumUpdateComment">
+								<input type="hidden" th:value='${comment.getIdent()}'
+									name="ident" />
+								<textarea name="content" cols="40" rows="5" required="required" />
+
+								<br />
+
+								<button type="submit" value="Post">Update</button>
+							</form>
+						</div>
+
+
+						<br />
+						<br /> <span>Likes: </span> <span
+							th:text='${comment.getLikers().size()}' />
+						<p></p>
+						<span th:if='${@userController.Logged}'>
+							<form class="like"
+								th:action="@{/toggleLike?ident=} + ${{comment.ident}}"
+								method="post">
+								<span th:if='${controller.haveILiked(comment.ident) == false}'>
+									<input type="submit" value="Like" method="Post"></input>
+								</span> <span th:if='${controller.haveILiked(comment.ident) == true}'>
+									<input type="submit" value="Unlike" method="Post"></input>
+								</span>
+
+							</form>
+						</span>
+					</div>
+
 				</div>
-				</div>
-		
-				<br/>
-<div class="form">
-				<span th:if='${@userController.Logged}'>
+			</div>
+		</div>
 
-					<form action="/addComment" method="post" id="formAddComment">
+		<br />
+		<div class="form">
+			<span th:if='${@userController.Logged}'>
 
- 						Add Comment: 
- 						
- 						<div>
-<textarea class="input" cols="40" 
-       rows="5"  name="content" form="formAddComment" id="textarea" maxlength="255"
-							placeholder="Add comment here" required="required"/></div> 
-							<div><button type="submit"
-							value="Post" > Post</button></div>
-					</form>					
-				</span>				
-</div>
-		
-		
-		
+				<form action="/addComment" method="post" id="formAddComment">
+
+					Add Comment:
+
+					<div>
+						<textarea class="input" cols="40" rows="5" name="content"
+							form="formAddComment" id="textarea" maxlength="255"
+							placeholder="Add comment here" required="required" />
+					</div>
+					<div>
+						<button type="submit" value="Post">Post</button>
+					</div>
+				</form>
+			</span>
+		</div>
+
+
+
 		<div class="tags">
-		<hr/>
-		Tags
-		<br/>
-		<span th:each="tag : ${topicTags}">
-		
-		<span>( </span>
-							<span class="tagsColor" th:text="${tag.getName()}" >
-							</span>
-							<span> )</span>
-							
-		</span>
-		<hr/>	
-			</div>			 
+			<hr />
+			Tags <br /> <span th:each="tag : ${topicTags}"> <span>(
+			</span> <span class="tagsColor" th:text="${tag.getName()}"> </span> <span>
+					)</span>
+
+			</span>
+			<hr />
+		</div>
 
 		<span th:if='${@userController.Logged}'> <span
 			th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
-<div class="removeAddTags">
-<span class="addTags">
-				<form th:action='${"/addTopicTag"}'>	
-					<select th:name= "ident">
-						<option th:each="tag : ${missingTags}" th:value="${tag.ident}"
-							th:text="${tag.getName()}" />
-					</select>					
-					<button type="submit" value="addTag">Add new tag</button>
-				</form> 
-</span>	
-<br/>
-<span class="removeTags">
-					<form th:action='${"/removeTopicTag"}'>	
-					<select th:name= "ident">
-						<option th:each="tag : ${topicTags}" th:value="${tag.ident}"
-							th:text="${tag.getName()}" />
-					</select>					
-					<button type="submit" value="removeTag">Remove tag</button>
-				</form> 
-</span>
-</div>
+				<div class="removeAddTags">
+					<span class="addTags">
+						<form th:action='${"/addTopicTag"}'>
+							<select th:name="ident">
+								<option th:each="tag : ${missingTags}" th:value="${tag.ident}"
+									th:text="${tag.getName()}" />
+							</select>
+							<button type="submit" value="addTag">Add new tag</button>
+						</form>
+					</span> <br /> <span class="removeTags">
+						<form th:action='${"/removeTopicTag"}'>
+							<select th:name="ident">
+								<option th:each="tag : ${topicTags}" th:value="${tag.ident}"
+									th:text="${tag.getName()}" />
+							</select>
+							<button type="submit" value="removeTag">Remove tag</button>
+						</form>
+					</span>
+				</div>
 		</span>
-		</span>
-		<span th:replace="fragments::footer"></span>
-</div>
+		</span> <span th:replace="fragments::footer"></span>
+	</div>
 
 
 </body>
 
-<script src="js/forum.js"/>
+<script src="js/forum.js" />
 </html>
