@@ -236,6 +236,7 @@ public class UserController {
 		System.err.println(user.getLogin());
 		System.err.println(user.getPassword());
 		
+		
 		if (!userService.nameTaken(user.getLogin())) {
 			user.setRestriction(Restriction.BASIC);
 			
@@ -339,7 +340,8 @@ public class UserController {
 
 		try {
 			byte[] imageInByteArray = userService.getImage(login);
-			if (imageInByteArray != null) {
+	
+			
 				ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
 				image = ImageIO.read(bis);
 				bis.close();
@@ -349,14 +351,15 @@ public class UserController {
 				imageInByteArray = baos.toByteArray();
 				baos.close();
 				finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
-			} else {
-				return "";
-			}
+				
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (IllegalArgumentException r) {
+			r.printStackTrace();
 		} catch (NullPointerException f) {
 			f.printStackTrace();
-		}
+		} 
 
 		return "data:image/png;base64," + finalImage;
 	}
