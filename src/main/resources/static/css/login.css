@@ -439,6 +439,18 @@ opacity: 1;
 	
 }
 
+.container3 button{
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	
+}
+
+
 .container2 button:hover, .container2 button:focus {
 background:#c9cba3 ;
 	color:#6e6f59 ;

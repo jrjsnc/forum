@@ -31,7 +31,7 @@ Profile photo :
 											onerror="this.src='image/default.jpg';" />
 </div>
 <br/>
-<button class="updateButton" th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update Profile </button>
+<button th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'" value="updateUser"> Update Profile </button>
 
 </div>
 
