@@ -213,9 +213,11 @@ public class UserController {
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
+		
 		if (isLogged()) {
 			if (getLoggedUser().getRestriction() == Restriction.BANNED) {
 				model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
+				loggedUser = null;
 				return "login";
 			}
 			fillModel(model);
