@@ -1,3 +1,9 @@
+/*
+ *authors: Denisa Cekanova, Juraj Senic, Miro Sotak, Tomas Siman
+ *project name: Movie forum
+ *company: T-systems
+ * (c)2018 
+ */
 package server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +16,24 @@ import forum.entity.Tag;
 import forum.services.TagService;
 import forum.services.UserService;
 
+
+/**
+ * The Class SetupController.
+ */
 @Controller
 public class SetupController {
 
+	/** The user service. */
 	@Autowired
 	protected UserService userService;
 	
+	/** The tag service. */
 	@Autowired
 	protected TagService tagService;
 	
+	/**
+	 * Adds the admin.
+	 */
 	public void addAdmin() {		
 		ForumUser user = new ForumUser();
 		user.setLogin("admin");
@@ -32,6 +47,9 @@ public class SetupController {
 		}		
 	}
 	
+	/**
+	 * Adds the archived tag.
+	 */
 	public void addArchivedTag() {
 		Tag tag = new Tag();
 		tag.setName("archived");

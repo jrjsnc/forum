@@ -67,17 +67,6 @@ public class CommentServiceJPA implements CommentService {
 
 		return null;
 	}
-
-	/* 
-	 * This method deletes the comment. 
-	 * @see forum.services.CommentService#deleteComment(forum.entity.Comment)
-	 */
-	@Override
-	public void deleteComment(Comment comment) {
-		entityManager.createQuery("DELETE FROM Comment c WHERE c.ident= :ident")
-				.setParameter("ident", comment.getIdent()).executeUpdate();
-
-	}	
 	
 	/* 
 	 * This method updates the comment. 

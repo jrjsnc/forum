@@ -39,7 +39,7 @@ import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.MailService;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class UserController.
  */
@@ -80,7 +80,7 @@ public class UserController {
 	}
 
 	private List<Topic> getUnarchivedTopics() {
-		List<Topic> topics = topicService.getTopics();		
+		List<Topic> topics = topicService.getTopics();
 		Tag tag = tagService.getTagByName("archived");
 		topics = topics.stream().filter(t -> !t.getTags().contains(tag)).collect(Collectors.toList());
 		topics.sort((Topic t1, Topic t2) -> t2.getComments().size() - t1.getComments().size());
@@ -173,25 +173,25 @@ public class UserController {
 	 * @return the string
 	 */
 	@RequestMapping("/filterTopics")
-	public String filterTopics(Tag tag, Model model) {	
+	public String filterTopics(Tag tag, Model model) {
 		if (tag.getIdent() == -1) {
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", getUnarchivedTopics());
 			model.addAttribute("selectedTag", "All");
 			return "index";
 		}
-		
-		if(tag.getIdent() == tagService.getTagByName("archived").getIdent()) {			
+
+		if (tag.getIdent() == tagService.getTagByName("archived").getIdent()) {
 			List<Topic> topics = topicService.getTopics();
-			topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());			
+			topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
 			model.addAttribute("topics", topics);
 			model.addAttribute("tags", tagService.getAllTags());
 			return "index";
 		}
-		
+
 		List<Topic> topics = getUnarchivedTopics();
 		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
-		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());		
+		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());
 		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());
 		return "index";
@@ -221,7 +221,7 @@ public class UserController {
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
 		loggedUser = userService.login(user.getLogin(), user.getPassword());
-		
+
 		if (isLogged()) {
 			if (getLoggedUser().getRestriction() == Restriction.BANNED) {
 				model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
@@ -276,12 +276,10 @@ public class UserController {
 			fillModel(model);
 			return "index";
 		}
-		
+
 		fillModel(model);
-		return "index";			
-		}	
-
-
+		return "index";
+	}
 
 	/**
 	 * Register.

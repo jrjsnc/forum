@@ -29,6 +29,7 @@ import forum.services.CommentService;
 
 /**
  * The Class ForumController.
+ * This class contains all of the important features to control forum. 
  */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -49,7 +50,7 @@ public class ForumController {
 	 * Method fillModel. This method fills model with datas from database. If currentTopicIdent is not null model is filled with current topic title, 
 	 * comments for topics, tags added to each topic and list of tags in drop down menu at index.html
 	 *
-	 * @param model the model
+	 * @param model
 	 */
 	private void fillModel(Model model) {
 		model.addAttribute("controller", this);
@@ -75,8 +76,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the tag. This method alows user with restriction ADMIN adding new tags. Same tag can not be added twice. 
-	 *
+	 * Adds the tag. This method allows user with restriction ADMIN adding new tags. Same tag can not be added twice. 
 	 * @param tag 
 	 * @param model 
 	 * @return admin.html 
@@ -98,8 +98,8 @@ public class ForumController {
 	/**
 	 * Update tag. This method allows user with restriction ADMIN update tags. 
 	 *
-	 * @param tag the tag
-	 * @param model the model
+	 * @param tag 
+	 * @param model 
 	 * @return admin.html
 	 */
 	@RequestMapping("/updateTag")
@@ -112,7 +112,6 @@ public class ForumController {
 
 	/**
 	 * Adds the topic tag. This method allows user with restriction ADMIN assign tag to current topic.
-	 *
 	 * @param tag 
 	 * @param model 
 	 * @return topic.html (web page where user can add comments to current topic)
@@ -126,6 +125,7 @@ public class ForumController {
 	}
 
 	/**
+
 	 * Removes the topic tag. This method allows user with restriction ADMIN removes tag from topic.
 	 *
 	 * @param tag 
@@ -142,7 +142,6 @@ public class ForumController {
 
 	/**
 	 * Toggle like. This method allows user to like or unlike comment. User can like/unlike comment only once.
-	 *
 	 * @param ident 
 	 * @param model 
 	 * @return topic.html (web page where user can add comments to current topic)
@@ -156,7 +155,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Have I liked. This method 
+	 * This method identify if the comment is already liked.
 	 *
 	 * @param ident 
 	 * @return true, if user liked comment or false, if user have not liked comment yet.
@@ -170,11 +169,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Gets the topic.
+	 * This method return web page topic.html where user can add comments to current topic.
 	 *
-	 * @param ident the ident
-	 * @param model the model
-	 * @return the topic
+	 * @param ident
+	 * @param model
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -184,11 +183,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the topic.
+	 * This method allows user to add new topic.
 	 *
-	 * @param topic the topic
-	 * @param model the model
-	 * @return the string
+	 * @param topic 
+	 * @param model 
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopic")
 	public String addTopic(Topic topic, Model model) {
@@ -202,11 +201,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the comment.
+	 * This method allows user to add comments to topic.
 	 *
-	 * @param comment the comment
-	 * @param model the model
-	 * @return the string
+	 * @param comment
+	 * @param model
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addComment")
 	public String addComment(Comment comment, Model model) {
@@ -222,25 +221,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Delete comment.
-	 *
-	 * @param ident the ident
-	 * @param model the model
-	 * @return the string
-	 */
-	@RequestMapping("/deleteComment")
-	public String deleteComment(@RequestParam(value = "ident", required = false) String ident, Model model) {
-		commentService.deleteComment(commentService.getComment(Long.parseLong(ident)));
-		model.addAttribute("comments", userController.topicService.getTopic(currentTopicIdent).getComments());
-		return "topic";
-	}
-
-	/**
-	 * Update comment.
+	 * This method updates the comment.
 	 *
 	 * @param comment the comment
 	 * @param model the model
-	 * @return the string
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/updateComment")
 	public String updateComment(Comment comment, Model model) {
@@ -250,11 +235,12 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle admin.
+	 * This method allows user with restriction ADMIN to toggle another user (only BASIC) as ADMIN. ADMIN can also change restriction of another
+	 * user from ADMIN to BASIC.
 	 *
-	 * @param ident the ident
-	 * @param model the model
-	 * @return the string
+	 * @param ident 
+	 * @param model 
+	 * @return admin.html (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleAdmin")
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -277,11 +263,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle ban.
+	 * This method allows user with restriction ADMIN to toggle user as BANNED or UNBANNED.
 	 *
-	 * @param ident the ident
-	 * @param model the model
-	 * @return the string
+	 * @param ident
+	 * @param model
+	 * @return admin.html (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -297,10 +283,10 @@ public class ForumController {
 	}
 
 	/**
-	 * Admin.
+	 * This method redirect BASIC or BANNED users to web page 404.html in case they try to penetrate into admin.html
 	 *
-	 * @param model the model
-	 * @return the string
+	 * @param model 
+	 * @return 404.html if user is BASIC or BANNED. If user is ADMIN return admin.html.
 	 */
 	@RequestMapping("/admin")
 	public String admin(Model model) {
@@ -311,10 +297,10 @@ public class ForumController {
 	}
 
 	/**
-	 * Mail restriction.
+	 * This method provide sending email for users when their restriction is change .
 	 *
-	 * @param email the email
-	 * @param restriction the restriction
+	 * @param email
+	 * @param restriction
 	 */
 	private void mailRestriction(String email, Restriction restriction) {
 		String subject = "MovieForum restriction";
@@ -328,9 +314,9 @@ public class ForumController {
 	}
 
 	/**
-	 * Sets the current topic ident.
+	 * This method sets the current topic ident.
 	 *
-	 * @param ident the new current topic ident
+	 * @param ident to set.
 	 */
 	public void setCurrentTopicIdent(Long ident) {
 		currentTopicIdent = ident;
