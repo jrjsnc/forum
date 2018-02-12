@@ -45,33 +45,16 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void deleteCommentTest() {
+	public void updateCommentTest() {
 		final Comment comment1 = new Comment();
 		comment1.setContent("macka");
-		final Comment comment2 = new Comment();
-		comment2.setContent("macka2");
-		
-		entityManager.persist(comment1);
-		entityManager.persist(comment2);
-		
-		// check if comment have id after save
-		Assert.assertNotNull(comment1.getIdent());
-		Assert.assertNotNull(comment2.getIdent());
-		
-		// get Comment from DB by entityManager
-		Assert.assertNotNull(entityManager.find(Comment.class, 1L));
-		Assert.assertNotNull(entityManager.find(Comment.class, 2L));
-		
-		commentService.deleteComment(comment1);
 	
-		entityManager.flush();
-		entityManager.clear();
+		entityManager.persist(comment1);
 		
-		// get Comment from DB by entityManager
-		final Comment deletedcomment = entityManager.find(Comment.class, 1L);
-		Assert.assertNull(deletedcomment);
-		final Comment nonDeletedcomment2 = entityManager.find(Comment.class, 2L);
-		Assert.assertNotNull(nonDeletedcomment2);
+		commentService.updateComment(comment1.getIdent(), "pes");
+		
+		Assert.assertEquals(commentService.getComment(comment1.getIdent()).getContent(), "pes");
+		
 	}
 	
 }
