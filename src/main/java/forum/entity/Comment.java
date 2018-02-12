@@ -26,7 +26,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Comment.
  */
@@ -34,33 +34,32 @@ import javax.persistence.Table;
 @Table(name = "comment")
 public class Comment {
 
-	/** The ident. */
+	/** The ident of each comment. Ident is generated automatically and is unique. */
 	@Id
 	@GeneratedValue
 	private Long ident;
 	
-	/** The content. */
+	/** The content of each comment. */
 	private String content;	
 	
-	/** The created on. */
+	/** The date of created of comment. */
 	private Date createdOn;	
 	
-	/** The topic. */
+	/** Many to one relation with entity topic. Foreign key is ident of topic. */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "topic_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private Topic topic;
 	
-	/** The forum user. */
+	/** Many to one relation with entity ForumUser. Foreign key is ident of user. */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private ForumUser forumUser;	
 	
-	/** The likers. */
+	/** Many to many relation for comment likes. One comment can have more likes and one user can get likes to more comments. */
 	@ManyToMany(mappedBy = "liked")
 	private Set<ForumUser> likers = new HashSet<ForumUser>();
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/* method equals. Return true when ident of object equals with ident of comment. 
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -69,8 +68,7 @@ public class Comment {
 		return ident != null && ident.equals(((Comment) o).getIdent());
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/* return the hashCode of comment.
 	 */
 	@Override
     public int hashCode() {
@@ -78,10 +76,12 @@ public class Comment {
     }	
 	
 	/**
-	 * Instantiates a new comment.
+	 * Constructor of two parameters.
 	 *
-	 * @param content the content
-	 * @param createdOn the created on
+	 * @param content. 
+	 * Content of comment 
+	 * @param createdOn.
+	 * Date of comment
 	 */
 	public Comment(String content, Date createdOn) {
 		super();		
@@ -90,25 +90,25 @@ public class Comment {
 	}
 	
 	/**
-	 * Instantiates a new comment.
+	 * Empty constructor.
 	 */
 	public Comment() {
 
 	}	
 	
 	/**
-	 * Gets the likers.
+	 * Gets the users who likes the comment.
 	 *
-	 * @return the likers
+	 * @return the Set of users who likes the comment.
 	 */
 	public Set<ForumUser> getLikers() {
 		return likers;
 	}
 	
 	/**
-	 * Sets the likers.
+	 * Sets the users who likes the comment.
 	 *
-	 * @param likers the new likers
+	 * @param likers the likers
 	 */
 	public void setLikers(Set<ForumUser> likers) {
 		this.likers = likers;
@@ -116,97 +116,97 @@ public class Comment {
 	
 	
 	/**
-	 * Gets the forum user.
+	 * Gets the forum user from entity ForumUser.
 	 *
-	 * @return the forum user
+	 * @return the forum user from entity ForumUser
 	 */
 	public ForumUser getForumUser() {
 		return forumUser;
 	}
 	
 	/**
-	 * Sets the forum user.
+	 * Sets the forum user from entity ForumUser.
 	 *
-	 * @param forumUser the new forum user
+	 * @param forumUser the forumUser
 	 */
 	public void setForumUser(ForumUser forumUser) {
 		this.forumUser = forumUser;
 	}
 
 	/**
-	 * Gets the ident.
+	 * Gets the ident of comment.
 	 *
-	 * @return the ident
+	 * @return the current ident of comment.
 	 */
 	public Long getIdent() {
 		return ident;
 	}
 	
 	/**
-	 * Sets the ident.
+	 * Sets the ident of comment.
 	 *
-	 * @param ident the new ident
+	 * @param ident of comment to set.
 	 */
 	public void setIdent(Long ident) {
 		this.ident = ident;
 	}	
 	
 	/**
-	 * Gets the topic.
+	 * Gets the topic that is commented by current comment.
 	 *
-	 * @return the topic
+	 * @return the topic.
 	 */
 	public Topic getTopic() {
 		return topic;
 	}
 	
 	/**
-	 * Sets the topic.
+	 * Sets the topic that is commented by current comment.
 	 *
-	 * @param topic the new topic
+	 * @param topic to set.
 	 */
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}	
 
 	/**
-	 * Gets the content.
+	 * Gets the content of comment.
 	 *
-	 * @return the content
+	 * @return the content of comment.
 	 */
 	public String getContent() {
 		return content;
 	}
 
 	/**
-	 * Sets the content.
+	 * Sets the content of comment.
 	 *
-	 * @param content the new content
+	 * @param content of comment to set.
 	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
 	/**
-	 * Gets the created on.
+	 * Gets the date of commented.
 	 *
-	 * @return the created on
+	 * @return the date of commented.
 	 */
 	public Date getCreatedOn() {
 		return createdOn;
 	}
 
 	/**
-	 * Sets the created on.
+	 * Sets the date of commented.
 	 *
-	 * @param createdOn the new created on
+	 * @param createdOn. The date of create comment to set.
 	 */
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/* method toString. Return the string format of comment (ident of comment, user who create comment,
+	 *  title of topic for which is comment created, date of create comment).
 	 */
 	@Override
 	public String toString() {

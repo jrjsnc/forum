@@ -25,7 +25,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ForumUser.
  */
@@ -33,35 +33,35 @@ import javax.persistence.Table;
 @Table(name = "forum_user")
 public class ForumUser {
 
-	/** The ident. */
+	/** The identof each user. Ident is generated automatically. */
 	@Id
 	@GeneratedValue
 	private Long ident;
 
-	/** The login. */
+	/** The users login. Login is unique and can't be null. */
 	@Column(unique=true, nullable=false)
 	private String login;
 	
-	/** The password. */
+	/** The users password. Password can't be null. */
 	@Column(nullable=false)
 	private String password;
 	
-	/** The email. */
+	/** The users email. Email must be unique and can't be null. */
 	@Column(unique=true, nullable=false)
 	private String email;
 	
-	/** The user image. */
+	/** The users image. */
 	private byte[] userImage;
 
-	/** The restriction. */
+	/** The restriction of user. User can be ADMIN, BASIC, BANNED. */
 	@Enumerated(EnumType.STRING)
 	private Restriction restriction;
 
-	/** The comments. */
+	/** The one to many relation with entity comment.  */
 	@OneToMany(mappedBy = "forumUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<Comment>();
 
-	/** The liked. */
+	/** The many to many relation with comment. */
 	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "forum_user_comment", joinColumns = @JoinColumn(name = "forum_user_ident"), inverseJoinColumns = @JoinColumn(name = "comment_ident"))
 	private Set<Comment> liked = new HashSet<Comment>();
@@ -69,7 +69,7 @@ public class ForumUser {
 	/**
 	 * Adds the comment.
 	 *
-	 * @param comment the comment
+	 * @param comment to add.
 	 */
 	public void addComment(Comment comment) {
 		comments.add(comment);
@@ -79,7 +79,7 @@ public class ForumUser {
 	/**
 	 * Removes the comment.
 	 *
-	 * @param comment the comment
+	 * @param comment to remove.
 	 */
 	public void removeComment(Comment comment) {
 		comments.remove(comment);
@@ -87,9 +87,9 @@ public class ForumUser {
 	}
 
 	/**
-	 * Adds the liked comment.
+	 * Adds the likes to comment.
 	 *
-	 * @param likedComment the liked comment
+	 * @param likedComment. 
 	 */
 	public void addLikedComment(Comment likedComment) {
 		liked.add(likedComment);
@@ -97,9 +97,9 @@ public class ForumUser {
 	}
 
 	/**
-	 * Removes the liked comment.
+	 * Removes the likes of comment.
 	 *
-	 * @param likedComment the liked comment
+	 * @param likedComment.
 	 */
 	public void removeLikedComment(Comment likedComment) {
 		liked.remove(likedComment);
@@ -108,9 +108,9 @@ public class ForumUser {
 	}
 
 	/**
-	 * Gets the liked comments.
+	 * Gets the set of liked comments.
 	 *
-	 * @return the liked comments
+	 * @return the liked comments.
 	 */
 	public Set<Comment> getLikedComments() {
 		return liked;
@@ -119,14 +119,13 @@ public class ForumUser {
 	/**
 	 * Sets the liked comments.
 	 *
-	 * @param likedComments the new liked comments
+	 * @param likedComments to set.
 	 */
 	public void setLikedComments(Set<Comment> likedComments) {
 		this.liked = likedComments;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/* method equals. Return true when ident of object equals with ident of user. 
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -137,8 +136,7 @@ public class ForumUser {
 		return ident != null && ident.equals(((ForumUser) o).getIdent());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/* return the hashcode of user.
 	 */
 	@Override
 	public int hashCode() {
@@ -146,25 +144,25 @@ public class ForumUser {
 	}
 
 	/**
-	 * Gets the restriction.
+	 * Gets the restriction to user. User can be ADMIN, BASIC, BANNED.
 	 *
-	 * @return the restriction
+	 * @return the restriction of user
 	 */
 	public Restriction getRestriction() {
 		return restriction;
 	}
 
 	/**
-	 * Sets the restriction.
+	 * Sets the restriction. User can be ADMIN, BASIC, BANNED.
 	 *
-	 * @param restriction the new restriction
+	 * @param restriction to set.
 	 */
 	public void setRestriction(Restriction restriction) {
 		this.restriction = restriction;
 	}
 
 	/**
-	 * Gets the ident.
+	 * Gets the ident of each user.
 	 *
 	 * @return the ident
 	 */
@@ -173,7 +171,7 @@ public class ForumUser {
 	}
 
 	/**
-	 * Gets the login.
+	 * Gets the users login.
 	 *
 	 * @return the login
 	 */
@@ -182,7 +180,7 @@ public class ForumUser {
 	}
 
 	/**
-	 * Gets the password.
+	 * Gets the users password.
 	 *
 	 * @return the password
 	 */
@@ -191,7 +189,7 @@ public class ForumUser {
 	}
 
 	/**
-	 * Gets the email.
+	 * Gets the users email.
 	 *
 	 * @return the email
 	 */
@@ -200,45 +198,45 @@ public class ForumUser {
 	}
 
 	/**
-	 * Sets the ident.
+	 * Sets the ident of user.
 	 *
-	 * @param ident the new ident
+	 * @param ident to set.
 	 */
 	public void setIdent(Long ident) {
 		this.ident = ident;
 	}
 
 	/**
-	 * Sets the login.
+	 * Sets the users login.
 	 *
-	 * @param login the new login
+	 * @param login to set.
 	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	/**
-	 * Sets the password.
+	 * Sets the users password.
 	 *
-	 * @param password the new password
+	 * @param password to set.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * Sets the email.
+	 * Sets the users email.
 	 *
-	 * @param email the new email
+	 * @param email to set.
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
-	 * Gets the user image.
+	 * Gets the users image.
 	 *
-	 * @return the user image
+	 * @return the user image.
 	 */
 	public byte[] getUserImage() {
 		return userImage;
@@ -247,14 +245,13 @@ public class ForumUser {
 	/**
 	 * Sets the user image.
 	 *
-	 * @param photo the new user image
+	 * @param photo to be set as users image
 	 */
 	public void setUserImage(byte[] photo) {
 		this.userImage = photo;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/* method toString return value of hashcode.
 	 */
 	@Override
 	public String toString() {
