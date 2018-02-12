@@ -151,17 +151,15 @@ public class UserController {
 	 */
 	@RequestMapping("/")
 	public String index(Model model) {
-<<<<<<< HEAD
+
 		List<Topic> topics = topicService.getTopics();
 		topics.sort((Topic t1, Topic t2) -> t2.getComments().size() - t1.getComments().size());
 		model.addAttribute("message", "");
 		model.addAttribute("selectedTag", "All");
 		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());
-
-=======
 		fillModel(model);
->>>>>>> b7f089825ab12ff706f9846557e73b70a7ce355f
+
 		return "index";
 	}
 
