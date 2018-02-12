@@ -264,11 +264,14 @@ public class UserController {
 			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			fillModel(model);
+			return "index";
 		}
 		
 		fillModel(model);
-		return "index";
-	}
+		return "index";			
+		}	
+
+
 
 	/**
 	 * Register.
