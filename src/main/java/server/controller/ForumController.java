@@ -26,9 +26,10 @@ import forum.entity.Topic;
 import forum.services.CommentService;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ForumController.
+ * This class contains all of the important features to control forum. 
  */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -46,7 +47,7 @@ public class ForumController {
 	private Long currentTopicIdent;
 
 	/**
-	 * Fill model.
+	 * This method fills the model.
 	 *
 	 * @param model the model
 	 */
@@ -74,7 +75,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the tag.
+	 * This method adds the tag.
 	 *
 	 * @param tag the tag
 	 * @param model the model
@@ -95,7 +96,7 @@ public class ForumController {
 	}
 	
 	/**
-	 * Update tag.
+	 * This method updates the tag.
 	 *
 	 * @param tag the tag
 	 * @param model the model
@@ -110,7 +111,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the topic tag.
+	 * This method adds the topic tag.
 	 *
 	 * @param tag the tag
 	 * @param model the model
@@ -125,7 +126,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Removes the topic tag.
+	 * This method removes the topic tag.
 	 *
 	 * @param tag the tag
 	 * @param model the model
@@ -140,7 +141,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle like.
+	 * This method toggles the like.
 	 *
 	 * @param ident the ident
 	 * @param model the model
@@ -155,7 +156,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Have I liked.
+	 * This method identify if the comment is already liked.
 	 *
 	 * @param ident the ident
 	 * @return true, if successful
@@ -169,7 +170,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Gets the topic.
+	 * This method gets the topic.
 	 *
 	 * @param ident the ident
 	 * @param model the model
@@ -183,7 +184,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the topic.
+	 * This method adds the topic.
 	 *
 	 * @param topic the topic
 	 * @param model the model
@@ -201,7 +202,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the comment.
+	 * This method adds the comment.
 	 *
 	 * @param comment the comment
 	 * @param model the model
@@ -221,7 +222,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Delete comment.
+	 * This method deletes the comment.
 	 *
 	 * @param ident the ident
 	 * @param model the model
@@ -235,7 +236,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Update comment.
+	 * This method updates the comment.
 	 *
 	 * @param comment the comment
 	 * @param model the model
@@ -249,7 +250,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle admin.
+	 * This method toggles the admin.
 	 *
 	 * @param ident the ident
 	 * @param model the model
@@ -276,7 +277,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle ban.
+	 * This method toggles ban to forum user.
 	 *
 	 * @param ident the ident
 	 * @param model the model
@@ -296,7 +297,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Admin.
+	 * This method covers unauthorized admin access to url link.
 	 *
 	 * @param model the model
 	 * @return the string
@@ -310,7 +311,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Mail restriction.
+	 * This method sets the mail restriction.
 	 *
 	 * @param email the email
 	 * @param restriction the restriction
@@ -327,7 +328,7 @@ public class ForumController {
 	}
 
 	/**
-	 * Sets the current topic ident.
+	 * This method sets the current topic ident.
 	 *
 	 * @param ident the new current topic ident
 	 */

@@ -78,8 +78,10 @@ public class Comment {
 	/**
 	 * Constructor of two parameters.
 	 *
-	 * @param String content - content of comment 
-	 * @param Date createdOn - date of comment
+	 * @param content. 
+	 * Content of comment 
+	 * @param createdOn.
+	 * Date of comment
 	 */
 	public Comment(String content, Date createdOn) {
 		super();		
@@ -106,7 +108,7 @@ public class Comment {
 	/**
 	 * Sets the users who likes the comment.
 	 *
-	 * @param likers 
+	 * @param likers the likers
 	 */
 	public void setLikers(Set<ForumUser> likers) {
 		this.likers = likers;
@@ -125,7 +127,7 @@ public class Comment {
 	/**
 	 * Sets the forum user from entity ForumUser.
 	 *
-	 * @param forumUser 
+	 * @param forumUser the forumUser
 	 */
 	public void setForumUser(ForumUser forumUser) {
 		this.forumUser = forumUser;
