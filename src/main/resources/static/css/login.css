@@ -371,6 +371,28 @@ opacity: 1;
 	width: 120px;
 	
 }
+
+.updateCommentButton, .removeAddTags button, .updateCommentForm button {
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	width: 120px;
+	
+}
+
+.updateCommentButton:hover, .updateCommentButton:focus, .removeAddTags button:hover, .removeAddTags button:focus, .updateCommentForm button:hover, .updateCommentForm button:focus{
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+	
+	
+}
 .form{
 	
 	text-align: center;
