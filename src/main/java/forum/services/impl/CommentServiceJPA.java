@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
+import forum.entity.Topic;
 import forum.services.CommentService;
 
 
@@ -44,7 +45,7 @@ public class CommentServiceJPA implements CommentService {
 	 * @see forum.services.CommentService#getComments(java.lang.String)
 	 */
 	@Override
-	public List<Comment> getComments(String topic) {
+	public List<Comment> getComments(Topic topic) {
 		return entityManager.createQuery("SELECT c FROM Comment c WHERE c.topic= :topic ORDER BY c.createdOn")
 				.setParameter("topic", topic).getResultList();
 	}

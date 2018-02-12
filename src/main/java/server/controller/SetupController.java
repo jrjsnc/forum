@@ -23,16 +23,16 @@ import forum.services.UserService;
 @Controller
 public class SetupController {
 
-	/** The user service. */
+	/** The userService. Object of class UserService.  */
 	@Autowired
 	protected UserService userService;
 	
-	/** The tag service. */
+	/** The tagService. Object of class TagService */
 	@Autowired
 	protected TagService tagService;
 	
 	/**
-	 * Adds the admin.
+	 * Adds the admin. This method automatically add admin into database after first run of application.
 	 */
 	public void addAdmin() {		
 		ForumUser user = new ForumUser();
@@ -48,7 +48,7 @@ public class SetupController {
 	}
 	
 	/**
-	 * Adds the archived tag.
+	 * Adds the archived tag. This method automatically add tag "archived" into database after first run of application.
 	 */
 	public void addArchivedTag() {
 		Tag tag = new Tag();
