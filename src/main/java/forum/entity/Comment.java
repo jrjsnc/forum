@@ -46,7 +46,7 @@ public class Comment {
 	private Date createdOn;	
 	
 	/** Many to one relation with entity topic. Foreign key is ident of topic. */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(foreignKey = @ForeignKey(name = "topic_ident", value = ConstraintMode.NO_CONSTRAINT))	
 	private Topic topic;
 	
