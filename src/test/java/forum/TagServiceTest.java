@@ -13,14 +13,16 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import forum.entity.Comment;
 import forum.entity.Tag;
+import forum.server.ForumServerTest;
 import forum.services.TagService;
 import server.ForumServer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = ForumServer.class)
+@ContextConfiguration(classes = ForumServerTest.class)
 public class TagServiceTest {
 	
 	@PersistenceContext
@@ -39,6 +41,19 @@ public class TagServiceTest {
 		
 		Assert.assertNotNull(id);
 		Assert.assertEquals("macka", tagService.getTag(id).getName());
+	}
+	
+	@Test
+	public void updateTagTest() {
+		final Tag tag = new Tag();
+		tag.setName("macka");
+	
+		entityManager.persist(tag);
+		
+		tagService.updateTag(tag.getIdent(), "lev");
+		
+		Assert.assertEquals(tagService.getTag(tag.getIdent()).getName(), "lev");
+		
 	}
 	
 }

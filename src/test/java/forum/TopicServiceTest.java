@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import forum.entity.Topic;
+import forum.server.ForumServerTest;
 import forum.services.TopicService;
 import server.ForumServer;
 
@@ -21,7 +22,7 @@ import server.ForumServer;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = ForumServer.class)
+@ContextConfiguration(classes = ForumServerTest.class)
 public class TopicServiceTest {
 	
 	@PersistenceContext
