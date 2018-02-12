@@ -1,5 +1,7 @@
 package forum;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import forum.entity.Comment;
 import forum.entity.Tag;
+import forum.entity.Topic;
 import forum.server.ForumServerTest;
 import forum.services.TagService;
 import server.ForumServer;
@@ -54,6 +57,30 @@ public class TagServiceTest {
 		
 		Assert.assertEquals(tagService.getTag(tag.getIdent()).getName(), "lev");
 		
+	}
+	
+	@Test
+	public void getTagTest() {
+		Tag tag = new Tag();
+		tag.setName("macka");
+		tagService.addTag(tag);			
+		Assert.assertEquals(tag, tagService.getTag(tag.getIdent()));
+	}
+	
+	@Test
+	public void getTagsTest() {
+		
+		Tag tag1 = new Tag();
+		tag1.setName("macka");
+		entityManager.persist(tag1);		
+		
+		Tag tag2 = new Tag();
+		tag2.setName("pes");
+		entityManager.persist(tag2);		
+			
+		List<Tag> t = tagService.getAllTags();
+		
+		Assert.assertEquals(2, t.size());		
 	}
 	
 }
