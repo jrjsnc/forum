@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Tag.
  */
@@ -24,21 +24,20 @@ import javax.persistence.Table;
 @Table(name = "tag")
 public class Tag {
 
-	/** The ident. */
+	/** The ident of tag. Ident is unique and generated automatically. */
 	@Id
 	@GeneratedValue
 	private Long ident;
 
-	/** The name. */
+	/** The name of each tag. Name is unique and can't be null. */
 	@Column(unique=true, nullable=false) 
 	private String name;
 
-	/** The topics. */
+	/** The many to many relation with entity Topic. Sets topics selected by tags. */
 	@ManyToMany(mappedBy = "tags")
 	private Set<Topic> topics = new HashSet<Topic>();
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/* method equals. Return true when ident of object equals with ident of tag. 
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -49,8 +48,7 @@ public class Tag {
 		return ident != null && ident.equals(((Tag) o).getIdent());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/* return the hashcode of tag.
 	 */
 	@Override
 	public int hashCode() {
@@ -58,76 +56,75 @@ public class Tag {
 	}		
 	
 	/**
-	 * Instantiates a new tag.
+	 * Constructor with one parameter.
 	 *
-	 * @param name the name
+	 * @param name of tag.
 	 */
 	public Tag(String name) {
 		this.name = name;
 	}
 	
 	/**
-	 * Instantiates a new tag.
+	 * Empty constructor.
 	 */
 	public Tag() {		
 	}
 	
 	/**
-	 * Gets the topics.
+	 * Gets the Set of topics for which tag can be assign.
 	 *
-	 * @return the topics
+	 * @return the Set of topics
 	 */
 	public Set<Topic> getTopics() {
 		return topics;
 	}
 	
 	/**
-	 * Sets the topics.
+	 * Sets the topics for which tag can be assign.
 	 *
-	 * @param topics the new topics
+	 * @param topics to set.
 	 */
 	public void setTopics(Set<Topic> topics) {
 		this.topics = topics;
 	}
 
 	/**
-	 * Gets the ident.
+	 * Gets the ident of tag.
 	 *
-	 * @return the ident
+	 * @return the ident of tag.
 	 */
 	public Long getIdent() {
 		return ident;
 	}
 
 	/**
-	 * Sets the ident.
+	 * Sets the ident of tag.
 	 *
-	 * @param ident the new ident
+	 * @param ident of tag to set.
 	 */
 	public void setIdent(Long ident) {
 		this.ident = ident;
 	}
 
 	/**
-	 * Gets the name.
+	 * Gets the tag's name.
 	 *
-	 * @return the name
+	 * @return the name of tag.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Sets the name.
+	 * Sets the tag's name.
 	 *
-	 * @param name the new name
+	 * @param name of tag to set.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/* method toString return the string format of tag (ident of tag, name of tag).
 	 */
 	@Override
 	public String toString() {		

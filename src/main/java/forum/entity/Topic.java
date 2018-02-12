@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Topic.
  */
@@ -33,30 +33,30 @@ import javax.persistence.Table;
 @Table(name = "topic")
 public class Topic {
 	
-	/** The ident. */
+	/** The ident of topic. Ident is unique and generated automatically. */
 	@Id
 	@GeneratedValue
 	private Long ident;
 	
-	/** The title. */
+	/** The title of topic. */
 	private String title;
 	
-	/** The comments. */
+	/** The one to many relation with entity Comment. One topic can have more than one comments. One comment can be assign only to one topic. */
 	@OneToMany(mappedBy = "topic", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
-	/** The forum user. */
+	/** The many to one relation with entity ForunUser. Foreign key is ident of user. One user cad add more topics. 
+	 * One topic can be added by only one user. */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "forum_user_ident", value = ConstraintMode.CONSTRAINT))	
 	private ForumUser forumUser;
 	
-	/** The tags. */
+	/** The many to many relation with entity Tag. One topic can have more tags and one tag can be added to more topics.*/
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "topic_tag", joinColumns = @JoinColumn(name = "topic_ident"), inverseJoinColumns = @JoinColumn(name = "tag_ident"))
 	private Set<Tag> tags = new HashSet<Tag>();
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/* method equals. Return true when ident of object equals with ident of topic. 
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -65,8 +65,7 @@ public class Topic {
 		return ident != null && ident.equals(((Topic) o).getIdent());
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/* return the hashcode of topic.
 	 */
 	@Override
     public int hashCode() {
@@ -74,24 +73,24 @@ public class Topic {
     }
 	
 	/**
-	 * Instantiates a new topic.
+	 * Constructor with one parameter.
 	 *
-	 * @param title the title
+	 * @param title of topic.
 	 */
 	public Topic(String title) {		
 		this.title = title;		
 	}
 	
 	/**
-	 * Instantiates a new topic.
+	 * Empty constructor.
 	 */
 	public Topic() {		
 	}	
 	
 	/**
-	 * Adds the tag.
+	 * Adds the tag to topic.
 	 *
-	 * @param tag the tag
+	 * @param tag.
 	 */
 	public void addTag(Tag tag) {
 		tags.add(tag);
@@ -99,9 +98,9 @@ public class Topic {
 	}
 	
 	/**
-	 * Removes the tag.
+	 * Removes the tag from topic.
 	 *
-	 * @param tag the tag
+	 * @param tag.
 	 */
 	public void removeTag(Tag tag) {
 		tags.remove(tag);
@@ -109,9 +108,9 @@ public class Topic {
 	}
 	
 	/**
-	 * Adds the comment.
+	 * Adds the comment to topic.
 	 *
-	 * @param comment the comment
+	 * @param comment.
 	 */
 	public void addComment(Comment comment) {
 		comments.add(comment);
@@ -119,9 +118,9 @@ public class Topic {
 	}
 	
 	/**
-	 * Removes the comment.
+	 * Removes the comment from topic.
 	 *
-	 * @param comment the comment
+	 * @param comment.
 	 */
 	public void removeComment(Comment comment) {
 		comments.remove(comment);
@@ -129,18 +128,18 @@ public class Topic {
 	}
 	
 	/**
-	 * Gets the forum user.
+	 * Gets the forum user who add the topic.
 	 *
-	 * @return the forum user
+	 * @return forumUser.
 	 */
 	public ForumUser getForumUser() {
 		return forumUser;
 	}
 	
 	/**
-	 * Sets the forum user.
+	 * Sets the forum user who add the topic.
 	 *
-	 * @param forumUser the new forum user
+	 * @param forumUser to set.
 	 */
 	public void setForumUser(ForumUser forumUser) {
 		this.forumUser = forumUser;
@@ -149,72 +148,72 @@ public class Topic {
 	
 	
 	/**
-	 * Gets the ident.
+	 * Gets the ident of topic.
 	 *
-	 * @return the ident
+	 * @return ident of topic.
 	 */
 	public Long getIdent() {
 		return ident;
 	}
 	
 	/**
-	 * Sets the ident.
+	 * Sets the ident of topic.
 	 *
-	 * @param ident the new ident
+	 * @param ident of topic to set.
 	 */
 	public void setIdent(Long ident) {
 		this.ident = ident;
 	}
 	
 	/**
-	 * Gets the title.
+	 * Gets the topic's title.
 	 *
-	 * @return the title
+	 * @return title of topic.
 	 */
 	public String getTitle() {
 		return title;
 	}
 	
 	/**
-	 * Sets the title.
+	 * Sets the topic's title.
 	 *
-	 * @param title the new title
+	 * @param title of topic to set.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
 	/**
-	 * Gets the comments.
+	 * Gets the topic's comments.
 	 *
-	 * @return the comments
+	 * @return comments of topic.
 	 */
 	public List<Comment> getComments() {
 		return comments;
 	}
 	
 	/**
-	 * Sets the comments.
+	 * Sets the topic's comments.
 	 *
-	 * @param comments the new comments
+	 * @param comments of topic to set.
 	 */
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 	
 	/**
-	 * Gets the tags.
+	 * Gets the topic's tags.
 	 *
-	 * @return the tags
+	 * @return tags of topic.
 	 */
 	public Set<Tag> getTags() {
 		return tags;
 	}
 	
 	/**
-	 * Sets the tags.
+	 * Sets the topic's tags.
 	 *
-	 * @param tags the new tags
+	 * @param tags of topic to set.
 	 */
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
