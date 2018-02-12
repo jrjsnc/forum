@@ -26,7 +26,7 @@ import forum.entity.Topic;
 import forum.services.CommentService;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ForumController.
  */
@@ -34,19 +34,20 @@ import forum.services.CommentService;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class ForumController {
 
-	/** The user controller. */
+	/** The userController. Object of class UserController. */
 	@Autowired
 	private UserController userController;
 
-	/** The comment service. */
+	/** The commentService. Object of class CommentService. */
 	@Autowired
 	private CommentService commentService;
 
-	/** The current topic ident. */
+	/** The current topic ident.  */
 	private Long currentTopicIdent;
 
 	/**
-	 * Fill model.
+	 * Method fillModel. This method fills model with datas from database. If currentTopicIdent is not null model is filled with current topic title, 
+	 * comments for topics, tags added to each topic and list of tags in drop down menu at index.html
 	 *
 	 * @param model the model
 	 */
@@ -74,11 +75,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the tag.
+	 * Adds the tag. This method alows user with restriction ADMIN adding new tags. Same tag can not be added twice. 
 	 *
-	 * @param tag the tag
-	 * @param model the model
-	 * @return the string
+	 * @param tag 
+	 * @param model 
+	 * @return admin.html 
 	 */
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
@@ -95,11 +96,11 @@ public class ForumController {
 	}
 	
 	/**
-	 * Update tag.
+	 * Update tag. This method allows user with restriction ADMIN update tags. 
 	 *
 	 * @param tag the tag
 	 * @param model the model
-	 * @return the string
+	 * @return admin.html
 	 */
 	@RequestMapping("/updateTag")
 	public String updateTag(Tag tag, Model model) {
@@ -110,11 +111,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Adds the topic tag.
+	 * Adds the topic tag. This method allows user with restriction ADMIN assign tag to current topic.
 	 *
-	 * @param tag the tag
-	 * @param model the model
-	 * @return the string
+	 * @param tag 
+	 * @param model 
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopicTag")
 	public String addTopicTag(Tag tag, Model model) {
@@ -125,11 +126,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Removes the topic tag.
+	 * Removes the topic tag. This method allows user with restriction ADMIN removes tag from topic.
 	 *
-	 * @param tag the tag
-	 * @param model the model
-	 * @return the string
+	 * @param tag 
+	 * @param model 
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/removeTopicTag")
 	public String removeTopicTag(Tag tag, Model model) {
@@ -140,11 +141,11 @@ public class ForumController {
 	}
 
 	/**
-	 * Toggle like.
+	 * Toggle like. This method allows user to like or unlike comment. User can like/unlike comment only once.
 	 *
-	 * @param ident the ident
-	 * @param model the model
-	 * @return the string
+	 * @param ident 
+	 * @param model 
+	 * @return topic.html (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/toggleLike")
 	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -155,10 +156,10 @@ public class ForumController {
 	}
 
 	/**
-	 * Have I liked.
+	 * Have I liked. This method 
 	 *
-	 * @param ident the ident
-	 * @return true, if successful
+	 * @param ident 
+	 * @return true, if user liked comment or false, if user have not liked comment yet.
 	 */
 	public boolean haveILiked(Long ident) {
 		if (userController.userService.getLikedComments(userController.getLoggedUser().getIdent())
