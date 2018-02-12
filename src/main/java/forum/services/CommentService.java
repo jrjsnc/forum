@@ -35,14 +35,6 @@ public interface CommentService {
 	 */
 	List<Comment> getComments(String topic);
 	
-	/**
-	 * This method deletes the comment.
-	 *
-	 * @param comment the comment
-	 */
-	@Transactional
-	@Modifying
-	void deleteComment(Comment comment);
 	
 	/**
 	 * This method updates the comment.

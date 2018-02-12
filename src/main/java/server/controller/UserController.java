@@ -40,8 +40,10 @@ import forum.services.UserService;
 import forum.services.impl.MailService;
 
 
+
 /**
- * The Class UserController.
+ * The Class UserController. This class implements features connected with user login, register, profile and others
+ * .
  */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -72,6 +74,11 @@ public class UserController {
 	/** The logged user. */
 	private ForumUser loggedUser;
 
+	/**
+	 * This method fills the model.
+	 *
+	 * @param model the model
+	 */
 	private void fillModel(Model model) {
 		model.addAttribute("message", "");
 		model.addAttribute("selectedTag", "All");
@@ -79,6 +86,11 @@ public class UserController {
 		model.addAttribute("tags", tagService.getAllTags());
 	}
 
+	/**
+	 * This method gets not archived topics.
+	 *
+	 * @return the unarchived topics
+	 */
 	private List<Topic> getUnarchivedTopics() {
 		List<Topic> topics = topicService.getTopics();
 		Tag tag = tagService.getTagByName("archived");
@@ -88,7 +100,7 @@ public class UserController {
 	}
 
 	/**
-	 * Send mail in thread.
+	 * This method sends mail in thread.
 	 *
 	 * @param to
 	 *            the to
@@ -109,7 +121,7 @@ public class UserController {
 	}
 
 	/**
-	 * Mail login.
+	 * This method creates mail by login.
 	 *
 	 * @param user
 	 *            the user
@@ -143,7 +155,7 @@ public class UserController {
 	}
 
 	/**
-	 * Index.
+	 * This method fills the index.
 	 *
 	 * @param model
 	 *            the model
@@ -164,7 +176,7 @@ public class UserController {
 	}
 
 	/**
-	 * Filter topics.
+	 * This method filter the topics.
 	 *
 	 * @param tag
 	 *            the tag
@@ -198,7 +210,7 @@ public class UserController {
 	}
 
 	/**
-	 * User.
+	 * This method defines /user.
 	 *
 	 * @param model
 	 *            the model
@@ -210,7 +222,7 @@ public class UserController {
 	}
 
 	/**
-	 * Login.
+	 * This method defines /login.
 	 *
 	 * @param user
 	 *            the user
@@ -237,7 +249,7 @@ public class UserController {
 	}
 
 	/**
-	 * Update profile.
+	 * This method updates the profile.
 	 *
 	 * @param user
 	 *            the user
@@ -255,7 +267,7 @@ public class UserController {
 	}
 
 	/**
-	 * Update user.
+	 * This method updates the forum user.
 	 *
 	 * @param file
 	 *            the file
@@ -282,7 +294,7 @@ public class UserController {
 	}
 
 	/**
-	 * Register.
+	 * This method defines /register.
 	 *
 	 * @param file
 	 *            the file
@@ -333,7 +345,7 @@ public class UserController {
 	}
 
 	/**
-	 * Login.
+	 * This method defines /logout.
 	 *
 	 * @param model
 	 *            the model
@@ -347,7 +359,7 @@ public class UserController {
 	}
 
 	/**
-	 * Gets the logged user.
+	 * This method gets the logged user.
 	 *
 	 * @return the logged user
 	 */
@@ -356,7 +368,7 @@ public class UserController {
 	}
 
 	/**
-	 * Checks if is logged.
+	 * This method checks if user is logged.
 	 *
 	 * @return true, if is logged
 	 */
@@ -365,7 +377,7 @@ public class UserController {
 	}
 
 	/**
-	 * Decode to image.
+	 * This method deals with image manipulation
 	 *
 	 * @param login
 	 *            the login
