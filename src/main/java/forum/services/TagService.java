@@ -52,4 +52,6 @@ public interface TagService {
 	 * @param name the name
 	 */
 	public void updateTag(Long ident, String name);
+	
+	public Tag getTagByName(String name);
 }

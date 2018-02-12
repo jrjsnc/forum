@@ -49,7 +49,7 @@ public class UserController {
 
 	/** The date format. */
 	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	
+
 	/** The date. */
 	Date date = new Date();
 
@@ -71,13 +71,31 @@ public class UserController {
 
 	/** The logged user. */
 	private ForumUser loggedUser;
-	
+
+	private void fillModel(Model model) {
+		model.addAttribute("message", "");
+		model.addAttribute("selectedTag", "All");
+		model.addAttribute("topics", getUnarchivedTopics());
+		model.addAttribute("tags", tagService.getAllTags());
+	}
+
+	private List<Topic> getUnarchivedTopics() {
+		List<Topic> topics = topicService.getTopics();		
+		Tag tag = tagService.getTagByName("archived");
+		topics = topics.stream().filter(t -> !t.getTags().contains(tag)).collect(Collectors.toList());
+		topics.sort((Topic t1, Topic t2) -> t2.getComments().size() - t1.getComments().size());
+		return topics;
+	}
+
 	/**
 	 * Send mail in thread.
 	 *
-	 * @param to the to
-	 * @param subject the subject
-	 * @param messageText the message text
+	 * @param to
+	 *            the to
+	 * @param subject
+	 *            the subject
+	 * @param messageText
+	 *            the message text
 	 */
 	protected void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
@@ -93,13 +111,15 @@ public class UserController {
 	/**
 	 * Mail login.
 	 *
-	 * @param user the user
-	 * @param model the model
+	 * @param user
+	 *            the user
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/mailLogin")
 	public String mailLogin(ForumUser user, Model model) {
-		model.addAttribute("message", "");		
+		model.addAttribute("message", "");
 		ForumUser fu = userService.getUserByEmail(user.getEmail());
 
 		if (null != fu) {
@@ -125,11 +145,13 @@ public class UserController {
 	/**
 	 * Index.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/")
 	public String index(Model model) {
+<<<<<<< HEAD
 		List<Topic> topics = topicService.getTopics();
 		topics.sort((Topic t1, Topic t2) -> t2.getComments().size() - t1.getComments().size());
 		model.addAttribute("message", "");
@@ -137,37 +159,51 @@ public class UserController {
 		model.addAttribute("topics", topics);
 		model.addAttribute("tags", tagService.getAllTags());
 
+=======
+		fillModel(model);
+>>>>>>> b7f089825ab12ff706f9846557e73b70a7ce355f
 		return "index";
 	}
 
 	/**
 	 * Filter topics.
 	 *
-	 * @param tag the tag
-	 * @param model the model
+	 * @param tag
+	 *            the tag
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/filterTopics")
-	public String filterTopics(Tag tag, Model model) {
+	public String filterTopics(Tag tag, Model model) {	
 		if (tag.getIdent() == -1) {
 			model.addAttribute("tags", tagService.getAllTags());
-			model.addAttribute("topics", topicService.getTopics());
+			model.addAttribute("topics", getUnarchivedTopics());
 			model.addAttribute("selectedTag", "All");
 			return "index";
 		}
-		List<Topic> topics = topicService.getTopics();
+		
+		if(tag.getIdent() == tagService.getTagByName("archived").getIdent()) {			
+			List<Topic> topics = topicService.getTopics();
+			topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());			
+			model.addAttribute("topics", topics);
+			model.addAttribute("tags", tagService.getAllTags());
+			return "index";
+		}
+		
+		List<Topic> topics = getUnarchivedTopics();
 		topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
-
-		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());
-		model.addAttribute("tags", tagService.getAllTags());
+		model.addAttribute("selectedTag", tagService.getTag(tag.getIdent()).getName());		
 		model.addAttribute("topics", topics);
+		model.addAttribute("tags", tagService.getAllTags());
 		return "index";
 	}
 
 	/**
 	 * User.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/user")
@@ -178,8 +214,10 @@ public class UserController {
 	/**
 	 * Login.
 	 *
-	 * @param user the user
-	 * @param model the model
+	 * @param user
+	 *            the user
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/login")
@@ -190,10 +228,7 @@ public class UserController {
 				model.addAttribute("message", "You are banned from this forum. Contact admin to unban.");
 				return "login";
 			}
-			model.addAttribute("message", "");
-			model.addAttribute("selectedTag", "All");
-			model.addAttribute("topics", topicService.getTopics());
-			model.addAttribute("tags", tagService.getAllTags());
+			fillModel(model);
 			return "index";
 		}
 
@@ -201,64 +236,62 @@ public class UserController {
 		return "login";
 	}
 
-	
-	
 	/**
 	 * Update profile.
 	 *
-	 * @param user the user
-	 * @param model the model
+	 * @param user
+	 *            the user
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/userProfile")
-	public String updateProfile(ForumUser user,Model model) {
+	public String updateProfile(ForumUser user, Model model) {
 
 		if (!isLogged())
 			return "login";
 		model.addAttribute("userController", this);
 		return "userProfile";
 	}
-	
-	
+
 	/**
 	 * Update user.
 	 *
-	 * @param file the file
-	 * @param user the user
-	 * @param model the model
+	 * @param file
+	 *            the file
+	 * @param user
+	 *            the user
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/updateUser")
-	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user,Model model) {
-				
-		System.err.println(user.getIdent());
-		System.err.println(user.getLogin());
-		System.err.println(user.getPassword());
-		
-		
+	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
+
 		if (!userService.nameTaken(user.getLogin())) {
 			user.setRestriction(Restriction.BASIC);
-			
-			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);					
+
+			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
-			
+			fillModel(model);
+			return "index";
+		}
+		
+		fillModel(model);
+		return "index";			
 		}	
-		
-		
-		model.addAttribute("selectedTag", "All");
-		model.addAttribute("tags", tagService.getAllTags());
-		model.addAttribute("topics", topicService.getTopics());
-		
-		
-		return "index";
-	}
+
+
 
 	/**
 	 * Register.
 	 *
-	 * @param file the file
-	 * @param user the user
-	 * @param model the model
+	 * @param file
+	 *            the file
+	 * @param user
+	 *            the user
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/register")
@@ -285,8 +318,8 @@ public class UserController {
 			sb.append("password: " + user.getPassword());
 			sb.append(System.lineSeparator());
 			sb.append(System.lineSeparator());
-			sb.append("In case you forgot your password, you can contact our admin at this email (movieforum@azet.sk)");	
-			
+			sb.append("In case you forgot your password, you can contact our admin at this email (movieforum@azet.sk)");
+
 			sendMailInThread(user.getEmail(), "Movie Forum Registration", sb.toString());
 
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
@@ -304,15 +337,14 @@ public class UserController {
 	/**
 	 * Login.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the string
 	 */
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedUser = null;
-		model.addAttribute("selectedTag", "All");
-		model.addAttribute("topics", topicService.getTopics());
-		model.addAttribute("tags", tagService.getAllTags());
+		fillModel(model);
 		return "index";
 	}
 
@@ -337,7 +369,8 @@ public class UserController {
 	/**
 	 * Decode to image.
 	 *
-	 * @param login the login
+	 * @param login
+	 *            the login
 	 * @return the string
 	 */
 	public String decodeToImage(String login) {
@@ -346,29 +379,25 @@ public class UserController {
 
 		try {
 			byte[] imageInByteArray = userService.getImage(login);
-	
-			
-				ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
-				image = ImageIO.read(bis);
-				bis.close();
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(image, "png", baos);
-				baos.flush();
-				imageInByteArray = baos.toByteArray();
-				baos.close();
-				finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
-				
-			
+
+			ByteArrayInputStream bis = new ByteArrayInputStream(imageInByteArray);
+			image = ImageIO.read(bis);
+			bis.close();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(image, "png", baos);
+			baos.flush();
+			imageInByteArray = baos.toByteArray();
+			baos.close();
+			finalImage = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException r) {
-			r.printStackTrace();
+			System.out.println("image not found");
 		} catch (NullPointerException f) {
-			f.printStackTrace();
-		} 
+			System.out.println("image not found");
+		}
 
 		return "data:image/png;base64," + finalImage;
 	}
 }
-
-

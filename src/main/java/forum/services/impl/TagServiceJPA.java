@@ -70,8 +70,23 @@ public class TagServiceJPA implements TagService{
 		return entityManager.find(Tag.class, ident);
 	}
 	
+<<<<<<< HEAD
 	/*
 	 * This method updates the tag.
+=======
+	@Override
+	public Tag getTagByName(String name) {		
+		try {
+			return (Tag) entityManager
+					.createQuery("SELECT t FROM Tag t WHERE name=:name")
+					.setParameter("name", name).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}	
+	}
+	
+	/* (non-Javadoc)
+>>>>>>> b7f089825ab12ff706f9846557e73b70a7ce355f
 	 * @see forum.services.TagService#updateTag(java.lang.Long, java.lang.String)
 	 */
 	@Override
