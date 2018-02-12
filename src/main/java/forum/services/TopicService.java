@@ -14,28 +14,28 @@ import org.springframework.data.jpa.repository.Modifying;
 
 import forum.entity.Topic;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Interface TopicService.
  */
 public interface TopicService {
 
 	/**
-	 * Adds the topic.
+	 * This method adds the topic.
 	 *
 	 * @param topic the topic
 	 */
 	void addTopic(Topic topic);
 
 	/**
-	 * Gets the topics.
+	 * This method gets the topics.
 	 *
 	 * @return the topics
 	 */
 	List<Topic> getTopics();
 
 	/**
-	 * Delete topic.
+	 * This method deletes the topic.
 	 *
 	 * @param topic the topic
 	 */
@@ -44,7 +44,7 @@ public interface TopicService {
 	void deleteTopic(Topic topic);
 
 	/**
-	 * Gets the topic.
+	 * This method gets the topic.
 	 *
 	 * @param ident the ident
 	 * @return the topic

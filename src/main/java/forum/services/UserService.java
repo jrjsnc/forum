@@ -18,14 +18,14 @@ import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Interface UserService.
  */
 public interface UserService {
 
 	/**
-	 * Register.
+	 * This method register the forum user.
 	 *
 	 * @param user
 	 *            the user
@@ -33,7 +33,7 @@ public interface UserService {
 	void register(ForumUser user);
 
 	/**
-	 * Login.
+	 * This method login the forum user.
 	 *
 	 * @param login
 	 *            the login
@@ -44,14 +44,14 @@ public interface UserService {
 	ForumUser login(String login, String password);
 
 	/**
-	 * Gets the users.
+	 * This method gets the list of all of the forum users.
 	 *
 	 * @return the users
 	 */
 	List<ForumUser> getUsers();
 
 	/**
-	 * Name taken.
+	 * This method reveal the name already taken in forum user list.
 	 *
 	 * @param login
 	 *            the login
@@ -60,7 +60,7 @@ public interface UserService {
 	boolean nameTaken(String login);
 
 	/**
-	 * Gets the user.
+	 * This method gets the forum user.
 	 *
 	 * @param ident
 	 *            the ident
@@ -69,7 +69,7 @@ public interface UserService {
 	ForumUser getUser(Long ident);
 
 	/**
-	 * Gets the user by email.
+	 * This method gets the forum user by email.
 	 *
 	 * @param email
 	 *            the email
@@ -78,7 +78,7 @@ public interface UserService {
 	ForumUser getUserByEmail(String email);
 
 	/**
-	 * Sets the restriction.
+	 * This method set the restrictions for the forum user.
 	 *
 	 * @param ident
 	 *            the ident
@@ -88,7 +88,7 @@ public interface UserService {
 	void setRestriction(Long ident, Restriction restriction);
 
 	/**
-	 * Gets the image.
+	 * This method gets the forum user image.
 	 *
 	 * @param login
 	 *            the login
@@ -97,7 +97,7 @@ public interface UserService {
 	byte[] getImage(String login);
 
 	/**
-	 * Delete user.
+	 * This method deletes the user.
 	 *
 	 * @param user
 	 *            the user
@@ -107,7 +107,7 @@ public interface UserService {
 	void deleteUser(ForumUser user);
 
 	/**
-	 * Update user.
+	 * This method updates the forum user.
 	 *
 	 * @param ident
 	 *            the ident
@@ -123,7 +123,7 @@ public interface UserService {
 	void updateUser(Long ident, String login, String email, String password, MultipartFile userImage);
 
 	/**
-	 * Toggle like.
+	 * This method toggles like of the comment.
 	 *
 	 * @param ident
 	 *            the ident
@@ -133,7 +133,7 @@ public interface UserService {
 	void toggleLike(Long ident, Comment comment);
 
 	/**
-	 * Gets the liked comments.
+	 * This method gets the liked comments.
 	 *
 	 * @param ident
 	 *            the ident

@@ -16,9 +16,10 @@ import forum.entity.Comment;
 import forum.entity.Topic;
 import forum.services.TopicService;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TopicServiceJPA.
+ * This class implements topic services.
  */
 @Transactional
 public class TopicServiceJPA implements TopicService {
@@ -27,7 +28,8 @@ public class TopicServiceJPA implements TopicService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
+	/* 
+	 * This method adds the topic.
 	 * @see forum.services.TopicService#addTopic(forum.entity.Topic)
 	 */
 	@Override
@@ -36,7 +38,8 @@ public class TopicServiceJPA implements TopicService {
 
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the topics.
 	 * @see forum.services.TopicService#getTopics()
 	 */
 	@Override
@@ -44,7 +47,8 @@ public class TopicServiceJPA implements TopicService {
 		return entityManager.createQuery("SELECT t from Topic t ").getResultList();
 	}
 	
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the topic.
 	 * @see forum.services.TopicService#getTopic(java.lang.Long)
 	 */
 	@Override
@@ -52,7 +56,8 @@ public class TopicServiceJPA implements TopicService {
 		return entityManager.find(Topic.class, ident);
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method deletes the topic.
 	 * @see forum.services.TopicService#deleteTopic(forum.entity.Topic)
 	 */
 	@Override

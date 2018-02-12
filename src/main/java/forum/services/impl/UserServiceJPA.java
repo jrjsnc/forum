@@ -25,9 +25,10 @@ import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.UserService;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class UserServiceJPA.
+ * The Class UserServiceJPA
+ * This class implements user service methods
  */
 @Transactional
 public class UserServiceJPA implements UserService {
@@ -36,7 +37,8 @@ public class UserServiceJPA implements UserService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
+	/* 
+	 * This method register the forum user.
 	 * @see forum.services.UserService#register(forum.entity.ForumUser)
 	 */
 	@Override
@@ -44,7 +46,8 @@ public class UserServiceJPA implements UserService {
 		entityManager.persist(user);
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method login the forum user.
 	 * @see forum.services.UserService#login(java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -58,7 +61,8 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method reveal the name already taken in forum user list.
 	 * @see forum.services.UserService#nameTaken(java.lang.String)
 	 */
 	@Override
@@ -72,7 +76,8 @@ public class UserServiceJPA implements UserService {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the list of all of the forum users.
 	 * @see forum.services.UserService#getUsers()
 	 */
 	@Override
@@ -80,7 +85,8 @@ public class UserServiceJPA implements UserService {
 		return entityManager.createQuery("SELECT u FROM ForumUser u").getResultList();
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the forum user.
 	 * @see forum.services.UserService#getUser(java.lang.Long)
 	 */
 	@Override
@@ -88,7 +94,8 @@ public class UserServiceJPA implements UserService {
 		return entityManager.find(ForumUser.class, ident);
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the forum user by email.
 	 * @see forum.services.UserService#getUserByEmail(java.lang.String)
 	 */
 	@Override
@@ -103,7 +110,8 @@ public class UserServiceJPA implements UserService {
 		return fu;
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method set the restrictions for the forum user.
 	 * @see forum.services.UserService#setRestriction(java.lang.Long, forum.entity.Restriction)
 	 */
 	@Override
@@ -112,7 +120,8 @@ public class UserServiceJPA implements UserService {
 		user.setRestriction(restriction);
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method toggles like of the comment.
 	 * @see forum.services.UserService#toggleLike(java.lang.Long, forum.entity.Comment)
 	 */
 	@Override
@@ -125,7 +134,8 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the liked comments.
 	 * @see forum.services.UserService#getLikedComments(java.lang.Long)
 	 */
 	@Override
@@ -134,7 +144,8 @@ public class UserServiceJPA implements UserService {
 		return user.getLikedComments();
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the forum user image.
 	 * @see forum.services.UserService#getImage(java.lang.String)
 	 */
 	@Override
@@ -147,7 +158,8 @@ public class UserServiceJPA implements UserService {
 		}
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method deletes the user.
 	 * @see forum.services.UserService#deleteUser(forum.entity.ForumUser)
 	 */
 	@Override
@@ -158,7 +170,8 @@ public class UserServiceJPA implements UserService {
 		
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method updates the forum user.
 	 * @see forum.services.UserService#updateUser(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, org.springframework.web.multipart.MultipartFile)
 	 */
 	@Override

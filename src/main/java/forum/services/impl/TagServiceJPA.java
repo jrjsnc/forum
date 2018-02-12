@@ -20,27 +20,29 @@ import forum.entity.ForumUser;
 import forum.entity.Tag;
 import forum.services.TagService;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class TagServiceJPA.
+ * The Class TagServiceJPA. This class implements tag services.
  */
 @Transactional
-public class TagServiceJPA implements TagService{
-	
+public class TagServiceJPA implements TagService {
+
 	/** The entity manager. */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
+	/*
+	 * This method adds the tag.
+	 * 
 	 * @see forum.services.TagService#addTag(forum.entity.Tag)
 	 */
 	@Override
 	public void addTag(Tag tag) throws DataIntegrityViolationException {
-		entityManager.persist(tag);		
+		entityManager.persist(tag);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * This method gets all tags.
+	 * 
 	 * @see forum.services.TagService#getAllTags()
 	 */
 	@Override
@@ -48,43 +50,51 @@ public class TagServiceJPA implements TagService{
 		return entityManager.createQuery("SELECT t from Tag t ").getResultList();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * This method deletes the tag.
+	 * 
 	 * @see forum.services.TagService#deleteTag(forum.entity.Tag)
 	 */
 	@Override
 	public void deleteTag(Tag tag) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * This method gets the tag.
+	 * 
 	 * @see forum.services.TagService#getTag(java.lang.Long)
 	 */
 	@Override
 	public Tag getTag(Long ident) {
 		return entityManager.find(Tag.class, ident);
 	}
-	
+
+	/*
+	 * This method updates the tag.
+	 * 
+	 * @see forum.services.TagService#updateTag(java.lang.Long, java.lang.String)
+	 */
 	@Override
-	public Tag getTagByName(String name) {		
+	public Tag getTagByName(String name) {
 		try {
-			return (Tag) entityManager
-					.createQuery("SELECT t FROM Tag t WHERE name=:name")
-					.setParameter("name", name).getSingleResult();
+			return (Tag) entityManager.createQuery("SELECT t FROM Tag t WHERE name=:name").setParameter("name", name)
+					.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
-		}	
+		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see forum.services.TagService#updateTag(java.lang.Long, java.lang.String)
+
+	/*
+	 * This method updates the tag.
+	 * 
+	 * @see forum.services.TagService#getTag(java.lang.Long)
 	 */
 	@Override
 	public void updateTag(Long ident, String name) {
 		Tag tag = entityManager.find(Tag.class, ident);
-		tag.setName(name);		
+		tag.setName(name);
 	}
 
-	
-	
 }
