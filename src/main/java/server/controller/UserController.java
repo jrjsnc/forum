@@ -43,41 +43,36 @@ import forum.services.impl.MailService;
 
 /**
  * The Class UserController. This class implements features connected with user login, register, profile and others
- * .
+ * 
  */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
 
-	/** The date format. */
-	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-	/** The date. */
-	Date date = new Date();
-
-	/** The user service. */
+	/** The userService. Object of class UserService. */
 	@Autowired
 	protected UserService userService;
 
-	/** The topic service. */
+	/** The topicService. Object of class TopicService. */
 	@Autowired
 	protected TopicService topicService;
 
-	/** The tag service. */
+	/** The tagService. Object of class TagService. */
 	@Autowired
 	protected TagService tagService;
 
-	/** The mail service. */
+	/** The mailService. Object of class MailService. */
 	@Autowired
 	protected MailService mailService;
 
-	/** The logged user. */
+	/** The loggedUser. Object of class ForumUser. */
 	private ForumUser loggedUser;
 
 	/**
-	 * This method fills the model.
+	 * This method fills the model with data from database. In drop down menu for tags is always as first tag selected "All". 
 	 *
-	 * @param model the model
+	 * @param model 
 	 */
 	private void fillModel(Model model) {
 		model.addAttribute("message", "");
@@ -87,9 +82,9 @@ public class UserController {
 	}
 
 	/**
-	 * This method gets not archived topics.
+	 * This method gets list of not archived topics.
 	 *
-	 * @return the unarchived topics
+	 * @return topics that are not archived.
 	 */
 	private List<Topic> getUnarchivedTopics() {
 		List<Topic> topics = topicService.getTopics();
@@ -100,14 +95,11 @@ public class UserController {
 	}
 
 	/**
-	 * This method sends mail in thread.
+	 * This method sends mail with parameters to (to whom is mail send), subject (subject of email), messageText (content of email).
 	 *
 	 * @param to
-	 *            the to
 	 * @param subject
-	 *            the subject
 	 * @param messageText
-	 *            the message text
 	 */
 	protected void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
@@ -121,13 +113,12 @@ public class UserController {
 	}
 
 	/**
-	 * This method creates mail by login.
+	 * This method creates mail by StringBuilder that is send to user in case user forgot login information. User enter a mail address into form
+	 * and in case of correct mail address, information is sent to current email.
 	 *
 	 * @param user
-	 *            the user
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return login.html as string in case of wrong mail (mail that is not in database), also in case of correct email(model is filled with message of mail sending).
 	 */
 	@RequestMapping("/mailLogin")
 	public String mailLogin(ForumUser user, Model model) {
@@ -155,11 +146,10 @@ public class UserController {
 	}
 
 	/**
-	 * This method fills the index.
+	 * This method return user to main page of forum and also fill model with data from database (topics and drop down menu with tags).
 	 *
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -176,13 +166,11 @@ public class UserController {
 	}
 
 	/**
-	 * This method filter the topics.
+	 * This method filter the topics by selected tags.
 	 *
 	 * @param tag
-	 *            the tag
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
@@ -210,11 +198,10 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines /user.
+	 * This method defines mapping /user in url .
 	 *
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return login.html as string (web page for login or register of user)
 	 */
 	@RequestMapping("/user")
 	public String user(Model model) {
@@ -222,13 +209,11 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines /login.
+	 * This method defines mapping /login in url and redirect user into web page login.html if the user is BANNED.
 	 *
 	 * @param user
-	 *            the user
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/login")
 	public String login(ForumUser user, Model model) {
@@ -249,13 +234,12 @@ public class UserController {
 	}
 
 	/**
-	 * This method updates the profile.
+	 * This method defines mapping /userProfile in url and redirect user to login if the user is not logged. If user is logged method redirect him to
+	 * userProfile.html (web page of user profile).
 	 *
 	 * @param user
-	 *            the user
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return userProfile.html as string (web page of user profile).
 	 */
 	@RequestMapping("/userProfile")
 	public String updateProfile(ForumUser user, Model model) {
@@ -267,15 +251,12 @@ public class UserController {
 	}
 
 	/**
-	 * This method updates the forum user.
+	 * This method updates the users information such as login, email, profile picture and password.
 	 *
 	 * @param file
-	 *            the file
 	 * @param user
-	 *            the user
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string after successful update of profile information.
 	 */
 	@RequestMapping("/updateUser")
 	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
@@ -294,15 +275,13 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines /register.
+	 * This method defines mapping /register in url and redirect user into main page of forum in case of successful registration.
+	 * In case of wrong registration, user is indirect into logi.html to try registration again.
 	 *
 	 * @param file
-	 *            the file
 	 * @param user
-	 *            the user
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string when registration is successful. login.html as string if registration is wrong.
 	 */
 	@RequestMapping("/register")
 	public String register(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
@@ -345,11 +324,10 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines /logout.
+	 * This method defines mapping /logout in url and redirect user into index.html after logout.
 	 *
 	 * @param model
-	 *            the model
-	 * @return the string
+	 * @return index.html as string
 	 */
 	@RequestMapping("/logout")
 	public String login(Model model) {
@@ -377,11 +355,10 @@ public class UserController {
 	}
 
 	/**
-	 * This method deals with image manipulation
+	 * This method deals with image manipulation. Also rewrite type of every image into png.
 	 *
 	 * @param login
-	 *            the login
-	 * @return the string
+	 * @return the string of url to image
 	 */
 	public String decodeToImage(String login) {
 		String finalImage = "";

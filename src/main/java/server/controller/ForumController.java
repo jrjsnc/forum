@@ -79,7 +79,7 @@ public class ForumController {
 	 * Adds the tag. This method allows user with restriction ADMIN adding new tags. Same tag can not be added twice. 
 	 * @param tag 
 	 * @param model 
-	 * @return admin.html 
+	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/addTag")
 	public String addTag(Tag tag, Model model) {
@@ -100,7 +100,7 @@ public class ForumController {
 	 *
 	 * @param tag 
 	 * @param model 
-	 * @return admin.html
+	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/updateTag")
 	public String updateTag(Tag tag, Model model) {
@@ -114,7 +114,7 @@ public class ForumController {
 	 * Adds the topic tag. This method allows user with restriction ADMIN assign tag to current topic.
 	 * @param tag 
 	 * @param model 
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopicTag")
 	public String addTopicTag(Tag tag, Model model) {
@@ -130,7 +130,7 @@ public class ForumController {
 	 *
 	 * @param tag 
 	 * @param model 
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/removeTopicTag")
 	public String removeTopicTag(Tag tag, Model model) {
@@ -144,7 +144,7 @@ public class ForumController {
 	 * Toggle like. This method allows user to like or unlike comment. User can like/unlike comment only once.
 	 * @param ident 
 	 * @param model 
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/toggleLike")
 	public String toggleLike(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -173,7 +173,7 @@ public class ForumController {
 	 *
 	 * @param ident
 	 * @param model
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/topic")
 	public String getTopic(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -187,7 +187,7 @@ public class ForumController {
 	 *
 	 * @param topic 
 	 * @param model 
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopic")
 	public String addTopic(Topic topic, Model model) {
@@ -205,7 +205,7 @@ public class ForumController {
 	 *
 	 * @param comment
 	 * @param model
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addComment")
 	public String addComment(Comment comment, Model model) {
@@ -225,7 +225,7 @@ public class ForumController {
 	 *
 	 * @param comment the comment
 	 * @param model the model
-	 * @return topic.html (web page where user can add comments to current topic)
+	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/updateComment")
 	public String updateComment(Comment comment, Model model) {
@@ -240,7 +240,7 @@ public class ForumController {
 	 *
 	 * @param ident 
 	 * @param model 
-	 * @return admin.html (web page for admins only where BASIC and BANNED user has no access.)
+	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleAdmin")
 	public String toggleAdmin(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -267,7 +267,7 @@ public class ForumController {
 	 *
 	 * @param ident
 	 * @param model
-	 * @return admin.html (web page for admins only where BASIC and BANNED user has no access.)
+	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleBan")
 	public String toggleBan(@RequestParam(value = "ident", required = false) String ident, Model model) {
@@ -286,7 +286,7 @@ public class ForumController {
 	 * This method redirect BASIC or BANNED users to web page 404.html in case they try to penetrate into admin.html
 	 *
 	 * @param model 
-	 * @return 404.html if user is BASIC or BANNED. If user is ADMIN return admin.html.
+	 * @return 404.html as string if user is BASIC or BANNED. If user is ADMIN return admin.html as string.
 	 */
 	@RequestMapping("/admin")
 	public String admin(Model model) {
