@@ -14,14 +14,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import forum.entity.Comment;
+import forum.server.ForumServerTest;
 import forum.services.CommentService;
 import server.ForumServer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = ForumServer.class)
+@ContextConfiguration(classes = ForumServerTest.class)
 public class CommentServiceTest {
+	
+	
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -31,13 +34,11 @@ public class CommentServiceTest {
 	
 	@Test
 	public void addComentTest() {
-		final Comment comment = new Comment();
-		final Long id = comment.getIdent();
+		final Comment comment = new Comment();		
 		comment.setContent("macka");
 		
 		commentService.addComment(comment);
-		// po pridani ma mat comment id
-		
+		final Long id = comment.getIdent();
 		
 		Assert.assertNotNull(id);
 		Assert.assertEquals("macka", commentService.getComment(id).getContent());
