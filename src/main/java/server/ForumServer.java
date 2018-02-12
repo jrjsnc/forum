@@ -32,7 +32,6 @@ import server.controller.SetupController;
 @SpringBootApplication
 // @EnableWs
 @EntityScan({ "forum.entity" })
-
 public class ForumServer {
 
 	@Autowired
