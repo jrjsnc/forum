@@ -244,6 +244,13 @@ public class UserController {
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			
 		}	
+		
+		
+		model.addAttribute("selectedTag", "All");
+		model.addAttribute("tags", tagService.getAllTags());
+		model.addAttribute("topics", topicService.getTopics());
+		
+		
 		return "index";
 	}
 
