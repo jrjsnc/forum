@@ -21,9 +21,10 @@ import forum.entity.Tag;
 import forum.services.TagService;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TagServiceJPA.
+ * This class implements tag services.
  */
 @Transactional
 public class TagServiceJPA implements TagService{
@@ -32,7 +33,8 @@ public class TagServiceJPA implements TagService{
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
+	/*
+	 * This method adds the tag.
 	 * @see forum.services.TagService#addTag(forum.entity.Tag)
 	 */
 	@Override
@@ -40,7 +42,8 @@ public class TagServiceJPA implements TagService{
 		entityManager.persist(tag);		
 	}
 	
-	/* (non-Javadoc)
+	/*
+	 * This method gets all tags.
 	 * @see forum.services.TagService#getAllTags()
 	 */
 	@Override
@@ -48,7 +51,8 @@ public class TagServiceJPA implements TagService{
 		return entityManager.createQuery("SELECT t from Tag t ").getResultList();
 	}
 
-	/* (non-Javadoc)
+	/*
+	* This method deletes the tag.
 	 * @see forum.services.TagService#deleteTag(forum.entity.Tag)
 	 */
 	@Override
@@ -57,7 +61,8 @@ public class TagServiceJPA implements TagService{
 		
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * This method gets the tag.
 	 * @see forum.services.TagService#getTag(java.lang.Long)
 	 */
 	@Override
@@ -65,7 +70,8 @@ public class TagServiceJPA implements TagService{
 		return entityManager.find(Tag.class, ident);
 	}
 	
-	/* (non-Javadoc)
+	/*
+	 * This method updates the tag.
 	 * @see forum.services.TagService#updateTag(java.lang.Long, java.lang.String)
 	 */
 	@Override

@@ -11,15 +11,16 @@ import javax.mail.internet.*;
 import javax.transaction.Transactional;
 import java.util.Properties;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class MailService.
+ * This class is responsible for mail notification
  */
 @Transactional
 public class MailService {
 
 	/**
-	 * Send mail.
+	 * This method sends mail.
 	 *
 	 * @param to the to
 	 * @param subject the subject

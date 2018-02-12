@@ -14,21 +14,21 @@ import org.springframework.data.jpa.repository.Modifying;
 
 import forum.entity.Comment;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Interface CommentService.
  */
 public interface CommentService {
 	
 	/**
-	 * Adds the comment.
+	 * This method adds the comment.
 	 *
 	 * @param comment the comment
 	 */
 	void addComment(Comment comment);
 	
 	/**
-	 * Gets the comments.
+	 * This method gets the comments.
 	 *
 	 * @param topic the topic
 	 * @return the comments
@@ -36,7 +36,7 @@ public interface CommentService {
 	List<Comment> getComments(String topic);
 	
 	/**
-	 * Delete comment.
+	 * This method deletes the comment.
 	 *
 	 * @param comment the comment
 	 */
@@ -45,7 +45,7 @@ public interface CommentService {
 	void deleteComment(Comment comment);
 	
 	/**
-	 * Update comment.
+	 * This method updates the comment.
 	 *
 	 * @param ident the ident
 	 * @param content the content
@@ -53,7 +53,7 @@ public interface CommentService {
 	void updateComment(Long ident, String content);
 
 	/**
-	 * Gets the comment.
+	 * This method gets the comment.
 	 *
 	 * @param ident the ident
 	 * @return the comment

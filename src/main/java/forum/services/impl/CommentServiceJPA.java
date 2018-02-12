@@ -18,9 +18,10 @@ import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.CommentService;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class CommentServiceJPA.
+ * This class implements comment services
  */
 @Transactional
 public class CommentServiceJPA implements CommentService {
@@ -29,7 +30,8 @@ public class CommentServiceJPA implements CommentService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* (non-Javadoc)
+	/* 
+	 * This method adds the comment.
 	 * @see forum.services.CommentService#addComment(forum.entity.Comment)
 	 */
 	@Override
@@ -37,7 +39,8 @@ public class CommentServiceJPA implements CommentService {
 		entityManager.persist(comment);
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the comments.
 	 * @see forum.services.CommentService#getComments(java.lang.String)
 	 */
 	@Override
@@ -46,7 +49,8 @@ public class CommentServiceJPA implements CommentService {
 				.setParameter("topic", topic).getResultList();
 	}
 	
-	/* (non-Javadoc)
+	/* 
+	 * This method gets the comment.
 	 * @see forum.services.CommentService#getComment(java.lang.Long)
 	 */
 	@Override
@@ -64,7 +68,8 @@ public class CommentServiceJPA implements CommentService {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/* 
+	 * This method deletes the comment. 
 	 * @see forum.services.CommentService#deleteComment(forum.entity.Comment)
 	 */
 	@Override
@@ -74,7 +79,8 @@ public class CommentServiceJPA implements CommentService {
 
 	}	
 	
-	/* (non-Javadoc)
+	/* 
+	 * This method updates the comment. 
 	 * @see forum.services.CommentService#updateComment(java.lang.Long, java.lang.String)
 	 */
 	@Override
