@@ -1,6 +1,1 @@
-forum
-forum.entity
-forum.services
 forum.services.impl
-server
-server.controller
