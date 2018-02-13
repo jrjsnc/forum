@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import server.ForumServer;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = ForumServer.class)
+@ContextConfiguration(classes = ForumServerTest.class)
 public class UserServiceTest {
 	
 	@PersistenceContext
@@ -32,16 +33,38 @@ public class UserServiceTest {
 	@Autowired
 	private UserService userService;
 	
+	@Before
+	public void generate() {
+		ForumUser u1 = new ForumUser();
+		u1.setLogin("u1");
+		u1.setPassword("pass");
+		u1.setEmail("u1@email.com");
+		ForumUser u2 = new ForumUser();
+		u2.setLogin("u2");
+		u2.setPassword("pass");
+		u2.setEmail("u2@email.com");
+		ForumUser u3 = new ForumUser();
+		u3.setLogin("u3");
+		u3.setPassword("pass");
+		u3.setEmail("u3@email.com");
+		
+		entityManager.persist(u1);
+		entityManager.persist(u2);
+		entityManager.persist(u3);
+	}
+	
 	@Test
 	public void registerTest() {
-		final ForumUser user = new ForumUser();
-		user.setLogin("macka");
+		ForumUser u = new ForumUser();
+		u.setLogin("user");
+		u.setPassword("pass");
+		u.setEmail("user@email.com");
 		
-		userService.register(user);
-		final Long id = user.getIdent();
+		userService.register(u);
+		final Long id = u.getIdent();
 		
 		Assert.assertNotNull(id);
-		Assert.assertEquals("macka", userService.getUser(id).getLogin());
+		Assert.assertEquals("user", userService.getUser(id).getLogin());
 	}
 	
 	
