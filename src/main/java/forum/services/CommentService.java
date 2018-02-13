@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 
 import forum.entity.Comment;
+import forum.entity.Topic;
 
 
 /**
@@ -33,7 +34,7 @@ public interface CommentService {
 	 * @param topic the topic
 	 * @return the comments
 	 */
-	List<Comment> getComments(String topic);
+	List<Comment> getComments(Topic topic);
 	
 	
 	/**

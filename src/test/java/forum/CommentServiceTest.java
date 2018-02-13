@@ -1,5 +1,7 @@
 package forum;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import forum.entity.Comment;
+import forum.entity.Topic;
 import forum.server.ForumServerTest;
 import forum.services.CommentService;
 import server.ForumServer;
@@ -34,7 +37,7 @@ public class CommentServiceTest {
 	
 	@Test
 	public void addComentTest() {
-		final Comment comment = new Comment();		
+		Comment comment = new Comment();		
 		comment.setContent("macka");
 		
 		commentService.addComment(comment);
@@ -46,7 +49,7 @@ public class CommentServiceTest {
 	
 	@Test
 	public void updateCommentTest() {
-		final Comment comment1 = new Comment();
+		Comment comment1 = new Comment();
 		comment1.setContent("macka");
 	
 		entityManager.persist(comment1);
@@ -56,5 +59,31 @@ public class CommentServiceTest {
 		Assert.assertEquals(commentService.getComment(comment1.getIdent()).getContent(), "pes");
 		
 	}
+	@Test
+	public void getCommentTest() {
+		Comment c1 = new Comment();
+		c1.setContent("macka");
+		commentService.addComment(c1);			
+		Assert.assertEquals(c1, commentService.getComment(c1.getIdent()));
+	}
 	
+	@Test
+	public void getCommentsTest() {
+		Topic t = new Topic();
+		t.setTitle("zvierata");
+		
+		Comment c1 = new Comment();
+		c1.setContent("macka");
+		c1.setTopic(t);
+		entityManager.persist(c1);		
+		
+		Comment c2 = new Comment();
+		c2.setContent("pes");
+		c2.setTopic(t);
+		entityManager.persist(c2);		
+			
+		List<Comment> c = commentService.getComments(t);
+		
+		Assert.assertEquals(2, c.size());		
+	}
 }
