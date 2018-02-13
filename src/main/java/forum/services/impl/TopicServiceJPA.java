@@ -12,14 +12,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import forum.entity.Comment;
 import forum.entity.Topic;
 import forum.services.TopicService;
 
-
 /**
- * The Class TopicServiceJPA.
- * This class implements topic services.
+ * The Class TopicServiceJPA. This class implements topic services.
  */
 @Transactional
 public class TopicServiceJPA implements TopicService {
@@ -28,8 +25,9 @@ public class TopicServiceJPA implements TopicService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/* 
+	/*
 	 * This method adds the topic.
+	 * 
 	 * @see forum.services.TopicService#addTopic(forum.entity.Topic)
 	 */
 	@Override
@@ -38,38 +36,24 @@ public class TopicServiceJPA implements TopicService {
 
 	}
 
-	/* 
+	/*
 	 * This method gets the topics.
+	 * 
 	 * @see forum.services.TopicService#getTopics()
 	 */
 	@Override
 	public List<Topic> getTopics() {
 		return entityManager.createQuery("SELECT t from Topic t ").getResultList();
 	}
-	
-	/* 
+
+	/*
 	 * This method gets the topic.
+	 * 
 	 * @see forum.services.TopicService#getTopic(java.lang.Long)
 	 */
 	@Override
-	public Topic getTopic(Long ident) {		
+	public Topic getTopic(Long ident) {
 		return entityManager.find(Topic.class, ident);
 	}
 
-	/* 
-	 * This method deletes the topic.
-	 * @see forum.services.TopicService#deleteTopic(forum.entity.Topic)
-	 */
-	@Override
-	public void deleteTopic(Topic topic) {
-		
-		Topic t = (Topic)entityManager.createQuery("SELECT t FROM Topic t JOIN FETCH t.comments WHERE t.ident = :ident")
-				.setParameter("ident", topic.getIdent()).getSingleResult();
-		
-		t.getComments().clear();		
-		
-		entityManager.createQuery("DELETE FROM Topic t WHERE t.title=:title").setParameter("title", topic.getTitle())
-				.executeUpdate();		
-	}
-	
 }

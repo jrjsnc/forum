@@ -9,15 +9,11 @@ package forum.services;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.multipart.MultipartFile;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
-
 
 /**
  * The Interface UserService.
@@ -95,16 +91,6 @@ public interface UserService {
 	 * @return the image
 	 */
 	byte[] getImage(String login);
-
-	/**
-	 * This method deletes the user.
-	 *
-	 * @param user
-	 *            the user
-	 */
-	@Transactional
-	@Modifying
-	void deleteUser(ForumUser user);
 
 	/**
 	 * This method updates the forum user.

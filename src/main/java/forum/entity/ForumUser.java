@@ -25,7 +25,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * The Class ForumUser.
  */
@@ -39,17 +38,17 @@ public class ForumUser {
 	private Long ident;
 
 	/** The users login. Login is unique and can't be null. */
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String login;
-	
+
 	/** The users password. Password can't be null. */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
-	
+
 	/** The users email. Email must be unique and can't be null. */
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String email;
-	
+
 	/** The users image. */
 	private byte[] userImage;
 
@@ -57,19 +56,20 @@ public class ForumUser {
 	@Enumerated(EnumType.STRING)
 	private Restriction restriction;
 
-	/** The one to many relation with entity comment.  */
+	/** The one to many relation with entity comment. */
 	@OneToMany(mappedBy = "forumUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<Comment>();
 
 	/** The many to many relation with comment. */
-	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinTable(name = "forum_user_comment", joinColumns = @JoinColumn(name = "forum_user_ident"), inverseJoinColumns = @JoinColumn(name = "comment_ident"))
 	private Set<Comment> liked = new HashSet<Comment>();
 
 	/**
 	 * Adds the comment.
 	 *
-	 * @param comment to add.
+	 * @param comment
+	 *            to add.
 	 */
 	public void addComment(Comment comment) {
 		comments.add(comment);
@@ -77,19 +77,9 @@ public class ForumUser {
 	}
 
 	/**
-	 * Removes the comment.
-	 *
-	 * @param comment to remove.
-	 */
-	public void removeComment(Comment comment) {
-		comments.remove(comment);
-		comment.setForumUser(null);
-	}
-
-	/**
 	 * Adds the likes to comment.
 	 *
-	 * @param likedComment. 
+	 * @param likedComment.
 	 */
 	public void addLikedComment(Comment likedComment) {
 		liked.add(likedComment);
@@ -119,13 +109,15 @@ public class ForumUser {
 	/**
 	 * Sets the liked comments.
 	 *
-	 * @param likedComments to set.
+	 * @param likedComments
+	 *            to set.
 	 */
 	public void setLikedComments(Set<Comment> likedComments) {
 		this.liked = likedComments;
 	}
 
-	/* method equals. Return true when ident of object equals with ident of user. 
+	/*
+	 * method equals. Return true when ident of object equals with ident of user.
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -136,7 +128,8 @@ public class ForumUser {
 		return ident != null && ident.equals(((ForumUser) o).getIdent());
 	}
 
-	/* return the hashcode of user.
+	/*
+	 * return the hashcode of user.
 	 */
 	@Override
 	public int hashCode() {
@@ -155,7 +148,8 @@ public class ForumUser {
 	/**
 	 * Sets the restriction. User can be ADMIN, BASIC, BANNED.
 	 *
-	 * @param restriction to set.
+	 * @param restriction
+	 *            to set.
 	 */
 	public void setRestriction(Restriction restriction) {
 		this.restriction = restriction;
@@ -200,7 +194,8 @@ public class ForumUser {
 	/**
 	 * Sets the ident of user.
 	 *
-	 * @param ident to set.
+	 * @param ident
+	 *            to set.
 	 */
 	public void setIdent(Long ident) {
 		this.ident = ident;
@@ -209,7 +204,8 @@ public class ForumUser {
 	/**
 	 * Sets the users login.
 	 *
-	 * @param login to set.
+	 * @param login
+	 *            to set.
 	 */
 	public void setLogin(String login) {
 		this.login = login;
@@ -218,7 +214,8 @@ public class ForumUser {
 	/**
 	 * Sets the users password.
 	 *
-	 * @param password to set.
+	 * @param password
+	 *            to set.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -227,7 +224,8 @@ public class ForumUser {
 	/**
 	 * Sets the users email.
 	 *
-	 * @param email to set.
+	 * @param email
+	 *            to set.
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -245,13 +243,15 @@ public class ForumUser {
 	/**
 	 * Sets the user image.
 	 *
-	 * @param photo to be set as users image
+	 * @param photo
+	 *            to be set as users image
 	 */
 	public void setUserImage(byte[] photo) {
 		this.userImage = photo;
 	}
 
-	/* method toString return value of hashcode.
+	/*
+	 * method toString return value of hashcode.
 	 */
 	@Override
 	public String toString() {
