@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="css/login.css" />
+<link rel="stylesheet" href="css/forum.css" />
 <head>
 <meta charset="UTF-8" />
 <title>Login</title>
@@ -34,22 +34,25 @@
 
 				<h4 class="alert">
 					<span th:text='${message}' />
-					</h4>
-					<br/>
-					
-					<button class="updateButton" th:onclick="'showMailForm();'"> forgot password </button>
-					
-					<form  style="display:none;"  th:action='${"/mailLogin"}' method="post" id="mailForm"> 
-		<input type="text" name="email" placeholder="Your email" required="required"/>
-			<button type="submit" value="Mail login info"> Send Mail </button>
-					</form> 
-					
-			
-				
+				</h4>
+				<br />
+
+				<button class="updateButton" th:onclick="'showMailForm();'">
+					forgot password</button>
+
+				<form style="display: none;" th:action='${"/mailLogin"}'
+					method="post" id="mailForm">
+					<input type="text" name="email" placeholder="Your email"
+						required="required" />
+					<button type="submit" value="Mail login info">Send Mail</button>
+				</form>
+
+
+
 
 			</div>
-			
-			
+
+
 
 
 
@@ -99,5 +102,4 @@
 	</div>
 </body>
 <script src="js/forum.js" />
-
 </html>

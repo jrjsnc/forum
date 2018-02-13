@@ -1,104 +1,555 @@
-body{
-	background-image: url("/pictures/background.jpeg");
+*{
 	
-	-moz-background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+	box-sizing: border-box;
 }
-.header{
-	text-align: center;
-	font-family: "Tw Cen MT" !important;
-	font-size: 150%;
-	font-style: normal;
-	font-style: italic;
-	font-style: oblique;
+
+
+body {
+	color: #6e6f59;
+	background-color: #c9cba3;
+	line-height: 1,6;
+	font-family: 'Tw Cen MT';
+	padding: 1em;	
 }
-.classlogin {
-  display: inline-block;
-  margin-bottom: .5rem;
-  border-radius: 15px;
-  font-family: "Tw Cen MT" !important;
+
+.container, .container2, .container3, .containerProfile, .container4 {
+	max-width: 700px;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 1em;	
 }
-.classregister{
-  display: inline-block;
-  margin-bottom: .5rem;
-  border-radius: 15px;
-  font-family: "Tw Cen MT" !important;
-}
-h4{
-  font-family: "Tw Cen MT" !important;
-  font-size: 125%;
-  text-align: left;
-}
-input {
-  display: inline-block;
-  margin-bottom: .5rem;
-  border-radius: 15px;  
-}
-form {
-	text-align: left;
-}
-fieldset{
-	border: none;
-}
-.footer{
-	text-align: center;
-}
-.classlogin{
-	text-align: right;
-}
-.classregister{
-	text-align: right;
-}
-.topics > div{
-	background: #eee;
-	padding: 1em;
-	border: #333 1px solid;
-}
-.topics > div:nth-child(odd){
-	background: #ddd;
-}
-.topics{
-	display: grid;
-	grid-row-gap: 0.5em;
-	font-size: 175%;
-	font-family: "Tw Cen MT" !important;
-	font-style: italic;
-	grid-auto-rows: minmax(100px, auto);
-}
+
 .scroll{
     overflow: scroll;
-    color: grey;
-    width: 5px;
-    height: 5px;
+    color: #000000;
+    width: 100%;
+	max-height: 400px;
+    margin-left:auto;
+	margin-right:auto;
+	overflow-x: hidden;
 }
-.login{
-	text-align: left !important;
+.topics {
+	padding:1rem;
 }
-.right_header{
-	color: blue !important;
+
+.container2 textarea{
+	
+	outline:none;
+	resize:none;
+	overflow:auto;
+	
 }
-.right_header2{
-	color: blue !important;
+
+.like input{
+	text-decoration: none;
+	background-color: #6e6f59;
+	color:#ffffff;
+	border:none;
 }
-.user{
-	color: red;
-	text-decoration: underline;
-	font-style: italic;
+#topicName{
+	font-size: 25px;
+	font-style:italic;
+	margin-top: auto;
+	margin-bottom: auto;
+	color:#3b3a30;	
+	
 }
+
+.topics span{
+	font-size: 15px;
+	font-style:italic;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: #6e6f59;
+}
+
+.updateButton {
+	font-size: 10px;
+	
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px #6e6f59; 
     border-radius: 10px;
+    background: #6e6f59; 
 }
 ::-webkit-scrollbar-thumb {
-    background: #606af0; 
+    background: white;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #606af0; 
+    background: white; 
+}
+.header{
+	text-align: center;
+	
+}
+.header a, .header a:hover{
+	font-size: 40px;
+	text-align: center;
+	padding: 0.5em;
+	color: #3b3a30;
+	text-decoration: none;
+	
+}
+.header a:hover{
+	color: #ffe1a8;
+	
+}
+
+.linkLoginRegister a, .linkLoginRegister a:hover {
+	text-decoration: none;
+	color:#6e6f59;
+	font-size: 15px;
+	text-align: right;
+	
+}
+
+
+.linkLoginRegister a:focus  {
+	
+	text-decoration: none;
+	color:#ffe1a8;
+	
+}
+
+.imgUserName {
+	
+	position: relative;
+    width: 50%;
+    margin-left: auto;
+	margin-right: auto;
+    
+ }
+
+.imageIndex {
+	
+opacity: 1;
+  display: block;
+  margin-left: auto;
+	margin-right: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle{
+	
+ transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;	
+	
+}
+
+.imgUserName:hover .imageIndex{
+	
+	 opacity: 0.3;
+	
+}
+
+.imgUserName:hover .middle{
+	
+	opacity: 1;
+	
+}
+
+.text {
+  color:#3b3a30;
+  font-size: 20px;
+  padding: 20px 20px;
+}
+
+.title {
+	
+	color: #ffe1a8;
+	text-align: center;
+	font-size: 30px;
+	font-style: italic;
+	
+	
+}
+
+
+
+.content {
+	
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  font-size: 25px;
+  color:#3b3a30;
+}
+
+.footer{
+	
+	text-align: center;
+}
+
+.footer a, .footer a:hover {
+	text-decoration: none;
+	color:#3b3a30;
+	align: center;
+	
+}
+
+.footer a:hover {
+	color:#ffe1a8;
+	
+}
+.footer a:focus  {
+	
+	text-decoration: none;
+	color: #6e6f59;
+	
+}
+.header span{
+	
+	color:#ffe1a8;
+	font-size: 15px;
+	text-align: right;
+}
+.lionel {
+	box-shadow: 0 0 20px 0 #6e6f59;
+	text-align: center;
+	align:center;
+	}
+
+.lionel img {
+	margin:auto;
+}
+	
+.lionel h4{
+	font-size:50px;
+	margin:0;
+	padding:0.5em;
+}
+
+.lionel div{
+	font-size:25px;
+}
+	
+.lionel > *{
+	padding:0.5em;	
+}
+}
+.wrapper{
+	box-shadow: 0 0 20px 0 #6e6f59;
+	
+}
+
+.wrapper > *{
+	padding:1em;	
+}
+
+.wrapper2 > *{
+	padding:0.3em;	
+}
+
+.wrapper2 {
+	background-color: #ffe1a8;
+	color:#6e6f59;
+	text-align: center;
+	align: center;
+}
+.wrapper2 .comments:nth-child(2n), .topics:nth-child(2n) {
+	background: #ffffff;
+	border-style: solid;
+    border-width: 1px 0px 1px 0px;
+	}
+	
+	
+	
+
+
+.wrapper2 a:hover{
+	text-decoration: underline;
+	
+}
+.removeAddTags {
+	text-align: center;
+}
+
+.wrapper2 a {
+	
+	text-decoration: none;
+	color: #6e6f59;
+	
+}
+
+.wrapper2 a:focus {
+	text-decoration: none;
+	color: #ffe1a8;
+	
+	
+}
+
+.login, .profile {
+	background-color: #ffe1a8;
+
+}
+
+.login h4, .login form, .profile div{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+
+.login form, .profile div {
+	display: grid;
+	grid-template-columns: 1fr  ;	
+	grid-gap:20px;
+
+}
+
+.register, .updateForm {
+	background-color: #ffffff;
+
+}
+.register h4, .register form, .updateForm form{
+	text-align: center;
+	margin: 0 0 1rem 0;
+	
+}
+
+.register form, .updateForm form {
+	display: grid;
+	grid-template-columns: 1fr ;	
+	grid-gap:20px;
+
+}
+
+.profile span {
+	color: black;
+}
+
+.updateForm form {
+	display: grid;
+	grid-template-columns: 2fr 1fr ;	
+	grid-gap:20px;
+
+}
+.comments{
+	display: grid;
+	grid-template-columns: 1fr 2fr ;	
+	grid-gap:20Spx;
+}
+
+.login form label, .register form label {
+	
+	display: block;
+	
+}
+
+.login form p, .register form p {
+	
+	margin: 0;
+	
+}
+
+.login form button, .register form button, .login form input, .register form input, .updateForm form input, .updateForm form button {
+	
+	width: 100%;
+	padding: 0.5em;
+	
+}
+
+.container form button,.container2 button, .container3 button, .containerProfile button, .404admin button{
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	width: 120px;
+	
+}
+
+.updateCommentButton, .removeAddTags button, .updateCommentForm button {
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	width: 120px;
+	
+}
+
+.updateCommentButton:hover, .updateCommentButton:focus, .removeAddTags button:hover, .removeAddTags button:focus, .updateCommentForm button:hover, .updateCommentForm button:focus{
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+	
+	
+}
+.form{
+	
+	text-align: center;
+}
+.tags{
+	
+	text-align: center;
+}
+
+.username{
+	font-size: 15px;
+}
+
+.date{
+	font-size: 15px;
+	align: right;
+}
+.form button {
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	width: 50px;
+	
+	
+}
+
+.tagsColor {
+	
+	color: #6e6f59; 
+}
+
+.addTags select, .removeTags select{
+	
+	width: 100px;
+	
+	
+}
+.lionel button {
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	
+}
+
+.lionel button:hover, .lionel button:focus{
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+	
+}
+.container3 button:focus, .container3 button:hover {
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+	
+}
+
+.container3 button{
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+	
+}
+
+
+.container2 button:hover, .container2 button:focus {
+background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+}
+.login  button, .register button, .updateForm button, .profile button {
+	
+	align: center;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #6e6f59;
+	color:#c9cba3 ;
+}
+
+.login  button:hover, .login button:focus, .register  button:focus, .register button:hover, .updateForm button:hover, .updateForm button:focus, .profile button:hover, .profile button:focus {
+	
+	background:#c9cba3 ;
+	color:#6e6f59 ;
+	outline: 0;
+	transition: background-color 1s ease-out ;
+}
+
+.photo img {
+	text-align:right;
+}
+
+.full {
+	align-items: center ;
+ 	width: 100px;
+	margin-left:auto;
+	margin-right:auto;
+ 	
+	
+}
+
+@media(min-width:700px) {
+	.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	
+	}
+	
+	.lionel {
+	display: grid;
+	grid-template-columns: 1fr;
+	
+	}
+	.comments {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	
+	}
+	.topics {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	
+	}
+	.login form, .profile div {
+	display: grid;
+	grid-template-columns: 1fr  ;
+	
+	}
+	
+	.register form, .updateForm form{
+	display: grid;
+	grid-template-columns: 1fr 1fr ;
+	
+	}
+	
+	.wrapper > *{
+	padding: 2em;
+	
+	}
+
+	
+
 }
 

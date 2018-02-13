@@ -8,49 +8,48 @@ package forum.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
-
 import forum.entity.Comment;
 import forum.entity.Topic;
-
 
 /**
  * The Interface CommentService.
  */
 public interface CommentService {
-	
+
 	/**
 	 * This method adds the comment.
 	 *
-	 * @param comment the comment
+	 * @param comment
+	 *            the comment
 	 */
 	void addComment(Comment comment);
-	
+
 	/**
 	 * This method gets the comments.
 	 *
-	 * @param topic the topic
+	 * @param topic
+	 *            the topic
 	 * @return the comments
 	 */
 	List<Comment> getComments(Topic topic);
-	
-	
+
 	/**
 	 * This method updates the comment.
 	 *
-	 * @param ident the ident
-	 * @param content the content
+	 * @param ident
+	 *            the ident
+	 * @param content
+	 *            the content
 	 */
 	void updateComment(Long ident, String content);
 
 	/**
 	 * This method gets the comment.
 	 *
-	 * @param ident the ident
+	 * @param ident
+	 *            the ident
 	 * @return the comment
 	 */
 	Comment getComment(Long ident);
-	
-	}
+
+}

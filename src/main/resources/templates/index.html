@@ -1,90 +1,94 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="css/login.css"/>
+<link rel="stylesheet" href="css/forum.css" />
 <head>
 <meta charset="UTF-8" />
 <title>Movie forum</title>
 </head>
 <body>
-	
+
 	<div class="container3">
-	
-			<span th:replace="fragments::header"></span>	
-			<br/>
-			
-			<div class="indexForm">
-			
-			<form th:action='${"/filterTopics"}'>	
-					<label for="tags">Tags: </label>	<select th:name= "ident" th:onechane='${"/filterTopics"}' value="select topic" id="tags">
 
-						<option th:each="tag : ${tags}" th:value="${tag.ident}"
-							th:text="${tag.getName()}" />
-							<option th:value="-1" selected="true">all</option>
-						
-					</select>					
-					<button type="submit" value="Select topics">Select topics</button>
-					<span>Selected tag: </span><span th:text='${selectedTag}'/>					
-				</form> 
-				
-				
-				
+		<span th:replace="fragments::header"></span> <br />
+
+		<div class="indexForm">
+
+			<form th:action='${"/filterTopics"}'>
+				<label for="tags">Tags: </label> <select th:name="ident"
+					th:onechane='${"/filterTopics"}' value="select topic" id="tags">
+
+					<option th:each="tag : ${tags}" th:value="${tag.ident}"
+						th:text="${tag.getName()}" />
+					<option th:value="-1" selected="true">all</option>
+
+				</select>
+				<button type="submit" value="Select topics">Select topics</button>
+				<span>Selected tag: </span><span th:text='${selectedTag}' />
+			</form>
+
+
+
+		</div>
+		<br />
+
+		<div class="scroll">
+			<div class="wrapper2">
+
+
+				<div class="topics" th:each="topic : ${topics}">
+
+
+					<div>
+						<a th:href='${"/topic?ident=" +topic.ident}'><span
+							id="topicName" th:text='${topic.title}' /></a>
+					</div>
+
+
+					<div>
+						<span> Comments: </span><span
+							th:text='${topic.getComments().size()}' />
+					</div>
+
+
+					<div class="imgUserName">
+
+						<img class="imageIndex" width="40" height="40"
+							th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
+							onerror="this.src='image/default.jpg';" />
+						<div class="middle">
+							<span class="text" th:text='${topic.getForumUser().getLogin()}' />
+
+						</div>
+					</div>
+				</div>
 			</div>
-			<br/>
-			
-			<div class="scroll">
-		<div class="wrapper2">
-				
-					
-					<div class="topics" th:each="topic : ${topics}">
-
-
-<div><a th:href='${"/topic?ident=" +topic.ident}'><span id="topicName" th:text='${topic.title}' /></a></div>
-								
-						
-						<div ><span> Comments: </span><span th:text='${topic.getComments().size()}' /></div>
-							
-							
-							<div class="imgUserName"> 
-							
-							<img class="imageIndex" width="40" height="40"
-											th:src="*{@userController.decodeToImage(topic.getForumUser().getLogin())}"
-											onerror="this.src='image/default.jpg';" />
-											<div class="middle">
-							<span class="text" th:text='${topic.getForumUser().getLogin()}'/>
-									
-											</div>
-									</div>
-									</div>
-	</div>
 		</div>
 
-<br/>
+		<br />
 
-				<div>
+		<div>
 
-					<span th:if='${@userController.Logged}'> 
-					<a th:href='${"/userProfile"}'>profile</a>
-					<span th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
-							<a th:href='${"/admin"}'>admin</a>
-					</span>
-					</span>
+			<span th:if='${@userController.Logged}'> <a
+				th:href='${"/userProfile"}'>profile</a> <span
+				th:if='${#strings.toString(@userController.loggedUser.restriction) == "ADMIN"}'>
+					<a th:href='${"/admin"}'>admin</a>
+			</span>
+			</span>
 
-				</div>
+		</div>
 
-				<span th:if='${@userController.Logged}'>
+		<span th:if='${@userController.Logged}'>
 
-					<form action="/addTopic" method="post">
+			<form action="/addTopic" method="post">
 
-						Add Topic: <input type="text" name="title"
-							placeholder="Add topic here" required="required"/> <button type="submit"
-							value="Post" > Post </button>
-					</form>
-				</span>
-						
-			<span th:replace="fragments::footer"></span>
-			</div>
-		
-	
+				Add Topic: <input type="text" name="title"
+					placeholder="Add topic here" required="required" />
+				<button type="submit" value="Post">Post</button>
+			</form>
+		</span> <span th:replace="fragments::footer"></span>
+	</div>
+
+
 </body>
-<script src="js/forum.js"/>
+<script src="js/forum.js" />
 </html>

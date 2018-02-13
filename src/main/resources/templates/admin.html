@@ -57,27 +57,30 @@
 					<h3>Tags</h3>
 					<div class="forum_tags" th:each="tag : ${tags}" th:if='${tag.getName() != "archived"}'>
 
-						<div><span th:text='${tag.getName()}' />
-</div>
-<div>
+						<div>
+							<span th:text='${tag.getName()}' />
+						</div>
+						<div>
 							<button class="updateButton"
 								th:onclick="'showUpdateTag(\''+${tag.getIdent()}+'\');'"
 								value="updateTag">Update Tag</button>
-	</div>							
-								
-					<br/>
+						</div>
+
+						<br />
 						<div style="display: none" class="updateTagForm"
 							th:id="${tag.getIdent()}">
-							<br/>
+							<br />
 							<form th:action='${"/updateTag"}' method="post"
 								id="forumUpdateTag">
-								
+
 								<input type="hidden" th:value='${tag.getIdent()}' name="ident" />
-								
+
 								<textarea name="name" cols="20" rows="3" required="required" />
 
-					
-								<button type="submit" value="Post">Update Tag "<span th:text='${tag.getName()}'></span>"</button>
+
+								<button type="submit" value="Post">
+									Update Tag "<span th:text='${tag.getName()}'></span>"
+								</button>
 							</form>
 						</div>
 
@@ -93,8 +96,8 @@
 
 		<form class="tag_action" action="/addTag" method="post">
 			Add Tag: <input type="text" name="name"
-				placeholder="Add new tag here" required="required" /> <button
-				type="submit" value="Post" >Post</button>
+				placeholder="Add new tag here" required="required" />
+			<button type="submit" value="Post">Post</button>
 		</form>
 
 

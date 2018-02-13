@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="sk">
-<link rel="stylesheet" href="css/login.css" />
+<link rel="stylesheet" href="css/forum.css" />
 
 <div class="header" th:fragment="header">
 
- <a  href='http://localhost:8080'>Best movie forum ever </a>
+	<a href='http://localhost:8080'>Best movie forum ever </a>
 
 </div>
 
 
 <div class="footer" th:fragment="footer">
 
-<a  href='http://localhost:8080'>Ⓒ  Movie forum 2018</a>
-<br/>
-<span class="linkLoginRegister">
-<span th:if='${@userController.Logged}'>
-Logged as <span  th:text='${@userController.LoggedUser?.Login}'/>
-<a href="/logout" >Logout</a>
+	<a href='http://localhost:8080'>Ⓒ Movie forum 2018</a> <br /> <span
+		class="linkLoginRegister"> <span
+		th:if='${@userController.Logged}'> Logged as <span
+			th:text='${@userController.LoggedUser?.Login}' /> <a href="/logout">Logout</a>
 
-</span>
-
-<span th:if='${not @userController.Logged}'>
-<a href="/user" >Login / Register</a>
-</span>
-</span>
+	</span> <span th:if='${not @userController.Logged}'> <a href="/user">Login
+				/ Register</a>
+	</span>
+	</span>
 </div>
 
 </html>

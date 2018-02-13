@@ -15,8 +15,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
-import forum.entity.Comment;
-import forum.entity.ForumUser;
 import forum.entity.Tag;
 import forum.services.TagService;
 
@@ -48,17 +46,6 @@ public class TagServiceJPA implements TagService {
 	@Override
 	public List<Tag> getAllTags() {
 		return entityManager.createQuery("SELECT t from Tag t ").getResultList();
-	}
-
-	/*
-	 * This method deletes the tag.
-	 * 
-	 * @see forum.services.TagService#deleteTag(forum.entity.Tag)
-	 */
-	@Override
-	public void deleteTag(Tag tag) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/*
