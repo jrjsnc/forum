@@ -52,8 +52,10 @@
 			<div class="scroll2">
 				<div class="tags">
 
+<!-- th:if='${@userController.getLoggedUser() != forumUser}'> -->
+
 					<h3>Tags</h3>
-					<div class="forum_tags" th:each="tag : ${tags}">
+					<div class="forum_tags" th:each="tag : ${tags}" th:if='${tag.getName() != "archived"}'>
 
 						<div>
 							<span th:text='${tag.getName()}' />

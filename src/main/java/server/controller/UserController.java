@@ -39,16 +39,14 @@ import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.MailService;
 
-
-
 /**
- * The Class UserController. This class implements features connected with user login, register, profile and others
+ * The Class UserController. This class implements features connected with user
+ * login, register, profile and others
  * 
  */
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
-
 
 	/** The userService. Object of class UserService. */
 	@Autowired
@@ -70,9 +68,10 @@ public class UserController {
 	private ForumUser loggedUser;
 
 	/**
-	 * This method fills the model with data from database. In drop down menu for tags is always as first tag selected "All". 
+	 * This method fills the model with data from database. In drop down menu for
+	 * tags is always as first tag selected "All".
 	 *
-	 * @param model 
+	 * @param model
 	 */
 	private void fillModel(Model model) {
 		model.addAttribute("message", "");
@@ -95,7 +94,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method sends mail with parameters to (to whom is mail send), subject (subject of email), messageText (content of email).
+	 * This method sends mail with parameters to (to whom is mail send), subject
+	 * (subject of email), messageText (content of email).
 	 *
 	 * @param to
 	 * @param subject
@@ -113,12 +113,15 @@ public class UserController {
 	}
 
 	/**
-	 * This method creates mail by StringBuilder that is send to user in case user forgot login information. User enter a mail address into form
-	 * and in case of correct mail address, information is sent to current email.
+	 * This method creates mail by StringBuilder that is send to user in case user
+	 * forgot login information. User enter a mail address into form and in case of
+	 * correct mail address, information is sent to current email.
 	 *
 	 * @param user
 	 * @param model
-	 * @return login.html as string in case of wrong mail (mail that is not in database), also in case of correct email(model is filled with message of mail sending).
+	 * @return login.html as string in case of wrong mail (mail that is not in
+	 *         database), also in case of correct email(model is filled with message
+	 *         of mail sending).
 	 */
 	@RequestMapping("/mailLogin")
 	public String mailLogin(ForumUser user, Model model) {
@@ -146,7 +149,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method return user to main page of forum and also fill model with data from database (topics and drop down menu with tags).
+	 * This method return user to main page of forum and also fill model with data
+	 * from database (topics and drop down menu with tags).
 	 *
 	 * @param model
 	 * @return index.html as string (main page of forum)
@@ -174,6 +178,7 @@ public class UserController {
 	 */
 	@RequestMapping("/filterTopics")
 	public String filterTopics(Tag tag, Model model) {
+
 		if (tag.getIdent() == -1) {
 			model.addAttribute("tags", tagService.getAllTags());
 			model.addAttribute("topics", getUnarchivedTopics());
@@ -181,7 +186,7 @@ public class UserController {
 			return "index";
 		}
 
-		if (tag.getIdent() == tagService.getTagByName("archived").getIdent()) {
+		if (tag.getIdent().equals(tagService.getTagByName("archived").getIdent())) {
 			List<Topic> topics = topicService.getTopics();
 			topics = topics.stream().filter(t -> t.getTags().contains(tag)).collect(Collectors.toList());
 			model.addAttribute("topics", topics);
@@ -209,7 +214,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines mapping /login in url and redirect user into web page login.html if the user is BANNED.
+	 * This method defines mapping /login in url and redirect user into web page
+	 * login.html if the user is BANNED.
 	 *
 	 * @param user
 	 * @param model
@@ -234,7 +240,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines mapping /userProfile in url and redirect user to login if the user is not logged. If user is logged method redirect him to
+	 * This method defines mapping /userProfile in url and redirect user to login if
+	 * the user is not logged. If user is logged method redirect him to
 	 * userProfile.html (web page of user profile).
 	 *
 	 * @param user
@@ -251,7 +258,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method updates the users information such as login, email, profile picture and password.
+	 * This method updates the users information such as login, email, profile
+	 * picture and password.
 	 *
 	 * @param file
 	 * @param user
@@ -275,13 +283,15 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines mapping /register in url and redirect user into main page of forum in case of successful registration.
-	 * In case of wrong registration, user is indirect into logi.html to try registration again.
+	 * This method defines mapping /register in url and redirect user into main page
+	 * of forum in case of successful registration. In case of wrong registration,
+	 * user is indirect into logi.html to try registration again.
 	 *
 	 * @param file
 	 * @param user
 	 * @param model
-	 * @return index.html as string when registration is successful. login.html as string if registration is wrong.
+	 * @return index.html as string when registration is successful. login.html as
+	 *         string if registration is wrong.
 	 */
 	@RequestMapping("/register")
 	public String register(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
@@ -324,7 +334,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method defines mapping /logout in url and redirect user into index.html after logout.
+	 * This method defines mapping /logout in url and redirect user into index.html
+	 * after logout.
 	 *
 	 * @param model
 	 * @return index.html as string
@@ -355,7 +366,8 @@ public class UserController {
 	}
 
 	/**
-	 * This method deals with image manipulation. Also rewrite type of every image into png.
+	 * This method deals with image manipulation. Also rewrite type of every image
+	 * into png.
 	 *
 	 * @param login
 	 * @return the string of url to image
