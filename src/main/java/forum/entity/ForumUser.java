@@ -77,6 +77,17 @@ public class ForumUser {
 	}
 
 	/**
+	 * Removes the comment.
+	 *
+	 * @param comment
+	 *            to remove.
+	 */
+	public void removeComment(Comment comment) {
+		comments.remove(comment);
+		comment.setForumUser(null);
+	}
+
+	/**
 	 * Adds the likes to comment.
 	 *
 	 * @param likedComment.
