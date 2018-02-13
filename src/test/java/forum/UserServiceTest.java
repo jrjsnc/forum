@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import forum.entity.ForumUser;
+import forum.server.ForumServerTest;
 import forum.services.UserService;
 import server.ForumServer;
 
@@ -42,5 +43,6 @@ public class UserServiceTest {
 		Assert.assertNotNull(id);
 		Assert.assertEquals("macka", userService.getUser(id).getLogin());
 	}
+	
 	
 }

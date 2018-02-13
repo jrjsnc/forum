@@ -83,4 +83,12 @@ public class TagServiceTest {
 		Assert.assertEquals(2, t.size());		
 	}
 	
+	@Test
+	public void getTagByNameTest() {
+		Tag tag = new Tag();
+		tag.setName("macka");
+		tagService.addTag(tag);	
+		Assert.assertEquals(tag, tagService.getTagByName("macka"));
+
+	}
 }
