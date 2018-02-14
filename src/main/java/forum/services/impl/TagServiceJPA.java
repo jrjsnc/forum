@@ -59,7 +59,7 @@ public class TagServiceJPA implements TagService {
 	}
 
 	/*
-	 * This method updates the tag.
+	 * This method returns tag by name.
 	 * 
 	 * @see forum.services.TagService#updateTag(java.lang.Long, java.lang.String)
 	 */
@@ -79,7 +79,7 @@ public class TagServiceJPA implements TagService {
 	 * @see forum.services.TagService#getTag(java.lang.Long)
 	 */
 	@Override
-	public void updateTag(Long ident, String name) {
+	public void updateTag(Long ident, String name) throws DataIntegrityViolationException {
 		Tag tag = entityManager.find(Tag.class, ident);
 		tag.setName(name);
 	}

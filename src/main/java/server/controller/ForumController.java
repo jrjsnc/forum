@@ -104,7 +104,13 @@ public class ForumController {
 	 */
 	@RequestMapping("/updateTag")
 	public String updateTag(Tag tag, Model model) {
-		userController.tagService.updateTag(tag.getIdent(), tag.getName());
+		model.addAttribute("message", "");
+		try {
+			userController.tagService.updateTag(tag.getIdent(), tag.getName());
+		} catch (DataIntegrityViolationException e) {
+			model.addAttribute("message", "Cannot update, this tag already exists.");
+		}
+		
 		model.addAttribute("tags", userController.tagService.getAllTags());
 		fillModel(model);		
 		return "admin";

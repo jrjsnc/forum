@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="forum.services.impl.MailService" project="forum" 
     file="/forum/src/main/java/forum/services/impl/MailService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="271" y="446"/>    
+    <position height="-1" width="-1" x="276" y="423"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
