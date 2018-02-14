@@ -33,6 +33,8 @@
 				<button
 					th:onclick="'showUpdateUser(\''+${userController.getLoggedUser().getIdent()}+'\');'"
 					value="updateUser">Update Profile</button>
+					<br/>
+					<span th:text='${message}' />
 
 			</div>
 

@@ -17,12 +17,14 @@ import javax.transaction.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.hamcrest.text.IsEmptyString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import forum.entity.Comment;
 import forum.entity.ForumUser;
 import forum.entity.Restriction;
 import forum.services.UserService;
+import server.controller.UserController;
 
 /**
  * The Class UserServiceJPA This class implements user service methods
@@ -33,6 +35,10 @@ public class UserServiceJPA implements UserService {
 	/** The entity manager. */
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+//	/** The userController. Object of class UserController. */
+//	@Autowired
+//	private UserController userController;
 
 	/*
 	 * This method register the forum user.
@@ -175,7 +181,7 @@ public class UserServiceJPA implements UserService {
 	 * org.springframework.web.multipart.MultipartFile)
 	 */
 	@Override
-	public void updateUser(Long ident, String login, String email, String password, MultipartFile userImage) {
+	public void updateUser(Long ident, String login, String email, String password, MultipartFile userImage) throws DataIntegrityViolationException {
 	
 		System.err.println(ident);
 		ForumUser user = entityManager.find(ForumUser.class, ident);
@@ -184,6 +190,7 @@ public class UserServiceJPA implements UserService {
 		user.setEmail(email);
 		user.setPassword(password);
 		try {
+
 			user.setUserImage(userImage.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

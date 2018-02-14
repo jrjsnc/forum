@@ -268,10 +268,16 @@ public class UserController {
 	 */
 	@RequestMapping("/updateUser")
 	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
-
+model.addAttribute("message", "");
 		
 
-			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);
+			try {
+				userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);
+			} catch (DataIntegrityViolationException e) {
+				model.addAttribute("userController", this);
+				model.addAttribute("message", "Name or email already used. Try another name.");
+				return "userProfile";
+			}
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			fillModel(model);
 			return "index";
