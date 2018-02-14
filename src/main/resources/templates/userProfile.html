@@ -52,19 +52,19 @@
 					<div>
 						New Username : <input type="text"
 							th:value="${@userController.loggedUser?.login}" name="login"
-							placeholder="update login" />
+							placeholder="update login" required="required"/>
 					</div>
 					<br />
 					<div>
 						New E-mail : <input type="text"
 							th:value="${@userController.loggedUser?.email}" name="email"
-							placeholder="update email" />
+							placeholder="update email" required="required" />
 					</div>
 					<br />
 					<div>
 						New Password : <input type="password"
 							th:value="${@userController.loggedUser?.password}"
-							name="password" placeholder="update password" />
+							name="password" placeholder="update password" required="required"/>
 					</div>
 					<br />
 					<div>
