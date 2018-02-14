@@ -269,17 +269,14 @@ public class UserController {
 	@RequestMapping("/updateUser")
 	public String updateUser(@RequestParam("file") MultipartFile file, ForumUser user, Model model) {
 
-		if (!userService.nameTaken(user.getLogin())) {
-			user.setRestriction(Restriction.BASIC);
+		
 
 			userService.updateUser(user.getIdent(), user.getLogin(), user.getEmail(), user.getPassword(), file);
 			loggedUser = userService.login(user.getLogin(), user.getPassword());
 			fillModel(model);
 			return "index";
-		}
+		
 
-		fillModel(model);
-		return "index";
 	}
 
 	/**

@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
-
+import org.hamcrest.text.IsEmptyString;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import forum.entity.Comment;
@@ -176,6 +176,7 @@ public class UserServiceJPA implements UserService {
 	 */
 	@Override
 	public void updateUser(Long ident, String login, String email, String password, MultipartFile userImage) {
+	
 		System.err.println(ident);
 		ForumUser user = entityManager.find(ForumUser.class, ident);
 
