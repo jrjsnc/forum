@@ -39,6 +39,7 @@ import forum.services.TopicService;
 import forum.services.UserService;
 import forum.services.impl.MailService;
 
+
 /**
  * The Class UserController. This class implements features connected with user
  * login, register, profile and others
@@ -71,7 +72,7 @@ public class UserController {
 	 * This method fills the model with data from database. In drop down menu for
 	 * tags is always as first tag selected "All".
 	 *
-	 * @param model
+	 * @param model the model
 	 */
 	private void fillModel(Model model) {
 		model.addAttribute("message", "");
@@ -97,9 +98,9 @@ public class UserController {
 	 * This method sends mail with parameters to (to whom is mail send), subject
 	 * (subject of email), messageText (content of email).
 	 *
-	 * @param to
-	 * @param subject
-	 * @param messageText
+	 * @param to the to
+	 * @param subject the subject
+	 * @param messageText the message text
 	 */
 	protected void sendMailInThread(String to, String subject, String messageText) {
 		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
@@ -117,8 +118,8 @@ public class UserController {
 	 * forgot login information. User enter a mail address into form and in case of
 	 * correct mail address, information is sent to current email.
 	 *
-	 * @param user
-	 * @param model
+	 * @param user the user
+	 * @param model the model
 	 * @return login.html as string in case of wrong mail (mail that is not in
 	 *         database), also in case of correct email(model is filled with message
 	 *         of mail sending).
@@ -152,7 +153,7 @@ public class UserController {
 	 * This method return user to main page of forum and also fill model with data
 	 * from database (topics and drop down menu with tags).
 	 *
-	 * @param model
+	 * @param model the model
 	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/")
@@ -172,8 +173,8 @@ public class UserController {
 	/**
 	 * This method filter the topics by selected tags.
 	 *
-	 * @param tag
-	 * @param model
+	 * @param tag the tag
+	 * @param model the model
 	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/filterTopics")
@@ -205,7 +206,7 @@ public class UserController {
 	/**
 	 * This method defines mapping /user in url .
 	 *
-	 * @param model
+	 * @param model the model
 	 * @return login.html as string (web page for login or register of user)
 	 */
 	@RequestMapping("/user")
@@ -217,8 +218,8 @@ public class UserController {
 	 * This method defines mapping /login in url and redirect user into web page
 	 * login.html if the user is BANNED.
 	 *
-	 * @param user
-	 * @param model
+	 * @param user the user
+	 * @param model the model
 	 * @return index.html as string (main page of forum)
 	 */
 	@RequestMapping("/login")
@@ -244,8 +245,8 @@ public class UserController {
 	 * the user is not logged. If user is logged method redirect him to
 	 * userProfile.html (web page of user profile).
 	 *
-	 * @param user
-	 * @param model
+	 * @param user the user
+	 * @param model the model
 	 * @return userProfile.html as string (web page of user profile).
 	 */
 	@RequestMapping("/userProfile")
@@ -261,9 +262,9 @@ public class UserController {
 	 * This method updates the users information such as login, email, profile
 	 * picture and password.
 	 *
-	 * @param file
-	 * @param user
-	 * @param model
+	 * @param file the file
+	 * @param user the user
+	 * @param model the model
 	 * @return index.html as string after successful update of profile information.
 	 */
 	@RequestMapping("/updateUser")
@@ -290,9 +291,9 @@ model.addAttribute("message", "");
 	 * of forum in case of successful registration. In case of wrong registration,
 	 * user is indirect into logi.html to try registration again.
 	 *
-	 * @param file
-	 * @param user
-	 * @param model
+	 * @param file the file
+	 * @param user the user
+	 * @param model the model
 	 * @return index.html as string when registration is successful. login.html as
 	 *         string if registration is wrong.
 	 */
@@ -340,7 +341,7 @@ model.addAttribute("message", "");
 	 * This method defines mapping /logout in url and redirect user into index.html
 	 * after logout.
 	 *
-	 * @param model
+	 * @param model the model
 	 * @return index.html as string
 	 */
 	@RequestMapping("/logout")
@@ -372,7 +373,7 @@ model.addAttribute("message", "");
 	 * This method deals with image manipulation. Also rewrite type of every image
 	 * into png.
 	 *
-	 * @param login
+	 * @param login the login
 	 * @return the string of url to image
 	 */
 	public String decodeToImage(String login) {

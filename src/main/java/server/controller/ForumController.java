@@ -27,6 +27,7 @@ import forum.services.CommentService;
 
 
 
+
 /**
  * The Class ForumController.
  * This class contains all of the important features to control forum. 
@@ -50,7 +51,7 @@ public class ForumController {
 	 * Method fillModel. This method fills model with datas from database. If currentTopicIdent is not null model is filled with current topic title, 
 	 * comments for topics, tags added to each topic and list of tags in drop down menu at index.html
 	 *
-	 * @param model
+	 * @param model the model
 	 */
 	private void fillModel(Model model) {
 		model.addAttribute("controller", this);
@@ -77,8 +78,9 @@ public class ForumController {
 
 	/**
 	 * Adds the tag. This method allows user with restriction ADMIN adding new tags. Same tag can not be added twice. 
-	 * @param tag 
-	 * @param model 
+	 *
+	 * @param tag the tag
+	 * @param model the model
 	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/addTag")
@@ -98,8 +100,8 @@ public class ForumController {
 	/**
 	 * Update tag. This method allows user with restriction ADMIN update tags. 
 	 *
-	 * @param tag 
-	 * @param model 
+	 * @param tag the tag
+	 * @param model the model
 	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/updateTag")
@@ -118,8 +120,9 @@ public class ForumController {
 
 	/**
 	 * Adds the topic tag. This method allows user with restriction ADMIN assign tag to current topic.
-	 * @param tag 
-	 * @param model 
+	 *
+	 * @param tag the tag
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopicTag")
@@ -131,11 +134,10 @@ public class ForumController {
 	}
 
 	/**
-
 	 * Removes the topic tag. This method allows user with restriction ADMIN removes tag from topic.
 	 *
-	 * @param tag 
-	 * @param model 
+	 * @param tag the tag
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/removeTopicTag")
@@ -148,8 +150,9 @@ public class ForumController {
 
 	/**
 	 * Toggle like. This method allows user to like or unlike comment. User can like/unlike comment only once.
-	 * @param ident 
-	 * @param model 
+	 *
+	 * @param ident the ident
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/toggleLike")
@@ -163,7 +166,7 @@ public class ForumController {
 	/**
 	 * This method identify if the comment is already liked.
 	 *
-	 * @param ident 
+	 * @param ident the ident
 	 * @return true, if user liked comment or false, if user have not liked comment yet.
 	 */
 	public boolean haveILiked(Long ident) {
@@ -177,8 +180,8 @@ public class ForumController {
 	/**
 	 * This method return web page topic.html where user can add comments to current topic.
 	 *
-	 * @param ident
-	 * @param model
+	 * @param ident the ident
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/topic")
@@ -191,8 +194,8 @@ public class ForumController {
 	/**
 	 * This method allows user to add new topic.
 	 *
-	 * @param topic 
-	 * @param model 
+	 * @param topic the topic
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addTopic")
@@ -209,8 +212,8 @@ public class ForumController {
 	/**
 	 * This method allows user to add comments to topic.
 	 *
-	 * @param comment
-	 * @param model
+	 * @param comment the comment
+	 * @param model the model
 	 * @return topic.html as string (web page where user can add comments to current topic)
 	 */
 	@RequestMapping("/addComment")
@@ -244,8 +247,8 @@ public class ForumController {
 	 * This method allows user with restriction ADMIN to toggle another user (only BASIC) as ADMIN. ADMIN can also change restriction of another
 	 * user from ADMIN to BASIC.
 	 *
-	 * @param ident 
-	 * @param model 
+	 * @param ident the ident
+	 * @param model the model
 	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleAdmin")
@@ -271,8 +274,8 @@ public class ForumController {
 	/**
 	 * This method allows user with restriction ADMIN to toggle user as BANNED or UNBANNED.
 	 *
-	 * @param ident
-	 * @param model
+	 * @param ident the ident
+	 * @param model the model
 	 * @return admin.html as string (web page for admins only where BASIC and BANNED user has no access.)
 	 */
 	@RequestMapping("/toggleBan")
@@ -291,7 +294,7 @@ public class ForumController {
 	/**
 	 * This method redirect BASIC or BANNED users to web page 404.html in case they try to penetrate into admin.html
 	 *
-	 * @param model 
+	 * @param model the model
 	 * @return 404.html as string if user is BASIC or BANNED. If user is ADMIN return admin.html as string.
 	 */
 	@RequestMapping("/admin")
@@ -305,8 +308,8 @@ public class ForumController {
 	/**
 	 * This method provide sending email for users when their restriction is change .
 	 *
-	 * @param email
-	 * @param restriction
+	 * @param email the email
+	 * @param restriction the restriction
 	 */
 	private void mailRestriction(String email, Restriction restriction) {
 		String subject = "MovieForum restriction";
